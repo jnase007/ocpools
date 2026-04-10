@@ -309,6 +309,54 @@
     .testimonial-dots button { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.25); border: none; cursor: pointer; transition: all 0.3s ease; }
     .testimonial-dots button.active { background: #c2ab92; transform: scale(1.3); }
 
+    /* Scroll progress bar */
+    #scrollProgress {
+      position: fixed; top: 0; left: 0; height: 3px; z-index: 9998;
+      background: linear-gradient(90deg, #0c93e8, #36adf7);
+      width: 0%; transition: width 0.1s linear;
+    }
+
+    /* Pricing calculator */
+    .size-btn { transition: all 0.3s ease; cursor: pointer; }
+    .size-btn.active { background: #072a49; color: white; border-color: #072a49; }
+    .price-display { transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+
+    /* Exit intent popup */
+    #exitPopup {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden;
+      transition: all 0.4s ease;
+    }
+    #exitPopup.show { opacity: 1; visibility: visible; }
+    #exitPopup .popup-card {
+      transform: translateY(30px) scale(0.95);
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    #exitPopup.show .popup-card { transform: translateY(0) scale(1); }
+
+    /* Seasonal banner */
+    .seasonal-banner {
+      background: linear-gradient(135deg, #072a49 0%, #0b426e 100%);
+      overflow: hidden; position: relative;
+    }
+    .seasonal-banner::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.03) 50%, transparent 100%);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0%, 100% { transform: translateX(-100%); }
+      50% { transform: translateX(100%); }
+    }
+
+    /* Meet section avatar */
+    .avatar-ring {
+      background: conic-gradient(#c2ab92, #e6ddd0, #c2ab92);
+      padding: 3px; border-radius: 50%;
+    }
+
     /* Text chat widget */
     #chatWidget {
       position: fixed; bottom: 24px; left: 24px; z-index: 45;
@@ -390,6 +438,9 @@
     </div>
   </div>
 
+  <!-- Scroll Progress -->
+  <div id="scrollProgress"></div>
+
   <!-- Navbar -->
   <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
     <div class="max-w-7xl mx-auto px-6 lg:px-10 py-5 flex justify-between items-center">
@@ -463,6 +514,13 @@
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40 z-10">
       <span class="text-[10px] tracking-luxury uppercase">Scroll</span>
       <div class="w-px h-8 bg-gradient-to-b from-white/40 to-transparent"></div>
+    </div>
+  </section>
+
+  <!-- Seasonal Banner -->
+  <section class="seasonal-banner py-3">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 text-center relative z-10">
+      <p class="text-white/90 text-sm font-medium" id="seasonalMsg"></p>
     </div>
   </section>
 
@@ -735,8 +793,55 @@
     </div>
   </section>
 
-  <!-- Comparison Table -->
+  <!-- Meet Your Team -->
   <section class="py-28 md:py-36 bg-sand-50">
+    <div class="max-w-5xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-16">
+        <p class="anim text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-4">The People Behind OC Pools</p>
+        <h2 class="anim d1 font-serif text-4xl sm:text-5xl text-gray-900 mb-6">Meet Your Team</h2>
+        <div class="anim d2 gold-line w-16 mx-auto mb-6"></div>
+        <p class="anim d2 text-lg text-gray-500 max-w-xl mx-auto font-light">Real people who take personal pride in your pool. Not a rotating cast of strangers.</p>
+      </div>
+
+      <div class="anim grid md:grid-cols-3 gap-10">
+        <div class="text-center">
+          <div class="avatar-ring w-32 h-32 mx-auto mb-6">
+            <div class="w-full h-full rounded-full bg-brand-950 flex items-center justify-center">
+              <span class="font-serif text-3xl text-white">JN</span>
+            </div>
+          </div>
+          <h3 class="font-serif text-xl text-gray-900 mb-1">Justin Nassie</h3>
+          <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-3">Founder & Lead Technician</p>
+          <p class="text-gray-500 text-[15px] leading-relaxed">CPO-certified with 10+ years in pool maintenance. Personally oversees every client relationship and quality standard.</p>
+        </div>
+
+        <div class="text-center">
+          <div class="avatar-ring w-32 h-32 mx-auto mb-6">
+            <div class="w-full h-full rounded-full bg-brand-900 flex items-center justify-center">
+              <i class="fa-solid fa-wrench text-3xl text-white/60"></i>
+            </div>
+          </div>
+          <h3 class="font-serif text-xl text-gray-900 mb-1">Service Technicians</h3>
+          <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-3">Certified & Background-Checked</p>
+          <p class="text-gray-500 text-[15px] leading-relaxed">Every tech is CPO-certified, background-checked, and trained in our standards before they ever touch a client's pool.</p>
+        </div>
+
+        <div class="text-center">
+          <div class="avatar-ring w-32 h-32 mx-auto mb-6">
+            <div class="w-full h-full rounded-full bg-brand-800 flex items-center justify-center">
+              <i class="fa-solid fa-headset text-3xl text-white/60"></i>
+            </div>
+          </div>
+          <h3 class="font-serif text-xl text-gray-900 mb-1">Client Support</h3>
+          <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-3">Fast Response, Always Human</p>
+          <p class="text-gray-500 text-[15px] leading-relaxed">Text or call and you'll reach a real person who knows your account. No call centers, no automated menus, no runaround.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Table -->
+  <section class="py-28 md:py-36 bg-white">
     <div class="max-w-4xl mx-auto px-6 lg:px-10">
       <div class="text-center mb-16">
         <p class="anim text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-4">Why Switch</p>
@@ -866,6 +971,42 @@
         <h2 class="anim d1 font-serif text-4xl sm:text-5xl md:text-[3.5rem] text-gray-900 mb-6">Straightforward & Transparent</h2>
         <div class="anim d2 gold-line w-16 mx-auto mb-6"></div>
         <p class="anim d2 text-lg text-gray-500 max-w-xl mx-auto font-light">No hidden fees. No contracts. Just exceptional care at a fair price.</p>
+      </div>
+
+      <!-- Interactive Calculator -->
+      <div class="anim max-w-2xl mx-auto mb-20 bg-white border border-gray-200 p-10 lg:p-12">
+        <h3 class="font-serif text-2xl text-gray-900 mb-2 text-center">Estimate Your Monthly Cost</h3>
+        <p class="text-gray-400 text-sm text-center mb-8">Select your pool size for an instant estimate</p>
+
+        <div class="grid grid-cols-3 gap-3 mb-10">
+          <button class="size-btn border border-gray-200 py-4 px-3 text-center" data-size="small" data-price="180">
+            <i class="fa-solid fa-water text-brand-400 text-lg mb-2 block"></i>
+            <p class="font-medium text-gray-900 text-sm">Small</p>
+            <p class="text-gray-400 text-xs">Up to 10k gal</p>
+          </button>
+          <button class="size-btn active border border-gray-200 py-4 px-3 text-center" data-size="medium" data-price="250">
+            <i class="fa-solid fa-water text-brand-400 text-lg mb-2 block"></i>
+            <p class="font-medium text-gray-900 text-sm">Medium</p>
+            <p class="text-gray-400 text-xs">10k–20k gal</p>
+          </button>
+          <button class="size-btn border border-gray-200 py-4 px-3 text-center" data-size="large" data-price="350">
+            <i class="fa-solid fa-water text-brand-400 text-lg mb-2 block"></i>
+            <p class="font-medium text-gray-900 text-sm">Large</p>
+            <p class="text-gray-400 text-xs">20k+ gal</p>
+          </button>
+        </div>
+
+        <div class="text-center price-display">
+          <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-1">Estimated Monthly Cost</p>
+          <div class="flex items-baseline justify-center gap-1">
+            <span class="font-serif text-6xl text-gray-900" id="calcPrice">$250</span>
+            <span class="text-gray-400">/mo</span>
+          </div>
+          <p class="text-gray-400 text-sm mt-2">Includes weekly visits, chemicals, reports & equipment checks</p>
+          <a href="#contact" class="inline-flex items-center justify-center bg-gray-900 text-white px-10 py-4 text-[13px] font-medium tracking-luxury uppercase hover:bg-gray-800 transition-all mt-6">
+            Get Exact Quote
+          </a>
+        </div>
       </div>
 
       <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -1177,6 +1318,29 @@
     </div>
   </div>
 
+  <!-- Exit Intent Popup -->
+  <div id="exitPopup">
+    <div class="popup-card bg-white max-w-md mx-4 p-10 relative">
+      <button id="closePopup" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="text-center">
+        <div class="w-16 h-16 border-2 border-sand-300 flex items-center justify-center mx-auto mb-6">
+          <i class="fa-solid fa-clipboard-list text-2xl text-sand-400"></i>
+        </div>
+        <h3 class="font-serif text-2xl text-gray-900 mb-3">Before You Go...</h3>
+        <p class="text-gray-500 text-[15px] leading-relaxed mb-6">Get our free <strong>Pool Health Checklist</strong> — 12 things to inspect before your next swim. Used by our own technicians.</p>
+        <form id="exitForm" class="space-y-3">
+          <input type="email" placeholder="Your email address" class="w-full border border-gray-200 px-5 py-3.5 text-[15px] text-gray-800 focus:border-brand-400 focus:outline-none transition-colors" required>
+          <button type="submit" class="w-full bg-gray-900 text-white py-3.5 text-[13px] font-medium tracking-luxury uppercase hover:bg-gray-800 transition-all">
+            Send Me the Checklist
+          </button>
+        </form>
+        <p class="text-gray-400 text-xs mt-4">No spam. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </div>
+
   <!-- Back to top -->
   <button id="backToTop" class="fixed bottom-6 right-6 z-40 hidden lg:flex bg-white border border-gray-200 text-gray-600 w-12 h-12 items-center justify-center shadow-lg hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all">
     <i class="fa-solid fa-arrow-up text-sm"></i>
@@ -1235,6 +1399,10 @@
 
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
+
+      // Progress bar
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      scrollProgress.style.width = (y / docHeight * 100) + '%';
 
       if (y > 60) {
         navbar.classList.add('bg-brand-950/95', 'backdrop-blur-xl', 'shadow-lg', 'py-0');
@@ -1315,6 +1483,63 @@
     // Preloader
     window.addEventListener('load', () => {
       setTimeout(() => document.getElementById('preloader').classList.add('done'), 400);
+    });
+
+    // Scroll progress bar
+    const scrollProgress = document.getElementById('scrollProgress');
+
+    // Seasonal banner
+    const month = new Date().getMonth();
+    const seasonalMessages = {
+      0: "New Year Special — 10% off your first month of service. Start the year with a pristine pool.",
+      1: "Winter maintenance matters — keep algae away even in cooler months. Book a free assessment.",
+      2: "Spring is here — time for a full equipment tune-up before pool season. Schedule yours today.",
+      3: "Pool season is approaching — book your spring startup now and skip the wait.",
+      4: "Summer is almost here — get your pool party-ready with a free assessment this week.",
+      5: "Peak pool season — we're booking fast. Lock in your weekly spot before they're gone.",
+      6: "Summer is in full swing — text us for same-day pre-party pool prep.",
+      7: "Hot August days demand perfect water chemistry. Let us handle it while you enjoy.",
+      8: "Fall prep starts now — schedule your end-of-summer deep clean and equipment check.",
+      9: "Leaves falling? We'll keep your pool spotless. Great time for a filter deep-clean.",
+      10: "Holiday entertaining season — make sure your pool looks stunning for guests.",
+      11: "Year-end special — lock in 2026 rates before the new year. No contracts, cancel anytime.",
+    };
+    document.getElementById('seasonalMsg').textContent = seasonalMessages[month] || seasonalMessages[3];
+
+    // Pricing calculator
+    const sizeBtns = document.querySelectorAll('.size-btn');
+    const calcPrice = document.getElementById('calcPrice');
+    sizeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        sizeBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        calcPrice.textContent = '$' + btn.dataset.price;
+      });
+    });
+
+    // Exit intent popup
+    const exitPopup = document.getElementById('exitPopup');
+    let exitShown = false;
+    document.addEventListener('mouseout', (e) => {
+      if (e.clientY < 5 && !exitShown && window.scrollY > 400) {
+        exitPopup.classList.add('show');
+        exitShown = true;
+      }
+    });
+    document.getElementById('closePopup').addEventListener('click', () => exitPopup.classList.remove('show'));
+    exitPopup.addEventListener('click', (e) => { if (e.target === exitPopup) exitPopup.classList.remove('show'); });
+    document.getElementById('exitForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      exitPopup.querySelector('.popup-card').innerHTML = `
+        <div class="text-center py-6">
+          <div class="w-16 h-16 border-2 border-sand-300 flex items-center justify-center mx-auto mb-6">
+            <i class="fa-solid fa-check text-2xl text-sand-400"></i>
+          </div>
+          <h3 class="font-serif text-2xl text-gray-900 mb-3">Check Your Inbox</h3>
+          <p class="text-gray-500 text-[15px]">Your Pool Health Checklist is on its way.</p>
+        </div>
+      `;
+      setTimeout(() => exitPopup.classList.remove('show'), 3000);
     });
 
     // Hero cursor glow
