@@ -45,6 +45,18 @@
     "sameAs": []
   }
   </script>
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="OC Pools | Luxury Pool Care in Orange County">
+  <meta property="og:description" content="Premium weekly pool maintenance for luxury homes in Newport Coast, Laguna Beach & Orange County. 5-star rated. Same-day response.">
+  <meta property="og:image" content="https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/shutterstock_2698749089.jpg">
+  <meta property="og:url" content="https://ocpools.com">
+  <meta property="og:site_name" content="OC Pools">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OC Pools | Luxury Pool Care in Orange County">
+  <meta name="twitter:description" content="Premium weekly pool maintenance for luxury homes in Newport Coast, Laguna Beach & Orange County.">
+  <meta name="twitter:image" content="https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/shutterstock_2698749089.jpg">
   <link rel="preload" as="image" href="https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/shutterstock_2698749089.jpg">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -297,6 +309,76 @@
     .testimonial-slide.active { opacity: 1; position: relative; }
     .testimonial-dots button { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.25); border: none; cursor: pointer; transition: all 0.3s ease; }
     .testimonial-dots button.active { background: #c2ab92; transform: scale(1.3); }
+
+    /* Text chat widget */
+    #chatWidget {
+      position: fixed; bottom: 24px; left: 24px; z-index: 45;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translateY(100px); opacity: 0;
+    }
+    #chatWidget.show { transform: translateY(0); opacity: 1; }
+    .chat-bubble {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: #25D366; color: white;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .chat-bubble:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
+    .chat-tooltip {
+      position: absolute; bottom: 68px; left: 0; white-space: nowrap;
+      background: white; color: #1a1a1a; padding: 10px 16px;
+      border-radius: 8px; font-size: 13px; font-weight: 500;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      opacity: 0; transform: translateY(8px);
+      transition: all 0.3s ease; pointer-events: none;
+    }
+    .chat-tooltip::after {
+      content: ''; position: absolute; bottom: -6px; left: 24px;
+      width: 12px; height: 12px; background: white;
+      transform: rotate(45deg); box-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+    }
+    #chatWidget.show .chat-tooltip { opacity: 1; transform: translateY(0); animation: tooltipBounce 0.5s ease 3s forwards; }
+    @keyframes tooltipBounce {
+      0% { opacity: 1; }
+      100% { opacity: 0; pointer-events: none; }
+    }
+
+    /* Social proof toast */
+    #proofToast {
+      position: fixed; bottom: 24px; left: 24px; z-index: 44;
+      background: white; border: 1px solid #e6ddd0;
+      padding: 14px 20px; box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      transform: translateX(-120%); opacity: 0;
+      transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      max-width: 320px;
+    }
+    #proofToast.show { transform: translateX(0); opacity: 1; }
+    @media (max-width: 640px) {
+      #proofToast { bottom: 90px; left: 12px; right: 12px; max-width: none; }
+    }
+
+    /* Comparison table */
+    .compare-check { color: #0c93e8; }
+    .compare-x { color: #d4d4d8; }
+    .compare-row:nth-child(even) { background: rgba(0,0,0,0.02); }
+    .compare-highlight { background: rgba(7,42,73,0.03); border: 2px solid #072a49; }
+
+    /* Custom cursor glow on hero */
+    .hero-glow {
+      position: absolute; width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(194,171,146,0.08) 0%, transparent 70%);
+      border-radius: 50%; pointer-events: none; z-index: 5;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s ease;
+    }
+
+    /* Smooth reveal for sections */
+    .reveal-section {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal-section.revealed { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body class="font-sans text-gray-800 antialiased overflow-x-hidden bg-sand-50">
@@ -352,7 +434,13 @@
   </nav>
 
   <!-- Hero -->
-  <section class="hero-bg relative min-h-screen flex items-end overflow-hidden">
+  <section class="hero-bg relative min-h-screen flex items-end overflow-hidden" id="heroSection">
+    <!-- Video background -->
+    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0" poster="https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/shutterstock_2698749089.jpg">
+      <source src="https://videos.pexels.com/video-files/1093662/1093662-hd_1920_1080_30fps.mp4" type="video/mp4">
+    </video>
+    <div class="absolute inset-0 z-[1]" style="background: linear-gradient(180deg, rgba(6,10,18,0.55) 0%, rgba(6,10,18,0.3) 40%, rgba(6,10,18,0.6) 100%);"></div>
+    <div class="hero-glow" id="heroGlow"></div>
     <div class="max-w-7xl mx-auto px-6 lg:px-10 pb-24 md:pb-32 pt-40 w-full relative z-10">
       <div class="max-w-3xl">
         <p class="anim text-sand-300 text-[13px] tracking-luxury uppercase font-medium mb-6 opacity-0">Newport Coast &middot; Laguna Beach &middot; Corona del Mar</p>
@@ -649,6 +737,76 @@
           <p class="font-serif text-4xl md:text-5xl text-gray-900 counter" data-target="100">0</p>
           <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mt-2">% Satisfaction</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Table -->
+  <section class="py-28 md:py-36 bg-sand-50">
+    <div class="max-w-4xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-16">
+        <p class="anim text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-4">Why Switch</p>
+        <h2 class="anim d1 font-serif text-4xl sm:text-5xl text-gray-900 mb-6">How We Compare</h2>
+        <div class="anim d2 gold-line w-16 mx-auto mb-6"></div>
+        <p class="anim d2 text-lg text-gray-500 max-w-xl mx-auto font-light">See the difference between franchise pool services and a dedicated local team.</p>
+      </div>
+
+      <div class="anim overflow-x-auto">
+        <table class="w-full text-left">
+          <thead>
+            <tr>
+              <th class="py-4 px-5 text-[12px] tracking-luxury uppercase text-gray-400 font-medium"></th>
+              <th class="py-4 px-5 text-center">
+                <div class="compare-highlight inline-block px-6 py-3">
+                  <p class="font-serif text-lg text-gray-900">OC Pools</p>
+                </div>
+              </th>
+              <th class="py-4 px-5 text-center text-gray-400 text-sm font-medium">Franchise<br>Services</th>
+            </tr>
+          </thead>
+          <tbody class="text-[15px]">
+            <tr class="compare-row border-b border-gray-100">
+              <td class="py-4 px-5 text-gray-600">Same technician every week</td>
+              <td class="py-4 px-5 text-center"><i class="fa-solid fa-circle-check compare-check text-lg"></i></td>
+              <td class="py-4 px-5 text-center"><i class="fa-solid fa-circle-xmark compare-x text-lg"></i></td>
+            </tr>
+            <tr class="compare-row border-b border-gray-100">
+              <td class="py-4 px-5 text-gray-600">Photo report after every visit</td>
+              <td class="py-4 px-5 text-center"><i class="fa-solid fa-circle-check compare-check text-lg"></i></td>
+              <td class="py-4 px-5 text-center"><i class="fa-solid fa-circle-xmark compare-x text-lg"></i></td>
+            </tr>
+            <tr class="compare-row border-b border-gray-100">
+              <td class="py-4 px-5 text-gray-600">Same-day emergency response</td>
+              <td class="py-4 px-5 text-center"><i class="fa-solid fa-circle-check compare-check text-lg"></i></td>
+              <td class="py-4 px-5 text-center"><i class="fa-solid fa-circle-xmark compare-x text-lg"></i></td>
+            </tr>
+            <tr class="compare-row border-b border-gray-100">
+              <td class="py-4 px-5 text-gray-600">No long-term contracts</td>
+              <td class="py-4 px-5 text-center"><i class="fa-solid fa-circle-check compare-check text-lg"></i></td>
+              <td class="py-4 px-5 text-center"><i class="fa-solid fa-circle-xmark compare-x text-lg"></i></td>
+            </tr>
+            <tr class="compare-row border-b border-gray-100">
+              <td class="py-4 px-5 text-gray-600">Free equipment diagnosis</td>
+              <td class="py-4 px-5 text-center"><i class="fa-solid fa-circle-check compare-check text-lg"></i></td>
+              <td class="py-4 px-5 text-center"><i class="fa-solid fa-circle-xmark compare-x text-lg"></i></td>
+            </tr>
+            <tr class="compare-row border-b border-gray-100">
+              <td class="py-4 px-5 text-gray-600">Direct text line to your tech</td>
+              <td class="py-4 px-5 text-center"><i class="fa-solid fa-circle-check compare-check text-lg"></i></td>
+              <td class="py-4 px-5 text-center"><i class="fa-solid fa-circle-xmark compare-x text-lg"></i></td>
+            </tr>
+            <tr class="compare-row border-b border-gray-100">
+              <td class="py-4 px-5 text-gray-600">Pre-party pool prep on request</td>
+              <td class="py-4 px-5 text-center"><i class="fa-solid fa-circle-check compare-check text-lg"></i></td>
+              <td class="py-4 px-5 text-center"><i class="fa-solid fa-circle-xmark compare-x text-lg"></i></td>
+            </tr>
+            <tr class="compare-row">
+              <td class="py-4 px-5 text-gray-600">Satisfaction guarantee</td>
+              <td class="py-4 px-5 text-center"><i class="fa-solid fa-circle-check compare-check text-lg"></i></td>
+              <td class="py-4 px-5 text-center text-gray-400 text-sm">Varies</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
@@ -1004,6 +1162,27 @@
     <i class="fa-solid fa-phone text-lg"></i>
   </a>
 
+  <!-- Text Chat Widget -->
+  <div id="chatWidget">
+    <div class="chat-tooltip">Text us now — we reply fast</div>
+    <a href="sms:9498928944" class="chat-bubble" aria-label="Text us">
+      <i class="fa-solid fa-comment-dots text-xl"></i>
+    </a>
+  </div>
+
+  <!-- Social Proof Toast -->
+  <div id="proofToast">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 bg-brand-50 flex items-center justify-center flex-shrink-0">
+        <i class="fa-solid fa-check text-brand-600 text-xs"></i>
+      </div>
+      <div>
+        <p class="text-sm font-medium text-gray-900" id="proofText"></p>
+        <p class="text-xs text-gray-400" id="proofTime"></p>
+      </div>
+    </div>
+  </div>
+
   <!-- Back to top -->
   <button id="backToTop" class="fixed bottom-6 right-6 z-40 hidden lg:flex bg-white border border-gray-200 text-gray-600 w-12 h-12 items-center justify-center shadow-lg hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all">
     <i class="fa-solid fa-arrow-up text-sm"></i>
@@ -1063,9 +1242,11 @@
       if (y > 600) {
         floatingCta.classList.add('show');
         backToTop.classList.add('show');
+        chatWidget.classList.add('show');
       } else {
         floatingCta.classList.remove('show');
         backToTop.classList.remove('show');
+        chatWidget.classList.remove('show');
       }
 
       // Active nav highlighting
@@ -1132,6 +1313,47 @@
     window.addEventListener('load', () => {
       setTimeout(() => document.getElementById('preloader').classList.add('done'), 400);
     });
+
+    // Hero cursor glow
+    const heroSection = document.getElementById('heroSection');
+    const heroGlow = document.getElementById('heroGlow');
+    if (window.matchMedia('(pointer: fine)').matches) {
+      heroSection.addEventListener('mousemove', (e) => {
+        const rect = heroSection.getBoundingClientRect();
+        heroGlow.style.left = (e.clientX - rect.left) + 'px';
+        heroGlow.style.top = (e.clientY - rect.top) + 'px';
+        heroGlow.style.opacity = '1';
+      });
+      heroSection.addEventListener('mouseleave', () => { heroGlow.style.opacity = '0'; });
+    }
+
+    // Chat widget visibility
+    const chatWidget = document.getElementById('chatWidget');
+
+    // Social proof toasts
+    const proofData = [
+      { text: 'A homeowner in Newport Coast just booked a free assessment', time: '2 minutes ago' },
+      { text: 'New weekly client signed up in Laguna Beach', time: '14 minutes ago' },
+      { text: 'Pool repair completed in Corona del Mar', time: '1 hour ago' },
+      { text: 'A property manager added 3 pools to service', time: '3 hours ago' },
+      { text: '5-star review received from Newport Beach', time: '5 hours ago' },
+    ];
+    const proofToast = document.getElementById('proofToast');
+    const proofText = document.getElementById('proofText');
+    const proofTime = document.getElementById('proofTime');
+    let proofIndex = 0;
+
+    function showProofToast() {
+      const data = proofData[proofIndex % proofData.length];
+      proofText.textContent = data.text;
+      proofTime.textContent = data.time;
+      proofToast.classList.add('show');
+      setTimeout(() => { proofToast.classList.remove('show'); }, 5000);
+      proofIndex++;
+    }
+
+    setTimeout(showProofToast, 8000);
+    setInterval(showProofToast, 30000);
 
     // Testimonial carousel
     const slides = document.querySelectorAll('.testimonial-slide');
