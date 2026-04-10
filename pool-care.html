@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pool Care Guide | OC Pools — Maintenance Tips for Homeowners</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="description" content="Expert pool maintenance tips from OC Pools. Learn how to keep your pool clean between visits, maintain equipment, and prevent common problems.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['"DM Sans"', 'system-ui', 'sans-serif'], serif: ['"DM Serif Display"', 'Georgia', 'serif'] },
+          colors: {
+            brand: { 50:'#f0f7ff',100:'#e0effe',200:'#bae0fd',300:'#7cc8fc',400:'#36adf7',500:'#0c93e8',600:'#0074c6',700:'#015da1',800:'#064f85',900:'#0b426e',950:'#072a49' },
+            sand: { 50:'#faf8f5',100:'#f3efe8',200:'#e6ddd0',300:'#d5c7b3',400:'#c2ab92',500:'#b3967b',600:'#a6856b',700:'#8b6d59',800:'#725a4c',900:'#5e4b40' },
+          },
+          letterSpacing: { luxury: '0.2em' }
+        }
+      }
+    }
+  </script>
+  <style>
+    @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+    .anim { opacity: 0; }
+    .anim.vis { animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    .anim.vis.d1 { animation-delay: 0.12s; }
+    .anim.vis.d2 { animation-delay: 0.24s; }
+    .gold-line { height: 1px; background: linear-gradient(90deg, transparent, #c2ab92, transparent); }
+    .nav-link { position: relative; }
+    .nav-link::after { content:''; position:absolute; bottom:-4px; left:50%; width:0; height:1px; background:currentColor; transition:all 0.3s ease; transform:translateX(-50%); }
+    .nav-link:hover::after { width:100%; }
+    .guide-card { transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease; }
+    .guide-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.06); }
+    .tip-check { min-width: 22px; min-height: 22px; }
+  </style>
+</head>
+<body class="font-sans text-gray-800 antialiased overflow-x-hidden bg-sand-50">
+
+  <!-- Navbar -->
+  <nav class="bg-brand-950 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-5 flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-3">
+        <svg class="w-10 h-10 flex-shrink-0" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="38" stroke="white" stroke-width="2" opacity="0.8"/><circle cx="40" cy="40" r="34" stroke="white" stroke-width="0.5" opacity="0.3"/><path d="M20 48 Q30 42, 40 48 Q50 54, 60 48" stroke="white" stroke-width="1.5" opacity="0.25" fill="none" stroke-linecap="round"/><path d="M20 52 Q30 46, 40 52 Q50 58, 60 52" stroke="white" stroke-width="1" opacity="0.15" fill="none" stroke-linecap="round"/><text x="40" y="42" text-anchor="middle" fill="white" font-family="'DM Serif Display', Georgia, serif" font-size="22" letter-spacing="2">OC</text></svg>
+        <span class="text-2xl font-serif text-white tracking-wide">OC Pools</span>
+      </a>
+      <div class="hidden lg:flex items-center gap-10 text-[13px] font-medium tracking-luxury uppercase">
+        <a href="index.html#services" class="nav-link text-white/80 hover:text-white transition-colors">Services</a>
+        <a href="process.html" class="nav-link text-white/80 hover:text-white transition-colors">Our Process</a>
+        <a href="faq.html" class="nav-link text-white/80 hover:text-white transition-colors">FAQ</a>
+        <a href="pool-care.html" class="nav-link text-white/80 hover:text-white transition-colors active">Pool Care Guide</a>
+        <a href="index.html#contact" class="ml-2 border border-white/40 text-white px-7 py-2.5 hover:bg-white hover:text-gray-900 transition-all tracking-luxury text-[12px]">Request Quote</a>
+      </div>
+      <button id="menuBtn" class="lg:hidden text-white text-xl focus:outline-none"><i class="fa-solid fa-bars" id="menuIcon"></i></button>
+    </div>
+    <div id="mobileMenu" class="lg:hidden hidden bg-white shadow-2xl overflow-hidden border-t border-gray-100">
+      <div class="flex flex-col p-8 gap-1">
+        <a href="index.html" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">Home</a>
+        <a href="process.html" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">Our Process</a>
+        <a href="faq.html" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">FAQ</a>
+        <a href="pool-care.html" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">Pool Care Guide</a>
+        <a href="index.html#contact" class="mobile-link bg-gray-900 text-white text-center py-4 text-sm font-medium tracking-luxury uppercase mt-4">Request Quote</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="bg-brand-950 text-white py-24 md:py-32">
+    <div class="max-w-4xl mx-auto px-6 lg:px-10 text-center">
+      <p class="anim text-[12px] tracking-luxury uppercase text-sand-400 font-medium mb-4">Homeowner Resources</p>
+      <h1 class="anim d1 font-serif text-4xl sm:text-5xl md:text-6xl text-white mb-6">Pool Care Guide</h1>
+      <div class="anim d2 gold-line w-16 mx-auto mb-6"></div>
+      <p class="anim d2 text-lg text-white/50 font-light max-w-xl mx-auto">Tips from our team to keep your pool in perfect shape between service visits.</p>
+    </div>
+  </section>
+
+  <!-- Between Visits -->
+  <section class="py-24 md:py-32 bg-sand-50">
+    <div class="max-w-5xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-16">
+        <p class="anim text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-3">Between Visits</p>
+        <h2 class="anim d1 font-serif text-3xl sm:text-4xl text-gray-900">What You Can Do at Home</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="anim guide-card bg-white p-8 border border-gray-100">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 bg-brand-50 flex items-center justify-center"><i class="fa-solid fa-eye text-brand-600 text-sm"></i></div>
+            <h3 class="font-serif text-xl text-gray-900">Daily Visual Check</h3>
+          </div>
+          <ul class="space-y-3">
+            <li class="flex gap-3 text-gray-500 text-[15px]"><i class="fa-solid fa-check tip-check text-sand-400 mt-0.5 text-xs"></i>Glance at water clarity — it should be blue, not cloudy or green</li>
+            <li class="flex gap-3 text-gray-500 text-[15px]"><i class="fa-solid fa-check tip-check text-sand-400 mt-0.5 text-xs"></i>Check the water level — it should hit the middle of the skimmer opening</li>
+            <li class="flex gap-3 text-gray-500 text-[15px]"><i class="fa-solid fa-check tip-check text-sand-400 mt-0.5 text-xs"></i>Remove any large debris (leaves, branches) with a leaf net if you see them</li>
+          </ul>
+        </div>
+
+        <div class="anim guide-card bg-white p-8 border border-gray-100">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 bg-brand-50 flex items-center justify-center"><i class="fa-solid fa-clock text-brand-600 text-sm"></i></div>
+            <h3 class="font-serif text-xl text-gray-900">Run Your Equipment</h3>
+          </div>
+          <ul class="space-y-3">
+            <li class="flex gap-3 text-gray-500 text-[15px]"><i class="fa-solid fa-check tip-check text-sand-400 mt-0.5 text-xs"></i>Keep your pump running 8–12 hours daily (we'll set the optimal schedule)</li>
+            <li class="flex gap-3 text-gray-500 text-[15px]"><i class="fa-solid fa-check tip-check text-sand-400 mt-0.5 text-xs"></i>Never turn off the pump for more than 24 hours in warm weather</li>
+            <li class="flex gap-3 text-gray-500 text-[15px]"><i class="fa-solid fa-check tip-check text-sand-400 mt-0.5 text-xs"></i>If you hear unusual grinding or humming, call us before it gets worse</li>
+          </ul>
+        </div>
+
+        <div class="anim guide-card bg-white p-8 border border-gray-100">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 bg-brand-50 flex items-center justify-center"><i class="fa-solid fa-umbrella-beach text-brand-600 text-sm"></i></div>
+            <h3 class="font-serif text-xl text-gray-900">After Heavy Use</h3>
+          </div>
+          <ul class="space-y-3">
+            <li class="flex gap-3 text-gray-500 text-[15px]"><i class="fa-solid fa-check tip-check text-sand-400 mt-0.5 text-xs"></i>Run the pump for an extra 2–3 hours after a pool party</li>
+            <li class="flex gap-3 text-gray-500 text-[15px]"><i class="fa-solid fa-check tip-check text-sand-400 mt-0.5 text-xs"></i>Shower before swimming to reduce sunscreen and oil buildup</li>
+            <li class="flex gap-3 text-gray-500 text-[15px]"><i class="fa-solid fa-check tip-check text-sand-400 mt-0.5 text-xs"></i>Text us if you're hosting more than 6 guests — we can pre-treat</li>
+          </ul>
+        </div>
+
+        <div class="anim guide-card bg-white p-8 border border-gray-100">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 bg-brand-50 flex items-center justify-center"><i class="fa-solid fa-cloud-rain text-brand-600 text-sm"></i></div>
+            <h3 class="font-serif text-xl text-gray-900">After Rain or Wind</h3>
+          </div>
+          <ul class="space-y-3">
+            <li class="flex gap-3 text-gray-500 text-[15px]"><i class="fa-solid fa-check tip-check text-sand-400 mt-0.5 text-xs"></i>Empty skimmer baskets if they're full of leaves and debris</li>
+            <li class="flex gap-3 text-gray-500 text-[15px]"><i class="fa-solid fa-check tip-check text-sand-400 mt-0.5 text-xs"></i>Don't add chemicals yourself — rain changes pH and we'll rebalance</li>
+            <li class="flex gap-3 text-gray-500 text-[15px]"><i class="fa-solid fa-check tip-check text-sand-400 mt-0.5 text-xs"></i>If water level rises above the tile, let us know so we can drain to optimal level</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chemical Basics -->
+  <section class="py-24 md:py-32 bg-white border-y border-gray-100">
+    <div class="max-w-5xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-16">
+        <p class="anim text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-3">Know Your Water</p>
+        <h2 class="anim d1 font-serif text-3xl sm:text-4xl text-gray-900">Chemical Balance Basics</h2>
+        <p class="anim d2 text-gray-500 font-light mt-4 max-w-lg mx-auto">You don't need to be a chemist — that's our job. But understanding what we measure helps you spot issues early.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="anim text-center p-8 border border-gray-100 bg-sand-50">
+          <div class="font-serif text-4xl text-brand-700 mb-2">7.4</div>
+          <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-1">Ideal pH</p>
+          <p class="text-gray-500 text-sm">Range: 7.2 – 7.6. Low pH burns eyes. High pH clouds water and reduces chlorine effectiveness.</p>
+        </div>
+        <div class="anim text-center p-8 border border-gray-100 bg-sand-50">
+          <div class="font-serif text-4xl text-brand-700 mb-2">3.0</div>
+          <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-1">Free Chlorine (ppm)</p>
+          <p class="text-gray-500 text-sm">Range: 2 – 4 ppm. This is what kills bacteria and algae. Below 1 ppm, your pool is at risk.</p>
+        </div>
+        <div class="anim text-center p-8 border border-gray-100 bg-sand-50">
+          <div class="font-serif text-4xl text-brand-700 mb-2">100</div>
+          <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-1">Alkalinity (ppm)</p>
+          <p class="text-gray-500 text-sm">Range: 80 – 120 ppm. Acts as a buffer for pH. Without it, pH swings wildly.</p>
+        </div>
+        <div class="anim text-center p-8 border border-gray-100 bg-sand-50">
+          <div class="font-serif text-4xl text-brand-700 mb-2">300</div>
+          <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-1">Calcium Hardness</p>
+          <p class="text-gray-500 text-sm">Range: 200 – 400 ppm. Too low corrodes surfaces. Too high causes white scale deposits.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seasonal -->
+  <section class="py-24 md:py-32 bg-sand-50">
+    <div class="max-w-5xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-16">
+        <p class="anim text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-3">Year-Round Care</p>
+        <h2 class="anim d1 font-serif text-3xl sm:text-4xl text-gray-900">Seasonal Tips for SoCal Pools</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="anim guide-card bg-white p-8 border border-gray-100">
+          <div class="flex items-center gap-3 mb-4">
+            <i class="fa-solid fa-sun text-amber-400 text-lg"></i>
+            <h3 class="font-serif text-xl text-gray-900">Summer (Jun–Sep)</h3>
+          </div>
+          <p class="text-gray-500 text-[15px] leading-relaxed mb-4">Peak season. Higher temperatures burn through chlorine faster. UV breaks down stabilizer. More swimmers means more demand on filtration.</p>
+          <ul class="space-y-2 text-gray-500 text-[15px]">
+            <li class="flex gap-2"><span class="text-sand-400">&bull;</span> Run pump 10–12 hrs daily</li>
+            <li class="flex gap-2"><span class="text-sand-400">&bull;</span> We increase chlorine and stabilizer levels</li>
+            <li class="flex gap-2"><span class="text-sand-400">&bull;</span> Keep landscaping trimmed back from the pool</li>
+          </ul>
+        </div>
+
+        <div class="anim guide-card bg-white p-8 border border-gray-100">
+          <div class="flex items-center gap-3 mb-4">
+            <i class="fa-solid fa-leaf text-orange-400 text-lg"></i>
+            <h3 class="font-serif text-xl text-gray-900">Fall (Oct–Nov)</h3>
+          </div>
+          <p class="text-gray-500 text-[15px] leading-relaxed mb-4">Leaves are the biggest challenge. Decaying organic matter consumes chlorine and can stain surfaces if left too long.</p>
+          <ul class="space-y-2 text-gray-500 text-[15px]">
+            <li class="flex gap-2"><span class="text-sand-400">&bull;</span> We add phosphate remover to prevent algae</li>
+            <li class="flex gap-2"><span class="text-sand-400">&bull;</span> Consider a pool cover if you have heavy tree canopy</li>
+            <li class="flex gap-2"><span class="text-sand-400">&bull;</span> Great time for filter deep-cleaning</li>
+          </ul>
+        </div>
+
+        <div class="anim guide-card bg-white p-8 border border-gray-100">
+          <div class="flex items-center gap-3 mb-4">
+            <i class="fa-solid fa-cloud text-gray-400 text-lg"></i>
+            <h3 class="font-serif text-xl text-gray-900">Winter (Dec–Feb)</h3>
+          </div>
+          <p class="text-gray-500 text-[15px] leading-relaxed mb-4">In Southern California, pools don't freeze — but they still need care. Reduced sunlight and cooler water mean less chlorine demand, but algae can still form in mild weeks.</p>
+          <ul class="space-y-2 text-gray-500 text-[15px]">
+            <li class="flex gap-2"><span class="text-sand-400">&bull;</span> We reduce pump runtime to 6–8 hrs daily</li>
+            <li class="flex gap-2"><span class="text-sand-400">&bull;</span> Ideal time for equipment upgrades or tile repair</li>
+            <li class="flex gap-2"><span class="text-sand-400">&bull;</span> Keep the pool clean — don't "hibernate" it</li>
+          </ul>
+        </div>
+
+        <div class="anim guide-card bg-white p-8 border border-gray-100">
+          <div class="flex items-center gap-3 mb-4">
+            <i class="fa-solid fa-seedling text-green-400 text-lg"></i>
+            <h3 class="font-serif text-xl text-gray-900">Spring (Mar–May)</h3>
+          </div>
+          <p class="text-gray-500 text-[15px] leading-relaxed mb-4">Pollen and Santa Ana winds bring debris. Water temps start climbing. This is when we ramp up and prep your pool for summer entertaining.</p>
+          <ul class="space-y-2 text-gray-500 text-[15px]">
+            <li class="flex gap-2"><span class="text-sand-400">&bull;</span> We do a full equipment tune-up</li>
+            <li class="flex gap-2"><span class="text-sand-400">&bull;</span> Acid wash or tile cleaning if needed</li>
+            <li class="flex gap-2"><span class="text-sand-400">&bull;</span> Great time to schedule any resurfacing</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Warning signs -->
+  <section class="py-24 md:py-32 bg-white border-y border-gray-100">
+    <div class="max-w-4xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-16">
+        <p class="anim text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-3">Early Warning</p>
+        <h2 class="anim d1 font-serif text-3xl sm:text-4xl text-gray-900">Signs to Call Us Right Away</h2>
+        <p class="anim d2 text-gray-500 font-light mt-4 max-w-lg mx-auto">Most problems are easy to fix if caught early. Here's what to watch for.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div class="anim flex gap-4 p-6 border border-red-100 bg-red-50/30">
+          <div class="w-10 h-10 bg-red-50 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-triangle-exclamation text-red-400 text-sm"></i></div>
+          <div>
+            <h4 class="font-semibold text-gray-900 mb-1">Green or Cloudy Water</h4>
+            <p class="text-gray-500 text-sm">Algae growth or chemical imbalance. Don't swim — call us for same-day treatment.</p>
+          </div>
+        </div>
+        <div class="anim flex gap-4 p-6 border border-red-100 bg-red-50/30">
+          <div class="w-10 h-10 bg-red-50 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-triangle-exclamation text-red-400 text-sm"></i></div>
+          <div>
+            <h4 class="font-semibold text-gray-900 mb-1">Unusual Equipment Noise</h4>
+            <p class="text-gray-500 text-sm">Grinding, screeching, or loud humming from the pump or motor means bearings or seals may be failing.</p>
+          </div>
+        </div>
+        <div class="anim flex gap-4 p-6 border border-amber-100 bg-amber-50/30">
+          <div class="w-10 h-10 bg-amber-50 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-exclamation text-amber-500 text-sm"></i></div>
+          <div>
+            <h4 class="font-semibold text-gray-900 mb-1">White Scale on Tile</h4>
+            <p class="text-gray-500 text-sm">Calcium deposits from high hardness. Catches early, easy to clean. Left too long, requires acid wash.</p>
+          </div>
+        </div>
+        <div class="anim flex gap-4 p-6 border border-amber-100 bg-amber-50/30">
+          <div class="w-10 h-10 bg-amber-50 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-exclamation text-amber-500 text-sm"></i></div>
+          <div>
+            <h4 class="font-semibold text-gray-900 mb-1">Water Level Dropping Fast</h4>
+            <p class="text-gray-500 text-sm">Normal evaporation is ¼" per day. More than that could indicate a leak in plumbing or the shell.</p>
+          </div>
+        </div>
+        <div class="anim flex gap-4 p-6 border border-amber-100 bg-amber-50/30">
+          <div class="w-10 h-10 bg-amber-50 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-exclamation text-amber-500 text-sm"></i></div>
+          <div>
+            <h4 class="font-semibold text-gray-900 mb-1">Strong Chlorine Smell</h4>
+            <p class="text-gray-500 text-sm">Ironically, a strong "chlorine" smell means there isn't enough free chlorine. It's actually chloramines — waste byproducts.</p>
+          </div>
+        </div>
+        <div class="anim flex gap-4 p-6 border border-amber-100 bg-amber-50/30">
+          <div class="w-10 h-10 bg-amber-50 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-exclamation text-amber-500 text-sm"></i></div>
+          <div>
+            <h4 class="font-semibold text-gray-900 mb-1">Stinging Eyes After Swimming</h4>
+            <p class="text-gray-500 text-sm">pH is likely too low (acidic). Safe to exit, but don't swim again until we rebalance the water.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-brand-950 text-white">
+    <div class="max-w-3xl mx-auto px-6 lg:px-10 text-center">
+      <h2 class="font-serif text-3xl sm:text-4xl mb-4">Skip the Guesswork</h2>
+      <p class="text-white/50 font-light mb-8">Let our team handle the chemistry, equipment, and heavy lifting. You just enjoy the water.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="index.html#contact" class="inline-flex items-center justify-center bg-white text-gray-900 px-10 py-4 text-[13px] font-semibold tracking-luxury uppercase hover:bg-sand-100 transition-all">
+          Get Started
+        </a>
+        <a href="tel:9498928944" class="inline-flex items-center justify-center border border-white/30 text-white px-10 py-4 text-[13px] font-medium tracking-luxury uppercase hover:bg-white/10 transition-all">
+          <i class="fa-solid fa-phone mr-3 text-xs"></i> 949.892.8944
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-brand-950 text-white/40 border-t border-white/[0.06]">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-16">
+      <div class="grid md:grid-cols-4 gap-12 mb-16">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <svg class="w-10 h-10 flex-shrink-0" viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" stroke="white" stroke-width="2" opacity="0.6"/><circle cx="40" cy="40" r="34" stroke="white" stroke-width="0.5" opacity="0.2"/><path d="M20 48 Q30 42, 40 48 Q50 54, 60 48" stroke="white" stroke-width="1.5" opacity="0.2" fill="none"/><path d="M20 52 Q30 46, 40 52 Q50 58, 60 52" stroke="white" stroke-width="1" opacity="0.12" fill="none"/><text x="40" y="42" text-anchor="middle" fill="white" font-family="'DM Serif Display', Georgia, serif" font-size="22" letter-spacing="2" opacity="0.9">OC</text></svg>
+            <p class="font-serif text-2xl text-white">OC Pools</p>
+          </div>
+          <p class="text-sm leading-relaxed">Premium pool care trusted by luxury homeowners across Orange County's coast.</p>
+        </div>
+        <div>
+          <h4 class="text-[11px] tracking-luxury uppercase text-white/60 font-medium mb-5">Pages</h4>
+          <ul class="space-y-3 text-sm"><li><a href="index.html" class="hover:text-white transition-colors">Home</a></li><li><a href="process.html" class="hover:text-white transition-colors">Our Process</a></li><li><a href="faq.html" class="hover:text-white transition-colors">FAQ</a></li><li><a href="pool-care.html" class="hover:text-white transition-colors">Pool Care Guide</a></li></ul>
+        </div>
+        <div>
+          <h4 class="text-[11px] tracking-luxury uppercase text-white/60 font-medium mb-5">Service Areas</h4>
+          <ul class="space-y-3 text-sm"><li>Newport Coast</li><li>Laguna Beach</li><li>Corona del Mar</li><li>Newport Beach</li></ul>
+        </div>
+        <div>
+          <h4 class="text-[11px] tracking-luxury uppercase text-white/60 font-medium mb-5">Connect</h4>
+          <ul class="space-y-3 text-sm"><li><a href="tel:9498928944" class="hover:text-white transition-colors">949.892.8944</a></li><li><a href="mailto:justinnassie@gmail.com" class="hover:text-white transition-colors">justinnassie@gmail.com</a></li></ul>
+        </div>
+      </div>
+      <div class="border-t border-white/[0.06] pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p class="text-xs">&copy; 2026 OC Pools. All rights reserved.</p>
+        <p class="text-xs">3525 Hyland Ave, Suite 235 &middot; Costa Mesa, CA 92626</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('vis'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.anim').forEach(el => observer.observe(el));
+    const menuBtn = document.getElementById('menuBtn');
+    const menuIcon = document.getElementById('menuIcon');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let menuOpen = false;
+    menuBtn.addEventListener('click', () => { menuOpen = !menuOpen; mobileMenu.classList.toggle('hidden'); menuIcon.className = menuOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'; });
+    document.querySelectorAll('.mobile-link').forEach(link => { link.addEventListener('click', () => { mobileMenu.classList.add('hidden'); menuOpen = false; menuIcon.className = 'fa-solid fa-bars'; }); });
+  </script>
+</body>
+</html>

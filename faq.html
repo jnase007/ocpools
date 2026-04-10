@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ | OC Pools — Luxury Pool Care in Orange County</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="description" content="Frequently asked questions about OC Pools' luxury pool maintenance, pricing, scheduling, and services in Orange County.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+            serif: ['"DM Serif Display"', 'Georgia', 'serif'],
+          },
+          colors: {
+            brand: { 50:'#f0f7ff',100:'#e0effe',200:'#bae0fd',300:'#7cc8fc',400:'#36adf7',500:'#0c93e8',600:'#0074c6',700:'#015da1',800:'#064f85',900:'#0b426e',950:'#072a49' },
+            sand: { 50:'#faf8f5',100:'#f3efe8',200:'#e6ddd0',300:'#d5c7b3',400:'#c2ab92',500:'#b3967b',600:'#a6856b',700:'#8b6d59',800:'#725a4c',900:'#5e4b40' },
+          },
+          letterSpacing: { luxury: '0.2em' }
+        }
+      }
+    }
+  </script>
+  <style>
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .anim { opacity: 0; }
+    .anim.vis { animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    .anim.vis.d1 { animation-delay: 0.12s; }
+    .anim.vis.d2 { animation-delay: 0.24s; }
+    .gold-line { height: 1px; background: linear-gradient(90deg, transparent, #c2ab92, transparent); }
+    .nav-link { position: relative; }
+    .nav-link::after { content:''; position:absolute; bottom:-4px; left:50%; width:0; height:1px; background:currentColor; transition:all 0.3s ease; transform:translateX(-50%); }
+    .nav-link:hover::after { width:100%; }
+    .faq-item { border-bottom: 1px solid #e6ddd0; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1), padding 0.3s ease; }
+    .faq-item.open .faq-answer { max-height: 300px; }
+    .faq-icon { transition: transform 0.3s ease; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+  </style>
+</head>
+<body class="font-sans text-gray-800 antialiased overflow-x-hidden bg-sand-50">
+
+  <!-- Navbar -->
+  <nav class="bg-brand-950 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-5 flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-3">
+        <svg class="w-10 h-10 flex-shrink-0" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="40" r="38" stroke="white" stroke-width="2" opacity="0.8"/>
+          <circle cx="40" cy="40" r="34" stroke="white" stroke-width="0.5" opacity="0.3"/>
+          <path d="M20 48 Q30 42, 40 48 Q50 54, 60 48" stroke="white" stroke-width="1.5" opacity="0.25" fill="none" stroke-linecap="round"/>
+          <path d="M20 52 Q30 46, 40 52 Q50 58, 60 52" stroke="white" stroke-width="1" opacity="0.15" fill="none" stroke-linecap="round"/>
+          <text x="40" y="42" text-anchor="middle" fill="white" font-family="'DM Serif Display', Georgia, serif" font-size="22" letter-spacing="2">OC</text>
+        </svg>
+        <span class="text-2xl font-serif text-white tracking-wide">OC Pools</span>
+      </a>
+      <div class="hidden lg:flex items-center gap-10 text-[13px] font-medium tracking-luxury uppercase">
+        <a href="index.html#services" class="nav-link text-white/80 hover:text-white transition-colors">Services</a>
+        <a href="process.html" class="nav-link text-white/80 hover:text-white transition-colors">Our Process</a>
+        <a href="faq.html" class="nav-link text-white/80 hover:text-white transition-colors active">FAQ</a>
+        <a href="pool-care.html" class="nav-link text-white/80 hover:text-white transition-colors">Pool Care Guide</a>
+        <a href="index.html#contact" class="ml-2 border border-white/40 text-white px-7 py-2.5 hover:bg-white hover:text-gray-900 transition-all tracking-luxury text-[12px]">Request Quote</a>
+      </div>
+      <button id="menuBtn" class="lg:hidden text-white text-xl focus:outline-none">
+        <i class="fa-solid fa-bars" id="menuIcon"></i>
+      </button>
+    </div>
+    <div id="mobileMenu" class="lg:hidden hidden bg-white shadow-2xl overflow-hidden border-t border-gray-100">
+      <div class="flex flex-col p-8 gap-1">
+        <a href="index.html" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">Home</a>
+        <a href="process.html" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">Our Process</a>
+        <a href="faq.html" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">FAQ</a>
+        <a href="pool-care.html" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">Pool Care Guide</a>
+        <a href="index.html#contact" class="mobile-link bg-gray-900 text-white text-center py-4 text-sm font-medium tracking-luxury uppercase mt-4">Request Quote</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="bg-brand-950 text-white py-24 md:py-32">
+    <div class="max-w-4xl mx-auto px-6 lg:px-10 text-center">
+      <p class="anim text-[12px] tracking-luxury uppercase text-sand-400 font-medium mb-4">Common Questions</p>
+      <h1 class="anim d1 font-serif text-4xl sm:text-5xl md:text-6xl text-white mb-6">Frequently Asked Questions</h1>
+      <div class="anim d2 gold-line w-16 mx-auto mb-6"></div>
+      <p class="anim d2 text-lg text-white/50 font-light max-w-xl mx-auto">Everything you need to know before getting started with OC Pools.</p>
+    </div>
+  </section>
+
+  <!-- FAQ Content -->
+  <section class="py-24 md:py-32 bg-sand-50">
+    <div class="max-w-3xl mx-auto px-6 lg:px-10">
+
+      <div class="anim faq-item py-7">
+        <button class="faq-toggle w-full flex justify-between items-start text-left gap-6">
+          <h3 class="font-serif text-xl text-gray-900">Do I need to be home during service?</h3>
+          <i class="fa-solid fa-plus text-sand-400 faq-icon mt-1 flex-shrink-0"></i>
+        </button>
+        <div class="faq-answer">
+          <p class="text-gray-500 leading-relaxed pt-4 pb-2 text-[15px]">Not at all. Most of our clients aren't home during service visits. As long as we have gate access, we handle everything and send you a detailed photo report when we're done. You'll know exactly what was done without needing to be there.</p>
+        </div>
+      </div>
+
+      <div class="anim faq-item py-7">
+        <button class="faq-toggle w-full flex justify-between items-start text-left gap-6">
+          <h3 class="font-serif text-xl text-gray-900">What's included in weekly maintenance?</h3>
+          <i class="fa-solid fa-plus text-sand-400 faq-icon mt-1 flex-shrink-0"></i>
+        </button>
+        <div class="faq-answer">
+          <p class="text-gray-500 leading-relaxed pt-4 pb-2 text-[15px]">Every visit includes skimming the surface and floor, brushing walls and tile, vacuuming, emptying skimmer and pump baskets, testing and balancing all chemicals, inspecting equipment, and a full photo report. We also monitor for early signs of equipment wear so nothing catches you off guard.</p>
+        </div>
+      </div>
+
+      <div class="anim faq-item py-7">
+        <button class="faq-toggle w-full flex justify-between items-start text-left gap-6">
+          <h3 class="font-serif text-xl text-gray-900">What chemicals do you use? Are they safe for kids and pets?</h3>
+          <i class="fa-solid fa-plus text-sand-400 faq-icon mt-1 flex-shrink-0"></i>
+        </button>
+        <div class="faq-answer">
+          <p class="text-gray-500 leading-relaxed pt-4 pb-2 text-[15px]">We use professional-grade, NSF-certified chemicals that are safe for families and pets when properly balanced. We also offer eco-friendly and saltwater-compatible options. Your water will always be within safe swimming parameters before we leave.</p>
+        </div>
+      </div>
+
+      <div class="anim faq-item py-7">
+        <button class="faq-toggle w-full flex justify-between items-start text-left gap-6">
+          <h3 class="font-serif text-xl text-gray-900">How quickly can you start?</h3>
+          <i class="fa-solid fa-plus text-sand-400 faq-icon mt-1 flex-shrink-0"></i>
+        </button>
+        <div class="faq-answer">
+          <p class="text-gray-500 leading-relaxed pt-4 pb-2 text-[15px]">Most new clients are on schedule within 48 hours of their free assessment. If your pool needs immediate attention — green water, equipment failure, or you're hosting an event — we offer same-day emergency service.</p>
+        </div>
+      </div>
+
+      <div class="anim faq-item py-7">
+        <button class="faq-toggle w-full flex justify-between items-start text-left gap-6">
+          <h3 class="font-serif text-xl text-gray-900">Is there a contract or commitment?</h3>
+          <i class="fa-solid fa-plus text-sand-400 faq-icon mt-1 flex-shrink-0"></i>
+        </button>
+        <div class="faq-answer">
+          <p class="text-gray-500 leading-relaxed pt-4 pb-2 text-[15px]">No long-term contracts. We operate on a month-to-month basis because we believe our work should speak for itself. You stay because you want to, not because you're locked in. Most of our clients have been with us since day one.</p>
+        </div>
+      </div>
+
+      <div class="anim faq-item py-7">
+        <button class="faq-toggle w-full flex justify-between items-start text-left gap-6">
+          <h3 class="font-serif text-xl text-gray-900">Will I always get the same technician?</h3>
+          <i class="fa-solid fa-plus text-sand-400 faq-icon mt-1 flex-shrink-0"></i>
+        </button>
+        <div class="faq-answer">
+          <p class="text-gray-500 leading-relaxed pt-4 pb-2 text-[15px]">Yes. Unlike franchise operations that rotate staff, we assign one dedicated technician to your pool. They learn your equipment, your preferences, and your standards. If your technician is ever unavailable, we'll notify you in advance and ensure a seamless handoff.</p>
+        </div>
+      </div>
+
+      <div class="anim faq-item py-7">
+        <button class="faq-toggle w-full flex justify-between items-start text-left gap-6">
+          <h3 class="font-serif text-xl text-gray-900">Do you handle repairs or just cleaning?</h3>
+          <i class="fa-solid fa-plus text-sand-400 faq-icon mt-1 flex-shrink-0"></i>
+        </button>
+        <div class="faq-answer">
+          <p class="text-gray-500 leading-relaxed pt-4 pb-2 text-[15px]">We handle both. Pumps, filters, heaters, lights, automation systems, tile restoration — we diagnose and repair on-site whenever possible. For active maintenance clients, diagnosis is always free and repair rates are discounted.</p>
+        </div>
+      </div>
+
+      <div class="anim faq-item py-7">
+        <button class="faq-toggle w-full flex justify-between items-start text-left gap-6">
+          <h3 class="font-serif text-xl text-gray-900">What areas do you serve?</h3>
+          <i class="fa-solid fa-plus text-sand-400 faq-icon mt-1 flex-shrink-0"></i>
+        </button>
+        <div class="faq-answer">
+          <p class="text-gray-500 leading-relaxed pt-4 pb-2 text-[15px]">We serve Newport Coast, Laguna Beach, Corona del Mar, Newport Beach, Balboa Island, Dana Point, San Clemente, Irvine, and surrounding luxury communities in Orange County. We're based in Costa Mesa at 3525 Hyland Ave, Suite 235.</p>
+        </div>
+      </div>
+
+      <div class="anim faq-item py-7">
+        <button class="faq-toggle w-full flex justify-between items-start text-left gap-6">
+          <h3 class="font-serif text-xl text-gray-900">What if I have a pool emergency outside business hours?</h3>
+          <i class="fa-solid fa-plus text-sand-400 faq-icon mt-1 flex-shrink-0"></i>
+        </button>
+        <div class="faq-answer">
+          <p class="text-gray-500 leading-relaxed pt-4 pb-2 text-[15px]">Active clients can text or call us anytime at 949.892.8944. For urgent equipment failures or safety concerns, we prioritize same-day or next-morning response. Your peace of mind doesn't have business hours.</p>
+        </div>
+      </div>
+
+      <div class="anim faq-item py-7">
+        <button class="faq-toggle w-full flex justify-between items-start text-left gap-6">
+          <h3 class="font-serif text-xl text-gray-900">I have a spa / hot tub too. Can you service both?</h3>
+          <i class="fa-solid fa-plus text-sand-400 faq-icon mt-1 flex-shrink-0"></i>
+        </button>
+        <div class="faq-answer">
+          <p class="text-gray-500 leading-relaxed pt-4 pb-2 text-[15px]">Absolutely. We service pools, spas, and combination systems. Spa maintenance is included in your weekly visit at no extra charge when it shares the same filtration system. Standalone spas can be added to your plan for a small additional fee.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-brand-950 text-white">
+    <div class="max-w-3xl mx-auto px-6 lg:px-10 text-center">
+      <h2 class="font-serif text-3xl sm:text-4xl mb-4">Still Have Questions?</h2>
+      <p class="text-white/50 font-light mb-8">We're happy to walk you through everything. No pressure, no sales pitch.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="tel:9498928944" class="inline-flex items-center justify-center bg-white text-gray-900 px-10 py-4 text-[13px] font-semibold tracking-luxury uppercase hover:bg-sand-100 transition-all">
+          <i class="fa-solid fa-phone mr-3 text-xs"></i> Call 949.892.8944
+        </a>
+        <a href="index.html#contact" class="inline-flex items-center justify-center border border-white/30 text-white px-10 py-4 text-[13px] font-medium tracking-luxury uppercase hover:bg-white/10 transition-all">
+          Request a Quote
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-brand-950 text-white/40 border-t border-white/[0.06]">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-16">
+      <div class="grid md:grid-cols-4 gap-12 mb-16">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <svg class="w-10 h-10 flex-shrink-0" viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" stroke="white" stroke-width="2" opacity="0.6"/><circle cx="40" cy="40" r="34" stroke="white" stroke-width="0.5" opacity="0.2"/><path d="M20 48 Q30 42, 40 48 Q50 54, 60 48" stroke="white" stroke-width="1.5" opacity="0.2" fill="none"/><path d="M20 52 Q30 46, 40 52 Q50 58, 60 52" stroke="white" stroke-width="1" opacity="0.12" fill="none"/><text x="40" y="42" text-anchor="middle" fill="white" font-family="'DM Serif Display', Georgia, serif" font-size="22" letter-spacing="2" opacity="0.9">OC</text></svg>
+            <p class="font-serif text-2xl text-white">OC Pools</p>
+          </div>
+          <p class="text-sm leading-relaxed">Premium pool care trusted by luxury homeowners across Orange County's coast.</p>
+        </div>
+        <div>
+          <h4 class="text-[11px] tracking-luxury uppercase text-white/60 font-medium mb-5">Pages</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+            <li><a href="process.html" class="hover:text-white transition-colors">Our Process</a></li>
+            <li><a href="faq.html" class="hover:text-white transition-colors">FAQ</a></li>
+            <li><a href="pool-care.html" class="hover:text-white transition-colors">Pool Care Guide</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-[11px] tracking-luxury uppercase text-white/60 font-medium mb-5">Service Areas</h4>
+          <ul class="space-y-3 text-sm"><li>Newport Coast</li><li>Laguna Beach</li><li>Corona del Mar</li><li>Newport Beach</li></ul>
+        </div>
+        <div>
+          <h4 class="text-[11px] tracking-luxury uppercase text-white/60 font-medium mb-5">Connect</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="tel:9498928944" class="hover:text-white transition-colors">949.892.8944</a></li>
+            <li><a href="mailto:justinnassie@gmail.com" class="hover:text-white transition-colors">justinnassie@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-white/[0.06] pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p class="text-xs">&copy; 2026 OC Pools. All rights reserved.</p>
+        <p class="text-xs">3525 Hyland Ave, Suite 235 &middot; Costa Mesa, CA 92626</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('vis'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.anim').forEach(el => observer.observe(el));
+
+    document.querySelectorAll('.faq-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!wasOpen) item.classList.add('open');
+      });
+    });
+
+    const menuBtn = document.getElementById('menuBtn');
+    const menuIcon = document.getElementById('menuIcon');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let menuOpen = false;
+    menuBtn.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      mobileMenu.classList.toggle('hidden');
+      menuIcon.className = menuOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => { mobileMenu.classList.add('hidden'); menuOpen = false; menuIcon.className = 'fa-solid fa-bars'; });
+    });
+  </script>
+</body>
+</html>

@@ -6,6 +6,7 @@
   <title>OC Pools | Luxury Pool Care in Orange County</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta name="description" content="Premium weekly pool maintenance, seasonal openings & closings, and expert repairs for luxury homes in Newport Coast, Laguna Beach & Orange County.">
+  <link rel="preload" as="image" href="https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/shutterstock_2698749089.jpg">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -169,6 +170,46 @@
         linear-gradient(180deg, rgba(7,42,73,0.92) 0%, rgba(7,42,73,0.88) 100%),
         url('https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/shutterstock_2533398529.jpg') center/cover no-repeat;
     }
+
+    .hero-bg {
+      background-attachment: fixed;
+    }
+    @media (max-width: 768px) {
+      .hero-bg { background-attachment: scroll; }
+    }
+
+    .nav-link.active::after { width: 100%; }
+
+    #floatingCta {
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translateY(100px);
+      opacity: 0;
+    }
+    #floatingCta.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    #backToTop {
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+    }
+    #backToTop.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .step-line {
+      height: 1px;
+      background: linear-gradient(90deg, #c2ab92, #e6ddd0);
+    }
+
+    .form-success {
+      animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
   </style>
 </head>
 <body class="font-sans text-gray-800 antialiased overflow-x-hidden bg-sand-50">
@@ -189,9 +230,10 @@
 
       <div class="hidden lg:flex items-center gap-10 text-[13px] font-medium tracking-luxury uppercase">
         <a href="#services" class="nav-link text-white/80 hover:text-white transition-colors">Services</a>
-        <a href="#about" class="nav-link text-white/80 hover:text-white transition-colors">Why Us</a>
+        <a href="process.html" class="nav-link text-white/80 hover:text-white transition-colors">Our Process</a>
         <a href="#pricing" class="nav-link text-white/80 hover:text-white transition-colors">Pricing</a>
-        <a href="#areas" class="nav-link text-white/80 hover:text-white transition-colors">Areas</a>
+        <a href="faq.html" class="nav-link text-white/80 hover:text-white transition-colors">FAQ</a>
+        <a href="pool-care.html" class="nav-link text-white/80 hover:text-white transition-colors">Pool Care</a>
         <a href="#contact" class="ml-2 border border-white/40 text-white px-7 py-2.5 rounded-none hover:bg-white hover:text-gray-900 transition-all tracking-luxury text-[12px]">
           Request Quote
         </a>
@@ -205,9 +247,10 @@
     <div id="mobileMenu" class="lg:hidden hidden bg-white shadow-2xl mx-0 overflow-hidden border-t border-gray-100">
       <div class="flex flex-col p-8 gap-1">
         <a href="#services" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">Services</a>
-        <a href="#about" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">Why Us</a>
+        <a href="process.html" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">Our Process</a>
         <a href="#pricing" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">Pricing</a>
-        <a href="#areas" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">Areas</a>
+        <a href="faq.html" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">FAQ</a>
+        <a href="pool-care.html" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">Pool Care</a>
         <a href="#contact" class="mobile-link bg-gray-900 text-white text-center py-4 text-sm font-medium tracking-luxury uppercase mt-4">Request Quote</a>
       </div>
     </div>
@@ -269,6 +312,45 @@
         <div class="flex items-center gap-3">
           <i class="fa-solid fa-leaf text-sand-400"></i>
           <span>Eco-Friendly Options</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="py-24 md:py-28 bg-sand-50">
+    <div class="max-w-5xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-16">
+        <p class="anim text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-4">How It Works</p>
+        <h2 class="anim d1 font-serif text-4xl sm:text-5xl text-gray-900 mb-6">Three Simple Steps</h2>
+        <div class="anim d2 gold-line w-16 mx-auto"></div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-12 relative">
+        <div class="hidden md:block absolute top-10 left-[20%] right-[20%] step-line"></div>
+
+        <div class="anim d1 text-center relative">
+          <div class="w-20 h-20 border-2 border-sand-300 flex items-center justify-center mx-auto mb-6 bg-sand-50 relative z-10">
+            <span class="font-serif text-3xl text-gray-900">1</span>
+          </div>
+          <h3 class="font-serif text-xl text-gray-900 mb-2">Request a Quote</h3>
+          <p class="text-gray-500 text-[15px] leading-relaxed">Fill out the form or call us. We'll ask a few quick questions about your pool and schedule a visit.</p>
+        </div>
+
+        <div class="anim d2 text-center relative">
+          <div class="w-20 h-20 border-2 border-sand-300 flex items-center justify-center mx-auto mb-6 bg-sand-50 relative z-10">
+            <span class="font-serif text-3xl text-gray-900">2</span>
+          </div>
+          <h3 class="font-serif text-xl text-gray-900 mb-2">Free Assessment</h3>
+          <p class="text-gray-500 text-[15px] leading-relaxed">We visit your pool, inspect the equipment, test the water, and give you an honest evaluation — no cost, no pressure.</p>
+        </div>
+
+        <div class="anim d3 text-center relative">
+          <div class="w-20 h-20 border-2 border-sand-300 flex items-center justify-center mx-auto mb-6 bg-sand-50 relative z-10">
+            <span class="font-serif text-3xl text-gray-900">3</span>
+          </div>
+          <h3 class="font-serif text-xl text-gray-900 mb-2">Relax & Enjoy</h3>
+          <p class="text-gray-500 text-[15px] leading-relaxed">We handle everything from that day forward. You get a pristine pool and a photo report after every visit.</p>
         </div>
       </div>
     </div>
@@ -413,6 +495,30 @@
             <h3 class="font-serif text-lg text-white mb-2">Fully Licensed</h3>
             <p class="text-white/50 text-sm leading-relaxed">Licensed, insured, and CPO-certified professionals.</p>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="py-20 bg-white border-y border-gray-100">
+    <div class="max-w-5xl mx-auto px-6 lg:px-10">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
+        <div class="anim d1">
+          <p class="font-serif text-4xl md:text-5xl text-gray-900 counter" data-target="150">0</p>
+          <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mt-2">Pools Serviced</p>
+        </div>
+        <div class="anim d2">
+          <p class="font-serif text-4xl md:text-5xl text-gray-900 counter" data-target="5">0</p>
+          <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mt-2">Star Rating</p>
+        </div>
+        <div class="anim d3">
+          <p class="font-serif text-4xl md:text-5xl text-gray-900 counter" data-target="2">0</p>
+          <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mt-2">Hour Response</p>
+        </div>
+        <div class="anim d4">
+          <p class="font-serif text-4xl md:text-5xl text-gray-900 counter" data-target="100">0</p>
+          <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mt-2">% Satisfaction</p>
         </div>
       </div>
     </div>
@@ -592,7 +698,7 @@
               </div>
               <div>
                 <p class="text-[11px] tracking-luxury uppercase text-white/40 mb-0.5">Call or Text</p>
-                <p class="text-lg text-white font-light">949.892.8944</p>
+                <a href="tel:9498928944" class="text-lg text-white font-light hover:text-sand-300 transition-colors">949.892.8944</a>
               </div>
             </div>
             <div class="flex items-center gap-5">
@@ -601,7 +707,7 @@
               </div>
               <div>
                 <p class="text-[11px] tracking-luxury uppercase text-white/40 mb-0.5">Email</p>
-                <p class="text-lg text-white font-light">justinnassie@gmail.com</p>
+                <a href="mailto:justinnassie@gmail.com" class="text-lg text-white font-light hover:text-sand-300 transition-colors">justinnassie@gmail.com</a>
               </div>
             </div>
             <div class="flex items-center gap-5">
@@ -669,11 +775,12 @@
           <p class="text-sm leading-relaxed">Premium pool care trusted by luxury homeowners across Orange County's coast.</p>
         </div>
         <div>
-          <h4 class="text-[11px] tracking-luxury uppercase text-white/60 font-medium mb-5">Services</h4>
+          <h4 class="text-[11px] tracking-luxury uppercase text-white/60 font-medium mb-5">Pages</h4>
           <ul class="space-y-3 text-sm">
-            <li><a href="#services" class="hover:text-white transition-colors">Weekly Maintenance</a></li>
-            <li><a href="#services" class="hover:text-white transition-colors">Pool Opening & Closing</a></li>
-            <li><a href="#services" class="hover:text-white transition-colors">Repairs & Upgrades</a></li>
+            <li><a href="#services" class="hover:text-white transition-colors">Services</a></li>
+            <li><a href="process.html" class="hover:text-white transition-colors">Our Process</a></li>
+            <li><a href="faq.html" class="hover:text-white transition-colors">FAQ</a></li>
+            <li><a href="pool-care.html" class="hover:text-white transition-colors">Pool Care Guide</a></li>
           </ul>
         </div>
         <div>
@@ -688,7 +795,7 @@
         <div>
           <h4 class="text-[11px] tracking-luxury uppercase text-white/60 font-medium mb-5">Connect</h4>
           <ul class="space-y-3 text-sm">
-            <li><a href="#contact" class="hover:text-white transition-colors">949.892.8944</a></li>
+            <li><a href="tel:9498928944" class="hover:text-white transition-colors">949.892.8944</a></li>
             <li><a href="mailto:justinnassie@gmail.com" class="hover:text-white transition-colors">justinnassie@gmail.com</a></li>
             <li class="pt-2 flex gap-4">
               <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-instagram text-lg"></i></a>
@@ -705,26 +812,92 @@
     </div>
   </footer>
 
+  <!-- Floating mobile CTA -->
+  <a href="tel:9498928944" id="floatingCta" class="fixed bottom-6 right-6 z-40 lg:hidden bg-brand-950 text-white w-14 h-14 flex items-center justify-center shadow-2xl shadow-brand-950/40">
+    <i class="fa-solid fa-phone text-lg"></i>
+  </a>
+
+  <!-- Back to top -->
+  <button id="backToTop" class="fixed bottom-6 right-6 z-40 hidden lg:flex bg-white border border-gray-200 text-gray-600 w-12 h-12 items-center justify-center shadow-lg hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all">
+    <i class="fa-solid fa-arrow-up text-sm"></i>
+  </button>
+
   <script>
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('vis');
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-
     document.querySelectorAll('.anim').forEach(el => observer.observe(el));
 
+    // Counter animation
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = parseInt(el.dataset.target);
+        const duration = 2000;
+        const start = performance.now();
+        const animate = (now) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(target * eased);
+          if (progress < 1) requestAnimationFrame(animate);
+          else {
+            el.textContent = target;
+            if (target === 100) el.textContent = target + '%';
+            if (target === 5) el.textContent = '5.0';
+            if (target === 2) el.textContent = '<2hr';
+            if (target === 150) el.textContent = '150+';
+          }
+        };
+        requestAnimationFrame(animate);
+        counterObserver.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+    // Navbar scroll + active section
     const navbar = document.getElementById('navbar');
+    const floatingCta = document.getElementById('floatingCta');
+    const backToTop = document.getElementById('backToTop');
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 60) {
-        navbar.classList.add('bg-brand-950/95', 'backdrop-blur-xl', 'shadow-lg');
-        navbar.classList.add('py-0');
+      const y = window.scrollY;
+
+      if (y > 60) {
+        navbar.classList.add('bg-brand-950/95', 'backdrop-blur-xl', 'shadow-lg', 'py-0');
       } else {
-        navbar.classList.remove('bg-brand-950/95', 'backdrop-blur-xl', 'shadow-lg');
-        navbar.classList.remove('py-0');
+        navbar.classList.remove('bg-brand-950/95', 'backdrop-blur-xl', 'shadow-lg', 'py-0');
       }
+
+      if (y > 600) {
+        floatingCta.classList.add('show');
+        backToTop.classList.add('show');
+      } else {
+        floatingCta.classList.remove('show');
+        backToTop.classList.remove('show');
+      }
+
+      // Active nav highlighting
+      let current = '';
+      sections.forEach(section => {
+        const top = section.offsetTop - 200;
+        if (y >= top) current = section.id;
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+      });
     });
 
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Mobile menu
     const menuBtn = document.getElementById('menuBtn');
     const menuIcon = document.getElementById('menuIcon');
     const mobileMenu = document.getElementById('mobileMenu');
@@ -742,12 +915,30 @@
       });
     });
 
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
+    });
+
+    // Form submission with success state
+    const form = document.querySelector('#contact form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      form.innerHTML = `
+        <div class="form-success text-center py-12">
+          <div class="w-20 h-20 border-2 border-sand-300 flex items-center justify-center mx-auto mb-6">
+            <i class="fa-solid fa-check text-3xl text-sand-300"></i>
+          </div>
+          <h3 class="font-serif text-2xl text-white mb-3">Request Received</h3>
+          <p class="text-white/60 font-light leading-relaxed">Thank you! We'll review your information and call you within 2 hours during business hours.</p>
+          <p class="text-sand-300 font-medium mt-4">949.892.8944</p>
+        </div>
+      `;
     });
   </script>
 </body>
