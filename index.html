@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OC Pools | Luxury Pool Care in Orange County</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="description" content="Premium weekly pool maintenance, seasonal openings & closings, and expert repairs for luxury homes in Newport Coast, Laguna Beach & Orange County.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+            serif: ['"DM Serif Display"', 'Georgia', 'serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              200: '#bae0fd',
+              300: '#7cc8fc',
+              400: '#36adf7',
+              500: '#0c93e8',
+              600: '#0074c6',
+              700: '#015da1',
+              800: '#064f85',
+              900: '#0b426e',
+              950: '#072a49',
+            },
+            sand: {
+              50: '#faf8f5',
+              100: '#f3efe8',
+              200: '#e6ddd0',
+              300: '#d5c7b3',
+              400: '#c2ab92',
+              500: '#b3967b',
+              600: '#a6856b',
+              700: '#8b6d59',
+              800: '#725a4c',
+              900: '#5e4b40',
+            },
+            slate: {
+              925: '#0c1220',
+              975: '#060a12',
+            }
+          },
+          letterSpacing: {
+            luxury: '0.2em',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.92); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes slideLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes lineGrow {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+    .anim { opacity: 0; }
+    .anim.vis { animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    .anim.vis.d1 { animation-delay: 0.12s; }
+    .anim.vis.d2 { animation-delay: 0.24s; }
+    .anim.vis.d3 { animation-delay: 0.36s; }
+    .anim.vis.d4 { animation-delay: 0.48s; }
+    .anim-scale.vis { animation: scaleIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    .anim-left.vis { animation: slideLeft 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    .anim-right.vis { animation: slideRight 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+    .hero-bg {
+      background:
+        linear-gradient(180deg, rgba(6,10,18,0.5) 0%, rgba(6,10,18,0.25) 40%, rgba(6,10,18,0.55) 100%),
+        url('https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/shutterstock_2698749089.jpg') center/cover no-repeat;
+    }
+
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      width: 0;
+      height: 1px;
+      background: currentColor;
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    .gold-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #c2ab92, transparent);
+    }
+
+    .service-card {
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .input-luxury {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: all 0.3s ease;
+    }
+    .input-luxury:focus {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.35);
+      outline: none;
+    }
+    .input-luxury::placeholder { color: rgba(255,255,255,0.4); }
+
+    .area-card {
+      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .area-card:hover {
+      transform: translateY(-4px);
+      border-color: #c2ab92;
+    }
+
+    .gallery-img {
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .gallery-item:hover .gallery-img {
+      transform: scale(1.05);
+    }
+    .gallery-overlay {
+      transition: opacity 0.4s ease;
+    }
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .testimonial-bg {
+      background:
+        linear-gradient(180deg, rgba(7,42,73,0.92) 0%, rgba(7,42,73,0.88) 100%),
+        url('https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/shutterstock_2533398529.jpg') center/cover no-repeat;
+    }
+  </style>
+</head>
+<body class="font-sans text-gray-800 antialiased overflow-x-hidden bg-sand-50">
+
+  <!-- Navbar -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-5 flex justify-between items-center">
+      <a href="#" class="flex items-center gap-3 group">
+        <svg class="w-10 h-10 flex-shrink-0" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="40" r="38" stroke="white" stroke-width="2" opacity="0.8"/>
+          <circle cx="40" cy="40" r="34" stroke="white" stroke-width="0.5" opacity="0.3"/>
+          <path d="M20 48 Q30 42, 40 48 Q50 54, 60 48" stroke="white" stroke-width="1.5" opacity="0.25" fill="none" stroke-linecap="round"/>
+          <path d="M20 52 Q30 46, 40 52 Q50 58, 60 52" stroke="white" stroke-width="1" opacity="0.15" fill="none" stroke-linecap="round"/>
+          <text x="40" y="42" text-anchor="middle" fill="white" font-family="'DM Serif Display', Georgia, serif" font-size="22" letter-spacing="2">OC</text>
+        </svg>
+        <span class="text-2xl font-serif text-white tracking-wide nav-title transition-colors">OC Pools</span>
+      </a>
+
+      <div class="hidden lg:flex items-center gap-10 text-[13px] font-medium tracking-luxury uppercase">
+        <a href="#services" class="nav-link text-white/80 hover:text-white transition-colors">Services</a>
+        <a href="#about" class="nav-link text-white/80 hover:text-white transition-colors">Why Us</a>
+        <a href="#pricing" class="nav-link text-white/80 hover:text-white transition-colors">Pricing</a>
+        <a href="#areas" class="nav-link text-white/80 hover:text-white transition-colors">Areas</a>
+        <a href="#contact" class="ml-2 border border-white/40 text-white px-7 py-2.5 rounded-none hover:bg-white hover:text-gray-900 transition-all tracking-luxury text-[12px]">
+          Request Quote
+        </a>
+      </div>
+
+      <button id="menuBtn" class="lg:hidden text-white text-xl focus:outline-none">
+        <i class="fa-solid fa-bars" id="menuIcon"></i>
+      </button>
+    </div>
+
+    <div id="mobileMenu" class="lg:hidden hidden bg-white shadow-2xl mx-0 overflow-hidden border-t border-gray-100">
+      <div class="flex flex-col p-8 gap-1">
+        <a href="#services" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">Services</a>
+        <a href="#about" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">Why Us</a>
+        <a href="#pricing" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">Pricing</a>
+        <a href="#areas" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">Areas</a>
+        <a href="#contact" class="mobile-link bg-gray-900 text-white text-center py-4 text-sm font-medium tracking-luxury uppercase mt-4">Request Quote</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero-bg relative min-h-screen flex items-end overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 pb-24 md:pb-32 pt-40 w-full relative z-10">
+      <div class="max-w-3xl">
+        <p class="anim text-sand-300 text-[13px] tracking-luxury uppercase font-medium mb-6 opacity-0">Newport Coast &middot; Laguna Beach &middot; Corona del Mar</p>
+
+        <h1 class="anim d1 font-serif text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-[1.05] text-white mb-8 opacity-0">
+          Luxury Pool Care,<br>Effortlessly Yours
+        </h1>
+
+        <p class="anim d2 text-lg md:text-xl text-white/70 leading-relaxed mb-12 max-w-xl font-light opacity-0">
+          Weekly maintenance, seasonal care, and expert repairs — so your pool is always immaculate, and you never lift a finger.
+        </p>
+
+        <div class="anim d3 flex flex-col sm:flex-row gap-4 opacity-0">
+          <a href="#contact" class="group inline-flex items-center justify-center bg-white text-gray-900 px-10 py-4 text-[13px] font-semibold tracking-luxury uppercase hover:bg-sand-100 transition-all">
+            Book Free Assessment
+            <i class="fa-solid fa-arrow-right ml-3 text-xs group-hover:translate-x-1 transition-transform"></i>
+          </a>
+          <a href="#pricing" class="inline-flex items-center justify-center border border-white/30 text-white px-10 py-4 text-[13px] font-medium tracking-luxury uppercase hover:bg-white/10 transition-all">
+            View Pricing
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40 z-10">
+      <span class="text-[10px] tracking-luxury uppercase">Scroll</span>
+      <div class="w-px h-8 bg-gradient-to-b from-white/40 to-transparent"></div>
+    </div>
+  </section>
+
+  <!-- Trust Strip -->
+  <section class="bg-white border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-8">
+      <div class="flex flex-wrap justify-center md:justify-between items-center gap-8 text-[12px] tracking-luxury uppercase text-gray-400 font-medium">
+        <div class="flex items-center gap-3">
+          <i class="fa-solid fa-shield-halved text-sand-400"></i>
+          <span>Licensed & Insured</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <i class="fa-solid fa-award text-sand-400"></i>
+          <span>CPO Certified</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <i class="fa-solid fa-star text-sand-400"></i>
+          <span>5-Star Rated</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <i class="fa-solid fa-clock text-sand-400"></i>
+          <span>Same-Day Response</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <i class="fa-solid fa-leaf text-sand-400"></i>
+          <span>Eco-Friendly Options</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="py-28 md:py-36 bg-sand-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-20">
+        <p class="anim text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-4">Services</p>
+        <h2 class="anim d1 font-serif text-4xl sm:text-5xl md:text-[3.5rem] text-gray-900 mb-6">Comprehensive Pool Care</h2>
+        <div class="anim d2 gold-line w-16 mx-auto mb-6"></div>
+        <p class="anim d2 text-lg text-gray-500 max-w-xl mx-auto font-light leading-relaxed">Everything your pool needs to look its absolute best, handled with care and precision every single week.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 lg:gap-10">
+        <div class="anim d1 service-card bg-white p-10 lg:p-12 border border-gray-100 group">
+          <div class="w-14 h-14 border border-sand-200 flex items-center justify-center mb-8 group-hover:bg-brand-950 group-hover:border-brand-950 transition-all duration-300">
+            <i class="fa-solid fa-water text-xl text-brand-700 group-hover:text-white transition-colors duration-300"></i>
+          </div>
+          <h3 class="font-serif text-2xl text-gray-900 mb-4">Weekly Maintenance</h3>
+          <p class="text-gray-500 leading-relaxed mb-8 text-[15px]">Skimming, brushing, vacuuming, chemical balancing, filter cleaning, and equipment checks every visit. Your pool stays pristine — guaranteed.</p>
+          <div class="pt-6 border-t border-gray-100">
+            <span class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium">Starting at</span>
+            <div class="flex items-baseline gap-1 mt-1">
+              <span class="font-serif text-3xl text-gray-900">$180</span>
+              <span class="text-gray-400 text-sm">/ month</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="anim d2 service-card bg-white p-10 lg:p-12 border border-gray-100 group">
+          <div class="w-14 h-14 border border-sand-200 flex items-center justify-center mb-8 group-hover:bg-brand-950 group-hover:border-brand-950 transition-all duration-300">
+            <i class="fa-solid fa-sun text-xl text-brand-700 group-hover:text-white transition-colors duration-300"></i>
+          </div>
+          <h3 class="font-serif text-2xl text-gray-900 mb-4">Seasonal Open & Close</h3>
+          <p class="text-gray-500 leading-relaxed mb-8 text-[15px]">Professional seasonal startup or winterization including equipment inspection, deep cleaning, chemical treatment, and any needed repairs.</p>
+          <div class="pt-6 border-t border-gray-100">
+            <span class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium">One-time service</span>
+            <div class="flex items-baseline gap-1 mt-1">
+              <span class="font-serif text-3xl text-gray-900">$350</span>
+              <span class="text-gray-400 text-sm">flat fee</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="anim d3 service-card bg-white p-10 lg:p-12 border border-gray-100 group">
+          <div class="w-14 h-14 border border-sand-200 flex items-center justify-center mb-8 group-hover:bg-brand-950 group-hover:border-brand-950 transition-all duration-300">
+            <i class="fa-solid fa-wrench text-xl text-brand-700 group-hover:text-white transition-colors duration-300"></i>
+          </div>
+          <h3 class="font-serif text-2xl text-gray-900 mb-4">Repairs & Upgrades</h3>
+          <p class="text-gray-500 leading-relaxed mb-8 text-[15px]">Pumps, filters, heaters, lights, automation, tile cleaning, and more. We catch small issues before they become expensive problems.</p>
+          <div class="pt-6 border-t border-gray-100">
+            <span class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium">Competitive flat rates</span>
+            <p class="text-gray-400 text-sm mt-1">Free diagnosis with active service</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Gallery -->
+  <section class="py-28 md:py-36 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-16">
+        <p class="anim text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-4">Our Work</p>
+        <h2 class="anim d1 font-serif text-4xl sm:text-5xl md:text-[3.5rem] text-gray-900 mb-6">Pools We Proudly Maintain</h2>
+        <div class="anim d2 gold-line w-16 mx-auto mb-6"></div>
+        <p class="anim d2 text-lg text-gray-500 max-w-xl mx-auto font-light">A glimpse at the luxury properties we keep in pristine condition across Orange County.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="anim d1 gallery-item relative overflow-hidden aspect-[4/3] cursor-pointer group">
+          <img src="https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/shutterstock_2698749089.jpg" alt="Modern luxury pool with wooden deck and loungers" class="gallery-img w-full h-full object-cover">
+          <div class="gallery-overlay absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 flex items-end p-6">
+            <div>
+              <p class="text-white font-serif text-lg">Modern Coastal Retreat</p>
+              <p class="text-white/60 text-sm">Weekly Maintenance</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="anim d2 gallery-item relative overflow-hidden aspect-[4/3] cursor-pointer group">
+          <img src="https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/shutterstock_2536795543.jpg" alt="Luxury backyard pool with spa and pergola" class="gallery-img w-full h-full object-cover">
+          <div class="gallery-overlay absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 flex items-end p-6">
+            <div>
+              <p class="text-white font-serif text-lg">Contemporary Estate</p>
+              <p class="text-white/60 text-sm">Pool & Spa Maintenance</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="anim d3 gallery-item relative overflow-hidden aspect-[4/3] cursor-pointer group md:col-span-2 lg:col-span-1">
+          <img src="https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/shutterstock_2533398529.jpg" alt="Luxury pool at sunset with modern architecture" class="gallery-img w-full h-full object-cover">
+          <div class="gallery-overlay absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 flex items-end p-6">
+            <div>
+              <p class="text-white font-serif text-lg">Sunset Entertainer</p>
+              <p class="text-white/60 text-sm">Full Service & Repairs</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Us -->
+  <section id="about" class="py-28 md:py-36 bg-brand-950 text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;1&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <div>
+          <p class="anim anim-left text-[12px] tracking-luxury uppercase text-sand-400 font-medium mb-4">The OC Pools Difference</p>
+          <h2 class="anim anim-left d1 font-serif text-4xl sm:text-5xl text-white mb-6 leading-tight">Not Just Another<br>Pool Company</h2>
+          <div class="anim anim-left d2 gold-line w-16 mb-8"></div>
+          <p class="anim anim-left d2 text-lg text-white/60 leading-relaxed mb-10 font-light">
+            Pool Scouts and Poolwerx send whoever's available. We assign one dedicated technician who learns every detail of your pool — your equipment, your preferences, your standards.
+          </p>
+          <p class="anim anim-left d3 text-lg text-white/60 leading-relaxed font-light">
+            Your pool is a centerpiece of your home. We treat it that way.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6">
+          <div class="anim d1 glass rounded-none p-8 group hover:bg-white/10 transition-all">
+            <i class="fa-solid fa-clipboard-check text-2xl text-sand-300 mb-5 block"></i>
+            <h3 class="font-serif text-lg text-white mb-2">Photo Reports</h3>
+            <p class="text-white/50 text-sm leading-relaxed">Detailed digital report with photos after every single visit.</p>
+          </div>
+          <div class="anim d2 glass rounded-none p-8 group hover:bg-white/10 transition-all">
+            <i class="fa-solid fa-user-tie text-2xl text-sand-300 mb-5 block"></i>
+            <h3 class="font-serif text-lg text-white mb-2">Same Tech, Every Week</h3>
+            <p class="text-white/50 text-sm leading-relaxed">One trusted professional who knows your system inside and out.</p>
+          </div>
+          <div class="anim d3 glass rounded-none p-8 group hover:bg-white/10 transition-all">
+            <i class="fa-solid fa-bolt text-2xl text-sand-300 mb-5 block"></i>
+            <h3 class="font-serif text-lg text-white mb-2">Same-Day Response</h3>
+            <p class="text-white/50 text-sm leading-relaxed">Hosting tonight? We'll be there — no waiting for your next visit.</p>
+          </div>
+          <div class="anim d4 glass rounded-none p-8 group hover:bg-white/10 transition-all">
+            <i class="fa-solid fa-certificate text-2xl text-sand-300 mb-5 block"></i>
+            <h3 class="font-serif text-lg text-white mb-2">Fully Licensed</h3>
+            <p class="text-white/50 text-sm leading-relaxed">Licensed, insured, and CPO-certified professionals.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-24 md:py-32 testimonial-bg">
+    <div class="max-w-5xl mx-auto px-6 lg:px-10">
+      <div class="text-center">
+        <div class="anim anim-scale flex justify-center gap-1 mb-8">
+          <i class="fa-solid fa-star text-sand-300"></i>
+          <i class="fa-solid fa-star text-sand-300"></i>
+          <i class="fa-solid fa-star text-sand-300"></i>
+          <i class="fa-solid fa-star text-sand-300"></i>
+          <i class="fa-solid fa-star text-sand-300"></i>
+        </div>
+        <blockquote class="anim d1 font-serif text-2xl sm:text-3xl md:text-4xl text-white leading-snug mb-10 italic">
+          "We've had three pool companies over the years. OC Pools is the first one where I never have to follow up or worry. Our pool is always flawless — even after a week away."
+        </blockquote>
+        <div class="anim d2">
+          <p class="text-[13px] tracking-luxury uppercase text-sand-300 font-medium">Homeowner, Newport Coast</p>
+          <p class="text-sm text-white/50 mt-1">Monthly client since 2025</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="py-28 md:py-36 bg-sand-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-20">
+        <p class="anim text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-4">Pricing</p>
+        <h2 class="anim d1 font-serif text-4xl sm:text-5xl md:text-[3.5rem] text-gray-900 mb-6">Straightforward & Transparent</h2>
+        <div class="anim d2 gold-line w-16 mx-auto mb-6"></div>
+        <p class="anim d2 text-lg text-gray-500 max-w-xl mx-auto font-light">No hidden fees. No contracts. Just exceptional care at a fair price.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="anim d1 bg-white border border-gray-200 p-10 lg:p-12 relative group hover:border-sand-300 transition-colors">
+          <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-brand-600 via-brand-400 to-brand-600"></div>
+          <p class="text-[12px] tracking-luxury uppercase text-brand-600 font-semibold mb-2">Most Popular</p>
+          <h3 class="font-serif text-2xl text-gray-900 mb-1">Monthly Maintenance</h3>
+          <p class="text-gray-400 text-sm mb-8">Weekly visits &middot; Complete peace of mind</p>
+
+          <div class="flex items-baseline gap-1 mb-8">
+            <span class="text-sm text-gray-400">from</span>
+            <span class="font-serif text-6xl text-gray-900">$180</span>
+            <span class="text-gray-400">/mo</span>
+          </div>
+
+          <ul class="space-y-4 mb-10">
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-check text-brand-600 text-xs mt-1.5"></i>
+              <span class="text-gray-600 text-[15px]">Full chemical balance & cleaning</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-check text-brand-600 text-xs mt-1.5"></i>
+              <span class="text-gray-600 text-[15px]">Equipment inspection every visit</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-check text-brand-600 text-xs mt-1.5"></i>
+              <span class="text-gray-600 text-[15px]">Digital report with photos</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-check text-brand-600 text-xs mt-1.5"></i>
+              <span class="text-gray-600 text-[15px]">Priority scheduling & repair discounts</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-check text-brand-600 text-xs mt-1.5"></i>
+              <span class="text-gray-600 text-[15px]">Same dedicated technician weekly</span>
+            </li>
+          </ul>
+          <a href="#contact" class="block text-center bg-gray-900 hover:bg-gray-800 text-white py-4 text-[13px] font-medium tracking-luxury uppercase transition-all">
+            Get Started
+          </a>
+        </div>
+
+        <div class="anim d2 bg-white border border-gray-200 p-10 lg:p-12 group hover:border-sand-300 transition-colors">
+          <p class="text-[12px] tracking-luxury uppercase text-sand-600 font-semibold mb-2">Seasonal</p>
+          <h3 class="font-serif text-2xl text-gray-900 mb-1">Pool Open / Close</h3>
+          <p class="text-gray-400 text-sm mb-8">One-time expert service</p>
+
+          <div class="flex items-baseline gap-1 mb-8">
+            <span class="font-serif text-6xl text-gray-900">$350</span>
+            <span class="text-gray-400">flat</span>
+          </div>
+
+          <ul class="space-y-4 mb-10">
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-check text-brand-600 text-xs mt-1.5"></i>
+              <span class="text-gray-600 text-[15px]">Full startup or winterization</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-check text-brand-600 text-xs mt-1.5"></i>
+              <span class="text-gray-600 text-[15px]">Deep clean & chemical treatment</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-check text-brand-600 text-xs mt-1.5"></i>
+              <span class="text-gray-600 text-[15px]">Complete equipment inspection</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-check text-brand-600 text-xs mt-1.5"></i>
+              <span class="text-gray-600 text-[15px]">Repair recommendations included</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fa-solid fa-check text-brand-600 text-xs mt-1.5"></i>
+              <span class="text-gray-600 text-[15px]">Priority if bundled with monthly</span>
+            </li>
+          </ul>
+          <a href="#contact" class="block text-center border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white py-4 text-[13px] font-medium tracking-luxury uppercase transition-all">
+            Schedule Service
+          </a>
+        </div>
+      </div>
+
+      <p class="anim text-center mt-12 text-gray-400 text-sm">Repairs quoted per job &middot; Volume discounts for multiple properties &middot; Custom packages available</p>
+    </div>
+  </section>
+
+  <!-- Service Areas -->
+  <section id="areas" class="py-28 md:py-36 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-16">
+        <p class="anim text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-4">Service Areas</p>
+        <h2 class="anim d1 font-serif text-4xl sm:text-5xl md:text-[3.5rem] text-gray-900 mb-6">Orange County's Finest<br class="hidden sm:block"> Coastal Communities</h2>
+        <div class="anim d2 gold-line w-16 mx-auto mb-6"></div>
+        <p class="anim d2 text-lg text-gray-500 font-light">Proudly based in Costa Mesa, serving your neighborhood</p>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 max-w-4xl mx-auto mb-10">
+        <div class="anim d1 area-card bg-sand-50 p-8 border border-sand-200 text-center">
+          <p class="font-serif text-xl text-gray-900 mb-1">Newport Coast</p>
+          <p class="text-xs text-gray-400 tracking-wider">92657</p>
+        </div>
+        <div class="anim d2 area-card bg-sand-50 p-8 border border-sand-200 text-center">
+          <p class="font-serif text-xl text-gray-900 mb-1">Laguna Beach</p>
+          <p class="text-xs text-gray-400 tracking-wider">92651</p>
+        </div>
+        <div class="anim d3 area-card bg-sand-50 p-8 border border-sand-200 text-center">
+          <p class="font-serif text-xl text-gray-900 mb-1">Corona del Mar</p>
+          <p class="text-xs text-gray-400 tracking-wider">92625</p>
+        </div>
+        <div class="anim d4 area-card bg-sand-50 p-8 border border-sand-200 text-center">
+          <p class="font-serif text-xl text-gray-900 mb-1">Newport Beach</p>
+          <p class="text-xs text-gray-400 tracking-wider">92660</p>
+        </div>
+      </div>
+
+      <div class="anim text-center">
+        <p class="inline-flex flex-wrap justify-center gap-3 text-[13px] text-gray-400 tracking-wide">
+          <span class="border border-gray-200 px-4 py-1.5">Balboa Island</span>
+          <span class="border border-gray-200 px-4 py-1.5">Dana Point</span>
+          <span class="border border-gray-200 px-4 py-1.5">San Clemente</span>
+          <span class="border border-gray-200 px-4 py-1.5">Irvine</span>
+          <span class="border border-gray-200 px-4 py-1.5">+ surrounding areas</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-28 md:py-36 bg-brand-950 text-white relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-sand-400/30 to-transparent"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-16 lg:gap-24">
+        <div>
+          <p class="anim anim-left text-[12px] tracking-luxury uppercase text-sand-400 font-medium mb-4">Get In Touch</p>
+          <h2 class="anim anim-left d1 font-serif text-4xl sm:text-5xl text-white mb-6 leading-tight">Ready for Effortless<br>Pool Care?</h2>
+          <div class="anim anim-left d2 gold-line w-16 mb-8"></div>
+          <p class="anim anim-left d2 text-lg text-white/50 leading-relaxed mb-12 font-light">Get your complimentary pool health assessment and custom quote. We respond within 2 hours during business hours.</p>
+
+          <div class="anim anim-left d3 space-y-8">
+            <div class="flex items-center gap-5">
+              <div class="w-12 h-12 border border-white/15 flex items-center justify-center flex-shrink-0">
+                <i class="fa-solid fa-phone text-sand-400 text-sm"></i>
+              </div>
+              <div>
+                <p class="text-[11px] tracking-luxury uppercase text-white/40 mb-0.5">Call or Text</p>
+                <p class="text-lg text-white font-light">949.892.8944</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-5">
+              <div class="w-12 h-12 border border-white/15 flex items-center justify-center flex-shrink-0">
+                <i class="fa-solid fa-envelope text-sand-400 text-sm"></i>
+              </div>
+              <div>
+                <p class="text-[11px] tracking-luxury uppercase text-white/40 mb-0.5">Email</p>
+                <p class="text-lg text-white font-light">justinnassie@gmail.com</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-5">
+              <div class="w-12 h-12 border border-white/15 flex items-center justify-center flex-shrink-0">
+                <i class="fa-solid fa-clock text-sand-400 text-sm"></i>
+              </div>
+              <div>
+                <p class="text-[11px] tracking-luxury uppercase text-white/40 mb-0.5">Hours</p>
+                <p class="text-lg text-white font-light">Monday – Saturday, 7am – 6pm</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-5">
+              <div class="w-12 h-12 border border-white/15 flex items-center justify-center flex-shrink-0">
+                <i class="fa-solid fa-location-dot text-sand-400 text-sm"></i>
+              </div>
+              <div>
+                <p class="text-[11px] tracking-luxury uppercase text-white/40 mb-0.5">Office</p>
+                <p class="text-lg text-white font-light">3525 Hyland Ave, Suite 235</p>
+                <p class="text-sm text-white/50 font-light">Costa Mesa, CA 92626</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="anim anim-right d1">
+          <form class="space-y-5">
+            <input type="text" placeholder="Full Name" class="input-luxury w-full px-5 py-4 text-white text-[15px]">
+            <div class="grid grid-cols-2 gap-5">
+              <input type="tel" placeholder="Phone" class="input-luxury w-full px-5 py-4 text-white text-[15px]">
+              <input type="email" placeholder="Email" class="input-luxury w-full px-5 py-4 text-white text-[15px]">
+            </div>
+            <select class="input-luxury w-full px-5 py-4 text-white/50 text-[15px] appearance-none">
+              <option value="" class="text-gray-800">Service Needed</option>
+              <option value="weekly" class="text-gray-800">Weekly Maintenance</option>
+              <option value="seasonal" class="text-gray-800">Pool Opening / Closing</option>
+              <option value="repair" class="text-gray-800">Repair / Upgrade</option>
+              <option value="other" class="text-gray-800">Other / Not Sure</option>
+            </select>
+            <textarea placeholder="Pool address, neighborhood, or notes" class="input-luxury w-full px-5 py-4 text-white text-[15px] h-28 resize-none"></textarea>
+            <button type="submit" class="w-full bg-white text-gray-900 py-4 text-[13px] font-semibold tracking-luxury uppercase hover:bg-sand-100 transition-all">
+              Send Request — We'll Call You Today
+            </button>
+            <p class="text-[12px] text-center text-white/30">No spam. No obligation. Just a conversation about your pool.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-brand-950 text-white/40 border-t border-white/[0.06]">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-16">
+      <div class="grid md:grid-cols-4 gap-12 mb-16">
+        <div class="md:col-span-1">
+          <div class="flex items-center gap-3 mb-4">
+            <svg class="w-10 h-10 flex-shrink-0" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="40" cy="40" r="38" stroke="white" stroke-width="2" opacity="0.6"/>
+              <circle cx="40" cy="40" r="34" stroke="white" stroke-width="0.5" opacity="0.2"/>
+              <path d="M20 48 Q30 42, 40 48 Q50 54, 60 48" stroke="white" stroke-width="1.5" opacity="0.2" fill="none" stroke-linecap="round"/>
+              <path d="M20 52 Q30 46, 40 52 Q50 58, 60 52" stroke="white" stroke-width="1" opacity="0.12" fill="none" stroke-linecap="round"/>
+              <text x="40" y="42" text-anchor="middle" fill="white" font-family="'DM Serif Display', Georgia, serif" font-size="22" letter-spacing="2" opacity="0.9">OC</text>
+            </svg>
+            <p class="font-serif text-2xl text-white">OC Pools</p>
+          </div>
+          <p class="text-sm leading-relaxed">Premium pool care trusted by luxury homeowners across Orange County's coast.</p>
+        </div>
+        <div>
+          <h4 class="text-[11px] tracking-luxury uppercase text-white/60 font-medium mb-5">Services</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="#services" class="hover:text-white transition-colors">Weekly Maintenance</a></li>
+            <li><a href="#services" class="hover:text-white transition-colors">Pool Opening & Closing</a></li>
+            <li><a href="#services" class="hover:text-white transition-colors">Repairs & Upgrades</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-[11px] tracking-luxury uppercase text-white/60 font-medium mb-5">Service Areas</h4>
+          <ul class="space-y-3 text-sm">
+            <li>Newport Coast</li>
+            <li>Laguna Beach</li>
+            <li>Corona del Mar</li>
+            <li>Newport Beach</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-[11px] tracking-luxury uppercase text-white/60 font-medium mb-5">Connect</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="#contact" class="hover:text-white transition-colors">949.892.8944</a></li>
+            <li><a href="mailto:justinnassie@gmail.com" class="hover:text-white transition-colors">justinnassie@gmail.com</a></li>
+            <li class="pt-2 flex gap-4">
+              <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-instagram text-lg"></i></a>
+              <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-facebook-f text-lg"></i></a>
+              <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-yelp text-lg"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-white/[0.06] pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p class="text-xs">&copy; 2026 OC Pools. All rights reserved.</p>
+        <p class="text-xs">3525 Hyland Ave, Suite 235 &middot; Costa Mesa, CA 92626</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('vis');
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.anim').forEach(el => observer.observe(el));
+
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        navbar.classList.add('bg-brand-950/95', 'backdrop-blur-xl', 'shadow-lg');
+        navbar.classList.add('py-0');
+      } else {
+        navbar.classList.remove('bg-brand-950/95', 'backdrop-blur-xl', 'shadow-lg');
+        navbar.classList.remove('py-0');
+      }
+    });
+
+    const menuBtn = document.getElementById('menuBtn');
+    const menuIcon = document.getElementById('menuIcon');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let menuOpen = false;
+    menuBtn.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      mobileMenu.classList.toggle('hidden');
+      menuIcon.className = menuOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuOpen = false;
+        menuIcon.className = 'fa-solid fa-bars';
+      });
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+</body>
+</html>

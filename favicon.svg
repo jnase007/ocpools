@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <circle cx="40" cy="40" r="38" fill="#072a49"/>
+  <circle cx="40" cy="40" r="36" stroke="white" stroke-width="1.5" fill="none" opacity="0.6"/>
+  <path d="M18 48 Q29 41, 40 48 Q51 55, 62 48" stroke="white" stroke-width="1.5" opacity="0.25" fill="none" stroke-linecap="round"/>
+  <path d="M18 53 Q29 46, 40 53 Q51 60, 62 53" stroke="white" stroke-width="1" opacity="0.15" fill="none" stroke-linecap="round"/>
+  <text x="40" y="43" text-anchor="middle" fill="white" font-family="Georgia, serif" font-size="24" letter-spacing="2" font-weight="400">OC</text>
+</svg>
