@@ -1312,17 +1312,18 @@
       </button>
       <div class="text-center">
         <div class="w-16 h-16 border-2 border-sand-300 flex items-center justify-center mx-auto mb-6">
-          <i class="fa-solid fa-clipboard-list text-2xl text-sand-400"></i>
+          <i class="fa-solid fa-book-open text-2xl text-sand-400"></i>
         </div>
         <h3 class="font-serif text-2xl text-gray-900 mb-3">Before You Go...</h3>
-        <p class="text-gray-500 text-[15px] leading-relaxed mb-6">Get our free <strong>Pool Health Checklist</strong> — 12 things to inspect before your next swim. Used by our own technicians.</p>
+        <p class="text-gray-500 text-[15px] leading-relaxed mb-6">Grab our free <strong>Pool Owner's Playbook</strong> — myths busted, seasonal care calendar, DIY vs. Pro cost breakdown, and a party-ready checklist.</p>
         <form id="exitForm" class="space-y-3">
-          <input type="email" placeholder="Your email address" class="w-full border border-gray-200 px-5 py-3.5 text-[15px] text-gray-800 focus:border-brand-400 focus:outline-none transition-colors" required>
+          <input type="text" name="name" placeholder="First name" class="w-full border border-gray-200 px-5 py-3.5 text-[15px] text-gray-800 focus:border-brand-400 focus:outline-none transition-colors" required>
+          <input type="email" name="email" placeholder="Email address" class="w-full border border-gray-200 px-5 py-3.5 text-[15px] text-gray-800 focus:border-brand-400 focus:outline-none transition-colors" required>
           <button type="submit" class="w-full bg-gray-900 text-white py-3.5 text-[13px] font-medium tracking-luxury uppercase hover:bg-gray-800 transition-all">
-            Send Me the Checklist
+            Download Free Playbook →
           </button>
         </form>
-        <p class="text-gray-400 text-xs mt-4">No spam. Unsubscribe anytime.</p>
+        <p class="text-gray-400 text-xs mt-4">No spam. Just pool tips. Unsubscribe anytime.</p>
       </div>
     </div>
   </div>
@@ -1507,16 +1508,33 @@
     exitPopup.addEventListener('click', (e) => { if (e.target === exitPopup) exitPopup.classList.remove('show'); });
     document.getElementById('exitForm').addEventListener('submit', (e) => {
       e.preventDefault();
+      const name = e.target.querySelector('[name="name"]').value;
+      const email = e.target.querySelector('[name="email"]').value;
+      
+      // Store lead
+      const leads = JSON.parse(localStorage.getItem('oc_playbook_leads') || '[]');
+      leads.push({ name, email, source: 'exit_popup', date: new Date().toISOString() });
+      localStorage.setItem('oc_playbook_leads', JSON.stringify(leads));
+      
+      // Trigger PDF download
+      const link = document.createElement('a');
+      link.href = 'https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/playbook_Ocpools.pdf';
+      link.download = 'The-Pool-Owners-Playbook-OC-Pools.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
       exitPopup.querySelector('.popup-card').innerHTML = `
         <div class="text-center py-6">
           <div class="w-16 h-16 border-2 border-sand-300 flex items-center justify-center mx-auto mb-6">
             <i class="fa-solid fa-check text-2xl text-sand-400"></i>
           </div>
-          <h3 class="font-serif text-2xl text-gray-900 mb-3">Check Your Inbox</h3>
-          <p class="text-gray-500 text-[15px]">Your Pool Health Checklist is on its way.</p>
+          <h3 class="font-serif text-2xl text-gray-900 mb-3">Your Playbook is Downloading! 🎉</h3>
+          <p class="text-gray-500 text-[15px] mb-4">Check your downloads folder.</p>
+          <a href="https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/playbook_Ocpools.pdf" download class="text-sand-500 hover:text-sand-600 text-sm font-medium underline">Click here if it didn't start</a>
         </div>
       `;
-      setTimeout(() => exitPopup.classList.remove('show'), 3000);
+      setTimeout(() => exitPopup.classList.remove('show'), 5000);
     });
 
     // Hero cursor glow
