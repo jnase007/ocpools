@@ -927,41 +927,7 @@
         <p class="anim d2 text-lg text-gray-500 max-w-xl mx-auto font-light">No hidden fees. No contracts. Just exceptional care at a fair price.</p>
       </div>
 
-      <!-- Interactive Calculator -->
-      <div class="anim max-w-2xl mx-auto mb-20 bg-white border border-gray-200 p-10 lg:p-12">
-        <h3 class="font-serif text-2xl text-gray-900 mb-2 text-center">Estimate Your Monthly Cost</h3>
-        <p class="text-gray-400 text-sm text-center mb-8">Select your pool size for an instant estimate</p>
-
-        <div class="grid grid-cols-3 gap-3 mb-10">
-          <button class="size-btn border border-gray-200 py-4 px-3 text-center" data-size="small" data-price="180">
-            <i class="fa-solid fa-water text-brand-400 text-lg mb-2 block"></i>
-            <p class="font-medium text-gray-900 text-sm">Small</p>
-            <p class="text-gray-400 text-xs">Up to 10k gal</p>
-          </button>
-          <button class="size-btn active border border-gray-200 py-4 px-3 text-center" data-size="medium" data-price="250">
-            <i class="fa-solid fa-water text-brand-400 text-lg mb-2 block"></i>
-            <p class="font-medium text-gray-900 text-sm">Medium</p>
-            <p class="text-gray-400 text-xs">10k–20k gal</p>
-          </button>
-          <button class="size-btn border border-gray-200 py-4 px-3 text-center" data-size="large" data-price="350">
-            <i class="fa-solid fa-water text-brand-400 text-lg mb-2 block"></i>
-            <p class="font-medium text-gray-900 text-sm">Large</p>
-            <p class="text-gray-400 text-xs">20k+ gal</p>
-          </button>
-        </div>
-
-        <div class="text-center price-display">
-          <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-1">Estimated Monthly Cost</p>
-          <div class="flex items-baseline justify-center gap-1">
-            <span class="font-serif text-6xl text-gray-900" id="calcPrice">$250</span>
-            <span class="text-gray-400">/mo</span>
-          </div>
-          <p class="text-gray-400 text-sm mt-2">Includes weekly visits, chemicals, reports & equipment checks</p>
-          <a href="#contact" class="inline-flex items-center justify-center bg-gray-900 text-white px-10 py-4 text-[13px] font-medium tracking-luxury uppercase hover:bg-gray-800 transition-all mt-6">
-            Get Exact Quote
-          </a>
-        </div>
-      </div>
+      <!-- Calculator removed — keeping pricing simple -->
 
       <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
         <div class="anim d1 bg-white border border-gray-200 p-10 lg:p-12 relative group hover:border-sand-300 transition-colors">
@@ -1548,16 +1514,7 @@
     };
     document.getElementById('seasonalMsg').textContent = seasonalMessages[month] || seasonalMessages[3];
 
-    // Pricing calculator
-    const sizeBtns = document.querySelectorAll('.size-btn');
-    const calcPrice = document.getElementById('calcPrice');
-    sizeBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        sizeBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        calcPrice.textContent = '$' + btn.dataset.price;
-      });
-    });
+    // Pricing calculator removed — keeping it simple
 
     // Exit intent popup
     const exitPopup = document.getElementById('exitPopup');
