@@ -434,10 +434,6 @@
 
   <!-- Hero -->
   <section class="hero-bg relative min-h-screen flex items-end overflow-hidden" id="heroSection">
-    <video id="heroVideo" autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0 hidden" poster="https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/shutterstock_2698749089.jpg">
-      <source src="https://videos.pexels.com/video-files/1093662/1093662-hd_1920_1080_30fps.mp4" type="video/mp4">
-    </video>
-    <div id="heroOverlay" class="absolute inset-0 z-[1] hidden" style="background: linear-gradient(180deg, rgba(6,10,18,0.55) 0%, rgba(6,10,18,0.3) 40%, rgba(6,10,18,0.6) 100%);"></div>
     <div class="hero-glow" id="heroGlow"></div>
     <div class="max-w-7xl mx-auto px-6 lg:px-10 pb-24 md:pb-32 pt-40 w-full relative z-10">
       <div class="max-w-3xl">
@@ -1187,22 +1183,14 @@
   </button>
 
   <script>
-    // Randomize hero: 50% static image, 50% video
+    // Randomize hero image on each page load
     const heroImages = [
       "url('https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/shutterstock_2698749089.jpg')",
       "url('https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/hero.png')",
       "url('https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/shutterstock_2705128713.jpg')",
     ];
-    const useVideo = Math.random() < 0.5;
     const hero = document.getElementById('heroSection');
-    if (useVideo) {
-      document.getElementById('heroVideo').classList.remove('hidden');
-      document.getElementById('heroOverlay').classList.remove('hidden');
-      hero.style.setProperty('--hero-img', 'none');
-    } else {
-      const pick = heroImages[Math.floor(Math.random() * heroImages.length)];
-      hero.style.setProperty('--hero-img', pick);
-    }
+    hero.style.setProperty('--hero-img', heroImages[Math.floor(Math.random() * heroImages.length)]);
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
