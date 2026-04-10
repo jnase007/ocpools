@@ -6,6 +6,45 @@
   <title>OC Pools | Luxury Pool Care in Orange County</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta name="description" content="Premium weekly pool maintenance, seasonal openings & closings, and expert repairs for luxury homes in Newport Coast, Laguna Beach & Orange County.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "OC Pools",
+    "description": "Premium weekly pool maintenance, seasonal openings & closings, and expert repairs for luxury homes in Orange County.",
+    "url": "https://ocpools.com",
+    "telephone": "+19498928944",
+    "email": "justinnassie@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "3525 Hyland Ave, Suite 235",
+      "addressLocality": "Costa Mesa",
+      "addressRegion": "CA",
+      "postalCode": "92626",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 33.6846,
+      "longitude": -117.9187
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      "opens": "07:00",
+      "closes": "18:00"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "150"
+    },
+    "priceRange": "$$",
+    "areaServed": ["Newport Coast","Laguna Beach","Corona del Mar","Newport Beach","Balboa Island","Dana Point","San Clemente","Irvine","Costa Mesa"],
+    "image": "https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/shutterstock_2698749089.jpg",
+    "sameAs": []
+  }
+  </script>
   <link rel="preload" as="image" href="https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/shutterstock_2698749089.jpg">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -210,9 +249,65 @@
     .form-success {
       animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
+
+    /* Preloader */
+    #preloader {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #072a49;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #preloader.done { opacity: 0; visibility: hidden; pointer-events: none; }
+    #preloader .pulse {
+      width: 60px; height: 60px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      animation: preloaderPulse 1.2s ease-in-out infinite;
+    }
+    @keyframes preloaderPulse {
+      0%, 100% { transform: scale(0.9); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 1; }
+    }
+
+    /* Before/After slider */
+    .ba-container { position: relative; overflow: hidden; cursor: ew-resize; -webkit-user-select: none; user-select: none; }
+    .ba-after { position: absolute; inset: 0; overflow: hidden; }
+    .ba-after img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+    .ba-slider { position: absolute; top: 0; bottom: 0; width: 3px; background: white; z-index: 10; cursor: ew-resize; }
+    .ba-slider::before {
+      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 44px; height: 44px; background: white; border-radius: 50%;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    }
+    .ba-slider::after {
+      content: '\f337'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      color: #072a49; font-size: 14px; z-index: 1;
+    }
+    .ba-label {
+      position: absolute; bottom: 16px; padding: 4px 16px;
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500;
+      color: white; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 5;
+    }
+    .ba-label.before { left: 16px; }
+    .ba-label.after { right: 16px; }
+
+    /* Testimonial carousel */
+    .testimonial-slide { opacity: 0; position: absolute; inset: 0; transition: opacity 0.8s ease; display: flex; align-items: center; justify-content: center; }
+    .testimonial-slide.active { opacity: 1; position: relative; }
+    .testimonial-dots button { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.25); border: none; cursor: pointer; transition: all 0.3s ease; }
+    .testimonial-dots button.active { background: #c2ab92; transform: scale(1.3); }
   </style>
 </head>
 <body class="font-sans text-gray-800 antialiased overflow-x-hidden bg-sand-50">
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="text-center">
+      <div class="pulse mx-auto mb-4"></div>
+      <p class="text-white/40 text-[11px] tracking-luxury uppercase">OC Pools</p>
+    </div>
+  </div>
 
   <!-- Navbar -->
   <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
@@ -456,6 +551,40 @@
     </div>
   </section>
 
+  <!-- Before / After -->
+  <section class="py-28 md:py-36 bg-sand-50">
+    <div class="max-w-5xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-16">
+        <p class="anim text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-4">Real Results</p>
+        <h2 class="anim d1 font-serif text-4xl sm:text-5xl text-gray-900 mb-6">Before & After</h2>
+        <div class="anim d2 gold-line w-16 mx-auto mb-6"></div>
+        <p class="anim d2 text-lg text-gray-500 max-w-xl mx-auto font-light">Drag the slider to see the transformation. This is what one visit looks like.</p>
+      </div>
+
+      <div class="anim grid md:grid-cols-2 gap-8">
+        <div class="ba-container aspect-[4/3]" id="ba1">
+          <img src="https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/shutterstock_2705128713.jpg" alt="Pool after OC Pools service" class="w-full h-full object-cover" style="filter: brightness(1.05) saturate(1.1);">
+          <div class="ba-after" style="width: 50%;">
+            <img src="https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/shutterstock_2705128713.jpg" alt="Pool before OC Pools service" style="filter: brightness(0.6) saturate(0.3) sepia(0.4) hue-rotate(60deg);">
+          </div>
+          <div class="ba-slider" style="left: 50%;"></div>
+          <span class="ba-label before">After</span>
+          <span class="ba-label after">Before</span>
+        </div>
+
+        <div class="ba-container aspect-[4/3]" id="ba2">
+          <img src="https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/shutterstock_2536795543.jpg" alt="Pool after maintenance" class="w-full h-full object-cover" style="filter: brightness(1.05) saturate(1.1);">
+          <div class="ba-after" style="width: 50%;">
+            <img src="https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/shutterstock_2536795543.jpg" alt="Pool before maintenance" style="filter: brightness(0.55) saturate(0.2) sepia(0.5) hue-rotate(70deg);">
+          </div>
+          <div class="ba-slider" style="left: 50%;"></div>
+          <span class="ba-label before">After</span>
+          <span class="ba-label after">Before</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Why Us -->
   <section id="about" class="py-28 md:py-36 bg-brand-950 text-white relative overflow-hidden">
     <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;1&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
@@ -524,24 +653,55 @@
     </div>
   </section>
 
-  <!-- Testimonials -->
+  <!-- Testimonials Carousel -->
   <section class="py-24 md:py-32 testimonial-bg">
     <div class="max-w-5xl mx-auto px-6 lg:px-10">
-      <div class="text-center">
-        <div class="anim anim-scale flex justify-center gap-1 mb-8">
-          <i class="fa-solid fa-star text-sand-300"></i>
-          <i class="fa-solid fa-star text-sand-300"></i>
-          <i class="fa-solid fa-star text-sand-300"></i>
-          <i class="fa-solid fa-star text-sand-300"></i>
-          <i class="fa-solid fa-star text-sand-300"></i>
+      <div id="testimonialCarousel" class="relative" style="min-height: 280px;">
+
+        <div class="testimonial-slide active" data-slide="0">
+          <div class="text-center">
+            <div class="flex justify-center gap-1 mb-8">
+              <i class="fa-solid fa-star text-sand-300"></i><i class="fa-solid fa-star text-sand-300"></i><i class="fa-solid fa-star text-sand-300"></i><i class="fa-solid fa-star text-sand-300"></i><i class="fa-solid fa-star text-sand-300"></i>
+            </div>
+            <blockquote class="font-serif text-2xl sm:text-3xl md:text-4xl text-white leading-snug mb-10 italic">
+              "We've had three pool companies over the years. OC Pools is the first one where I never have to follow up or worry. Our pool is always flawless — even after a week away."
+            </blockquote>
+            <p class="text-[13px] tracking-luxury uppercase text-sand-300 font-medium">Homeowner, Newport Coast</p>
+            <p class="text-sm text-white/50 mt-1">Monthly client since 2025</p>
+          </div>
         </div>
-        <blockquote class="anim d1 font-serif text-2xl sm:text-3xl md:text-4xl text-white leading-snug mb-10 italic">
-          "We've had three pool companies over the years. OC Pools is the first one where I never have to follow up or worry. Our pool is always flawless — even after a week away."
-        </blockquote>
-        <div class="anim d2">
-          <p class="text-[13px] tracking-luxury uppercase text-sand-300 font-medium">Homeowner, Newport Coast</p>
-          <p class="text-sm text-white/50 mt-1">Monthly client since 2025</p>
+
+        <div class="testimonial-slide" data-slide="1">
+          <div class="text-center">
+            <div class="flex justify-center gap-1 mb-8">
+              <i class="fa-solid fa-star text-sand-300"></i><i class="fa-solid fa-star text-sand-300"></i><i class="fa-solid fa-star text-sand-300"></i><i class="fa-solid fa-star text-sand-300"></i><i class="fa-solid fa-star text-sand-300"></i>
+            </div>
+            <blockquote class="font-serif text-2xl sm:text-3xl md:text-4xl text-white leading-snug mb-10 italic">
+              "They found a failing pump seal before it blew — saved us thousands. The photo reports after each visit give me total peace of mind. Best money we spend on the house."
+            </blockquote>
+            <p class="text-[13px] tracking-luxury uppercase text-sand-300 font-medium">Property Manager, Laguna Beach</p>
+            <p class="text-sm text-white/50 mt-1">Managing 4 properties with OC Pools</p>
+          </div>
         </div>
+
+        <div class="testimonial-slide" data-slide="2">
+          <div class="text-center">
+            <div class="flex justify-center gap-1 mb-8">
+              <i class="fa-solid fa-star text-sand-300"></i><i class="fa-solid fa-star text-sand-300"></i><i class="fa-solid fa-star text-sand-300"></i><i class="fa-solid fa-star text-sand-300"></i><i class="fa-solid fa-star text-sand-300"></i>
+            </div>
+            <blockquote class="font-serif text-2xl sm:text-3xl md:text-4xl text-white leading-snug mb-10 italic">
+              "We host pool parties almost every weekend in summer. I just text them the day before and the pool looks absolutely perfect every time. I've referred all my neighbors."
+            </blockquote>
+            <p class="text-[13px] tracking-luxury uppercase text-sand-300 font-medium">Homeowner, Corona del Mar</p>
+            <p class="text-sm text-white/50 mt-1">Monthly client since 2024</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="testimonial-dots flex justify-center gap-3 mt-8">
+        <button class="active" data-goto="0" aria-label="Testimonial 1"></button>
+        <button data-goto="1" aria-label="Testimonial 2"></button>
+        <button data-goto="2" aria-label="Testimonial 3"></button>
       </div>
     </div>
   </section>
@@ -679,6 +839,25 @@
     </div>
   </section>
 
+  <!-- Guarantee -->
+  <section class="py-20 bg-brand-950 border-y border-white/[0.06]">
+    <div class="max-w-4xl mx-auto px-6 lg:px-10">
+      <div class="anim flex flex-col md:flex-row items-center gap-10 md:gap-16">
+        <div class="flex-shrink-0">
+          <div class="w-28 h-28 border-2 border-sand-400/40 rounded-full flex items-center justify-center relative">
+            <div class="absolute inset-2 border border-sand-400/20 rounded-full"></div>
+            <i class="fa-solid fa-shield-halved text-4xl text-sand-300"></i>
+          </div>
+        </div>
+        <div class="text-center md:text-left">
+          <h3 class="font-serif text-2xl sm:text-3xl text-white mb-3">Our Satisfaction Guarantee</h3>
+          <p class="text-white/50 font-light leading-relaxed text-[15px] mb-4">If your pool doesn't look absolutely pristine after any visit, we'll come back the same day and make it right — no charge, no questions. We've never had to, but the promise stands.</p>
+          <p class="text-sand-300 text-sm font-medium tracking-wide">100% satisfaction or your next service is on us.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Contact -->
   <section id="contact" class="py-28 md:py-36 bg-brand-950 text-white relative overflow-hidden">
     <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-sand-400/30 to-transparent"></div>
@@ -752,6 +931,14 @@
             </button>
             <p class="text-[12px] text-center text-white/30">No spam. No obligation. Just a conversation about your pool.</p>
           </form>
+
+          <!-- Google Map -->
+          <div class="mt-8 border border-white/10 overflow-hidden">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3322.8!2d-117.9187!3d33.6846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dcde7e0ce47e85%3A0x8a7a2a2f7c7f6e1b!2s3525%20Hyland%20Ave%20%23235%2C%20Costa%20Mesa%2C%20CA%2092626!5e0!3m2!1sen!2sus!4v1712764800000!5m2!1sen!2sus"
+              width="100%" height="200" style="border:0; filter: grayscale(0.8) contrast(1.1);" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade" title="OC Pools office location"></iframe>
+          </div>
         </div>
       </div>
     </div>
@@ -939,6 +1126,60 @@
           <p class="text-sand-300 font-medium mt-4">949.892.8944</p>
         </div>
       `;
+    });
+
+    // Preloader
+    window.addEventListener('load', () => {
+      setTimeout(() => document.getElementById('preloader').classList.add('done'), 400);
+    });
+
+    // Testimonial carousel
+    const slides = document.querySelectorAll('.testimonial-slide');
+    const dots = document.querySelectorAll('.testimonial-dots button');
+    let currentSlide = 0;
+    let autoPlay;
+
+    function goToSlide(n) {
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      currentSlide = n;
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+    }
+
+    function nextSlide() { goToSlide((currentSlide + 1) % slides.length); }
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        clearInterval(autoPlay);
+        goToSlide(parseInt(dot.dataset.goto));
+        autoPlay = setInterval(nextSlide, 6000);
+      });
+    });
+
+    autoPlay = setInterval(nextSlide, 6000);
+
+    // Before/After sliders
+    document.querySelectorAll('.ba-container').forEach(container => {
+      const afterEl = container.querySelector('.ba-after');
+      const slider = container.querySelector('.ba-slider');
+      let isDragging = false;
+
+      function updateSlider(x) {
+        const rect = container.getBoundingClientRect();
+        let pos = Math.max(0, Math.min(x - rect.left, rect.width));
+        const pct = (pos / rect.width) * 100;
+        afterEl.style.width = pct + '%';
+        slider.style.left = pct + '%';
+      }
+
+      container.addEventListener('mousedown', (e) => { isDragging = true; updateSlider(e.clientX); });
+      window.addEventListener('mousemove', (e) => { if (isDragging) updateSlider(e.clientX); });
+      window.addEventListener('mouseup', () => { isDragging = false; });
+
+      container.addEventListener('touchstart', (e) => { isDragging = true; updateSlider(e.touches[0].clientX); }, { passive: true });
+      container.addEventListener('touchmove', (e) => { if (isDragging) updateSlider(e.touches[0].clientX); }, { passive: true });
+      container.addEventListener('touchend', () => { isDragging = false; });
     });
   </script>
 </body>
