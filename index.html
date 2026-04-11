@@ -755,11 +755,7 @@
   <!-- Stats -->
   <section class="py-20 bg-white border-y border-gray-100">
     <div class="max-w-5xl mx-auto px-6 lg:px-10">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
-        <div class="anim d1">
-          <p class="font-serif text-4xl md:text-5xl text-gray-900 counter" data-target="150">0</p>
-          <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mt-2">Pools Serviced</p>
-        </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-10 text-center">
         <div class="anim d2">
           <p class="font-serif text-4xl md:text-5xl text-gray-900 counter" data-target="5">0</p>
           <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mt-2">Star Rating</p>
@@ -1368,7 +1364,6 @@
             if (target === 100) el.textContent = target + '%';
             if (target === 5) el.textContent = '5.0';
             if (target === 2) el.textContent = '<2hr';
-            if (target === 150) el.textContent = '150+';
           }
         };
         requestAnimationFrame(animate);
