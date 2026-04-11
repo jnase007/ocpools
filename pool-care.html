@@ -152,27 +152,149 @@
         <p class="anim d2 text-gray-500 font-light mt-4 max-w-lg mx-auto">You don't need to be a chemist — that's our job. But understanding what we measure helps you spot issues early.</p>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="anim text-center p-8 border border-gray-100 bg-sand-50">
-          <div class="font-serif text-4xl text-brand-700 mb-2">7.4</div>
-          <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-1">Ideal pH</p>
-          <p class="text-gray-500 text-sm">Range: 7.2 – 7.6. Low pH burns eyes. High pH clouds water and reduces chlorine effectiveness.</p>
+      <div class="grid md:grid-cols-2 gap-8">
+
+        <!-- pH -->
+        <div class="anim guide-card bg-sand-50 border border-gray-100 p-8 lg:p-10">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-1">pH Level</p>
+              <h3 class="font-serif text-3xl text-gray-900">7.4 <span class="text-lg text-gray-400 font-light">ideal</span></h3>
+            </div>
+            <div class="w-12 h-12 border border-sand-200 flex items-center justify-center">
+              <i class="fa-solid fa-droplet text-brand-600"></i>
+            </div>
+          </div>
+          <p class="text-gray-500 text-[15px] mb-6">Range: 7.2 &ndash; 7.6. Low pH burns eyes. High pH clouds water and reduces chlorine effectiveness.</p>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-red-50 border border-red-100 p-4">
+              <p class="text-[11px] tracking-luxury uppercase text-red-400 font-semibold mb-2"><i class="fa-solid fa-arrow-down mr-1"></i>Below 7.2</p>
+              <ul class="text-[13px] text-gray-600 space-y-1.5">
+                <li>&bull; Eye &amp; skin irritation</li>
+                <li>&bull; Corrodes metal equipment</li>
+                <li>&bull; Etches plaster surfaces</li>
+                <li><strong class="text-gray-800">Fix:</strong> Add soda ash</li>
+              </ul>
+            </div>
+            <div class="bg-blue-50 border border-blue-100 p-4">
+              <p class="text-[11px] tracking-luxury uppercase text-blue-400 font-semibold mb-2"><i class="fa-solid fa-arrow-up mr-1"></i>Above 7.6</p>
+              <ul class="text-[13px] text-gray-600 space-y-1.5">
+                <li>&bull; Cloudy water</li>
+                <li>&bull; Chlorine becomes inactive</li>
+                <li>&bull; Scale buildup begins</li>
+                <li><strong class="text-gray-800">Fix:</strong> Add muriatic acid</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="anim text-center p-8 border border-gray-100 bg-sand-50">
-          <div class="font-serif text-4xl text-brand-700 mb-2">3.0</div>
-          <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-1">Free Chlorine (ppm)</p>
-          <p class="text-gray-500 text-sm">Range: 2 – 4 ppm. This is what kills bacteria and algae. Below 1 ppm, your pool is at risk.</p>
+
+        <!-- Free Chlorine -->
+        <div class="anim guide-card bg-sand-50 border border-gray-100 p-8 lg:p-10">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-1">Free Chlorine</p>
+              <h3 class="font-serif text-3xl text-gray-900">3.0 <span class="text-lg text-gray-400 font-light">ppm ideal</span></h3>
+            </div>
+            <div class="w-12 h-12 border border-sand-200 flex items-center justify-center">
+              <i class="fa-solid fa-shield-halved text-brand-600"></i>
+            </div>
+          </div>
+          <p class="text-gray-500 text-[15px] mb-6">Range: 2 &ndash; 4 ppm. This is what kills bacteria and algae. Below 1 ppm, your pool is at risk.</p>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-red-50 border border-red-100 p-4">
+              <p class="text-[11px] tracking-luxury uppercase text-red-400 font-semibold mb-2"><i class="fa-solid fa-arrow-down mr-1"></i>Below 2 ppm</p>
+              <ul class="text-[13px] text-gray-600 space-y-1.5">
+                <li>&bull; Algae growth risk</li>
+                <li>&bull; Bacteria thrive</li>
+                <li>&bull; Green or murky water</li>
+                <li><strong class="text-gray-800">Fix:</strong> Shock the pool</li>
+              </ul>
+            </div>
+            <div class="bg-blue-50 border border-blue-100 p-4">
+              <p class="text-[11px] tracking-luxury uppercase text-blue-400 font-semibold mb-2"><i class="fa-solid fa-arrow-up mr-1"></i>Above 4 ppm</p>
+              <ul class="text-[13px] text-gray-600 space-y-1.5">
+                <li>&bull; Skin &amp; eye irritation</li>
+                <li>&bull; Bleaches swimwear</li>
+                <li>&bull; Strong chemical smell</li>
+                <li><strong class="text-gray-800">Fix:</strong> Wait or dilute</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="anim text-center p-8 border border-gray-100 bg-sand-50">
-          <div class="font-serif text-4xl text-brand-700 mb-2">100</div>
-          <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-1">Alkalinity (ppm)</p>
-          <p class="text-gray-500 text-sm">Range: 80 – 120 ppm. Acts as a buffer for pH. Without it, pH swings wildly.</p>
+
+        <!-- Alkalinity -->
+        <div class="anim guide-card bg-sand-50 border border-gray-100 p-8 lg:p-10">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-1">Total Alkalinity</p>
+              <h3 class="font-serif text-3xl text-gray-900">100 <span class="text-lg text-gray-400 font-light">ppm ideal</span></h3>
+            </div>
+            <div class="w-12 h-12 border border-sand-200 flex items-center justify-center">
+              <i class="fa-solid fa-scale-balanced text-brand-600"></i>
+            </div>
+          </div>
+          <p class="text-gray-500 text-[15px] mb-6">Range: 80 &ndash; 120 ppm. Acts as a buffer for pH. Without it, pH swings wildly.</p>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-red-50 border border-red-100 p-4">
+              <p class="text-[11px] tracking-luxury uppercase text-red-400 font-semibold mb-2"><i class="fa-solid fa-arrow-down mr-1"></i>Below 80 ppm</p>
+              <ul class="text-[13px] text-gray-600 space-y-1.5">
+                <li>&bull; pH bounces constantly</li>
+                <li>&bull; Corrosion risk</li>
+                <li>&bull; Green-tinted water</li>
+                <li><strong class="text-gray-800">Fix:</strong> Add baking soda</li>
+              </ul>
+            </div>
+            <div class="bg-blue-50 border border-blue-100 p-4">
+              <p class="text-[11px] tracking-luxury uppercase text-blue-400 font-semibold mb-2"><i class="fa-solid fa-arrow-up mr-1"></i>Above 120 ppm</p>
+              <ul class="text-[13px] text-gray-600 space-y-1.5">
+                <li>&bull; Cloudy water</li>
+                <li>&bull; Scale deposits</li>
+                <li>&bull; Chlorine less effective</li>
+                <li><strong class="text-gray-800">Fix:</strong> Add muriatic acid</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="anim text-center p-8 border border-gray-100 bg-sand-50">
-          <div class="font-serif text-4xl text-brand-700 mb-2">300</div>
-          <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-1">Calcium Hardness</p>
-          <p class="text-gray-500 text-sm">Range: 200 – 400 ppm. Too low corrodes surfaces. Too high causes white scale deposits.</p>
+
+        <!-- Calcium Hardness -->
+        <div class="anim guide-card bg-sand-50 border border-gray-100 p-8 lg:p-10">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <p class="text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-1">Calcium Hardness</p>
+              <h3 class="font-serif text-3xl text-gray-900">300 <span class="text-lg text-gray-400 font-light">ppm ideal</span></h3>
+            </div>
+            <div class="w-12 h-12 border border-sand-200 flex items-center justify-center">
+              <i class="fa-solid fa-gem text-brand-600"></i>
+            </div>
+          </div>
+          <p class="text-gray-500 text-[15px] mb-6">Range: 200 &ndash; 400 ppm. Too low corrodes surfaces. Too high causes white scale deposits.</p>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-red-50 border border-red-100 p-4">
+              <p class="text-[11px] tracking-luxury uppercase text-red-400 font-semibold mb-2"><i class="fa-solid fa-arrow-down mr-1"></i>Below 200 ppm</p>
+              <ul class="text-[13px] text-gray-600 space-y-1.5">
+                <li>&bull; Etches plaster &amp; tile</li>
+                <li>&bull; Corrodes equipment</li>
+                <li>&bull; Pitting on surfaces</li>
+                <li><strong class="text-gray-800">Fix:</strong> Add calcium chloride</li>
+              </ul>
+            </div>
+            <div class="bg-blue-50 border border-blue-100 p-4">
+              <p class="text-[11px] tracking-luxury uppercase text-blue-400 font-semibold mb-2"><i class="fa-solid fa-arrow-up mr-1"></i>Above 400 ppm</p>
+              <ul class="text-[13px] text-gray-600 space-y-1.5">
+                <li>&bull; White scale on tile</li>
+                <li>&bull; Cloudy water</li>
+                <li>&bull; Clogs filters &amp; pipes</li>
+                <li><strong class="text-gray-800">Fix:</strong> Partial drain &amp; refill</li>
+              </ul>
+            </div>
+          </div>
         </div>
+
+      </div>
+
+      <div class="anim text-center mt-12">
+        <p class="text-gray-400 text-sm mb-6">Not sure where your levels stand? We test everything on every visit.</p>
+        <a href="index.html#contact" class="inline-block bg-gray-900 hover:bg-gray-800 text-white py-4 px-10 text-[13px] font-medium tracking-luxury uppercase transition-all">Get a Free Water Test</a>
       </div>
     </div>
   </section>
