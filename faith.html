@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Faith | OC Pools — Built on Something Greater</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="description" content="OC Pools is built on faith, integrity, and a commitment to serving others. Learn how our belief in Jesus shapes the way we care for your pool and your family.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['"DM Sans"', 'system-ui', 'sans-serif'], serif: ['"DM Serif Display"', 'Georgia', 'serif'] },
+          colors: {
+            brand: { 50:'#f0f7ff',100:'#e0effe',200:'#bae0fd',300:'#7cc8fc',400:'#36adf7',500:'#0c93e8',600:'#0074c6',700:'#015da1',800:'#064f85',900:'#0b426e',950:'#072a49' },
+            sand: { 50:'#faf8f5',100:'#f3efe8',200:'#e6ddd0',300:'#d5c7b3',400:'#c2ab92',500:'#b3967b',600:'#a6856b',700:'#8b6d59',800:'#725a4c',900:'#5e4b40' },
+          },
+          letterSpacing: { luxury: '0.2em' }
+        }
+      }
+    }
+  </script>
+  <style>
+    @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+    .anim { opacity: 0; }
+    .anim.vis { animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    .anim.vis.d1 { animation-delay: 0.12s; }
+    .anim.vis.d2 { animation-delay: 0.24s; }
+    .anim.vis.d3 { animation-delay: 0.36s; }
+    .gold-line { height: 1px; background: linear-gradient(90deg, transparent, #c2ab92, transparent); }
+    .nav-link { position: relative; }
+    .nav-link::after { content:''; position:absolute; bottom:-4px; left:50%; width:0; height:1px; background:currentColor; transition:all 0.3s ease; transform:translateX(-50%); }
+    .nav-link:hover::after { width:100%; }
+    .scripture-card { background: linear-gradient(135deg, #faf8f5 0%, #f3efe8 100%); }
+  </style>
+</head>
+<body class="font-sans text-gray-800 antialiased overflow-x-hidden bg-sand-50">
+
+  <!-- Navbar -->
+  <nav class="bg-brand-950 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-5 flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-3">
+        <svg class="w-10 h-10 flex-shrink-0" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="38" stroke="white" stroke-width="2" opacity="0.8"/><circle cx="40" cy="40" r="34" stroke="white" stroke-width="0.5" opacity="0.3"/><path d="M14 46 Q27 36, 40 46 Q53 56, 66 46" stroke="white" stroke-width="2.5" opacity="0.45" fill="none" stroke-linecap="round"/><path d="M14 53 Q27 43, 40 53 Q53 63, 66 53" stroke="white" stroke-width="2" opacity="0.3" fill="none" stroke-linecap="round"/><text x="40" y="42" text-anchor="middle" fill="white" font-family="'DM Serif Display', Georgia, serif" font-size="22" letter-spacing="2">OC</text></svg>
+        <span class="text-2xl font-serif text-white tracking-wide">OC Pools</span>
+      </a>
+      <div class="hidden lg:flex items-center gap-10 text-[13px] font-medium tracking-luxury uppercase">
+        <a href="index.html#services" class="nav-link text-white/80 hover:text-white transition-colors">Services</a>
+        <a href="about.html" class="nav-link text-white/80 hover:text-white transition-colors">About</a>
+        <a href="process.html" class="nav-link text-white/80 hover:text-white transition-colors">Our Process</a>
+        <a href="faq.html" class="nav-link text-white/80 hover:text-white transition-colors">FAQ</a>
+        <a href="pool-care.html" class="nav-link text-white/80 hover:text-white transition-colors">Pool Care</a>
+        <a href="index.html#playbook" class="nav-link text-sand-400 hover:text-sand-300 transition-colors font-medium">Free Playbook</a>
+        <a href="index.html#contact" class="ml-2 border border-white/40 text-white px-7 py-2.5 hover:bg-white hover:text-gray-900 transition-all tracking-luxury text-[12px]">Request Quote</a>
+      </div>
+      <button id="menuBtn" class="lg:hidden text-white text-xl focus:outline-none"><i class="fa-solid fa-bars" id="menuIcon"></i></button>
+    </div>
+    <div id="mobileMenu" class="lg:hidden hidden bg-white shadow-2xl overflow-hidden border-t border-gray-100">
+      <div class="flex flex-col p-8 gap-1">
+        <a href="index.html" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">Home</a>
+        <a href="about.html" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">About</a>
+        <a href="process.html" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">Our Process</a>
+        <a href="faq.html" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">FAQ</a>
+        <a href="pool-care.html" class="mobile-link text-gray-800 text-sm font-medium tracking-luxury uppercase py-4 border-b border-gray-100">Pool Care</a>
+        <a href="index.html#contact" class="mobile-link bg-gray-900 text-white text-center py-4 text-sm font-medium tracking-luxury uppercase mt-4">Request Quote</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="text-white py-24 md:py-32 relative overflow-hidden" style="background: linear-gradient(180deg, rgba(7,42,73,0.92) 0%, rgba(7,42,73,0.85) 100%), url('https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/hero.png') center/cover no-repeat;">
+    <div class="max-w-4xl mx-auto px-6 lg:px-10 text-center relative z-10">
+      <p class="anim text-[12px] tracking-luxury uppercase text-sand-400 font-medium mb-4">Our Faith</p>
+      <h1 class="anim d1 font-serif text-4xl sm:text-5xl md:text-6xl text-white mb-6">Built on Something<br>Greater Than Water</h1>
+      <div class="anim d2 gold-line w-16 mx-auto mb-6"></div>
+      <p class="anim d2 text-lg text-white/50 font-light max-w-xl mx-auto">The foundation of OC Pools isn&rsquo;t chemicals or equipment &mdash; it&rsquo;s faith, integrity, and a heart to serve.</p>
+    </div>
+  </section>
+
+  <!-- Walking on Water -->
+  <section class="py-24 md:py-32 bg-sand-50">
+    <div class="max-w-3xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-16">
+        <p class="anim text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-4">Matthew 14:22&ndash;33</p>
+        <h2 class="anim d1 font-serif text-3xl sm:text-4xl text-gray-900 mb-6">The Man Who Walked on Water</h2>
+        <div class="anim d2 gold-line w-16 mx-auto"></div>
+      </div>
+
+      <div class="anim space-y-6 text-gray-500 text-[16px] leading-relaxed">
+        <p>In the middle of the night, on a lake tossed by wind and waves, the disciples saw something impossible &mdash; Jesus walking toward them on the water. They were terrified. But Jesus spoke:</p>
+      </div>
+
+      <div class="anim d1 scripture-card border border-sand-200 p-8 md:p-10 my-10">
+        <i class="fa-solid fa-quote-left text-sand-300 text-2xl mb-4 block"></i>
+        <p class="font-serif text-xl sm:text-2xl text-gray-800 leading-relaxed italic mb-4">&ldquo;Take courage! It is I. Don&rsquo;t be afraid.&rdquo;</p>
+        <p class="text-[13px] tracking-luxury uppercase text-sand-500 font-medium">Matthew 14:27 (NIV)</p>
+      </div>
+
+      <div class="anim space-y-6 text-gray-500 text-[16px] leading-relaxed">
+        <p>Peter &mdash; impulsive, bold, full of heart &mdash; called out: <em>&ldquo;Lord, if it&rsquo;s you, tell me to come to you on the water.&rdquo;</em></p>
+
+        <p>Jesus said one word: <strong class="text-gray-800">&ldquo;Come.&rdquo;</strong></p>
+
+        <p>And Peter did it. He climbed over the side of the boat and walked on the water toward Jesus. For a moment, he did the impossible. Not because he was special &mdash; but because he kept his eyes on Jesus.</p>
+
+        <p>Then Peter looked down. He saw the wind. He felt the waves. And he started to sink.</p>
+      </div>
+
+      <div class="anim d1 scripture-card border border-sand-200 p-8 md:p-10 my-10">
+        <i class="fa-solid fa-quote-left text-sand-300 text-2xl mb-4 block"></i>
+        <p class="font-serif text-xl sm:text-2xl text-gray-800 leading-relaxed italic mb-4">&ldquo;Immediately Jesus reached out his hand and caught him. &lsquo;You of little faith,&rsquo; he said, &lsquo;why did you doubt?&rsquo;&rdquo;</p>
+        <p class="text-[13px] tracking-luxury uppercase text-sand-500 font-medium">Matthew 14:31 (NIV)</p>
+      </div>
+
+      <div class="anim space-y-6 text-gray-500 text-[16px] leading-relaxed">
+        <p>Jesus didn&rsquo;t let him drown. He reached out and pulled him up.</p>
+        <p>That story means everything to me. Because starting a business &mdash; stepping out on your own, serving people, putting yourself out there &mdash; it feels a lot like stepping out of the boat. The waves are real. The wind is real. The fear is real.</p>
+        <p class="text-gray-800 font-medium">But when you keep your eyes on Jesus, you can walk through anything.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Faith Matters to OC Pools -->
+  <section class="py-24 md:py-32 bg-white border-y border-gray-100">
+    <div class="max-w-3xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-16">
+        <p class="anim text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-4">Why It Matters</p>
+        <h2 class="anim d1 font-serif text-3xl sm:text-4xl text-gray-900 mb-6">How Faith Shapes Our Work</h2>
+        <div class="anim d2 gold-line w-16 mx-auto"></div>
+      </div>
+
+      <div class="anim space-y-6 text-gray-500 text-[16px] leading-relaxed">
+        <p>Running a pool service might seem simple. But the way you do the small things reveals who you really are. I believe every job is an opportunity to serve &mdash; not just a pool, but a family.</p>
+
+        <p>That means:</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-6 my-10">
+        <div class="anim scripture-card border border-sand-200 p-6">
+          <i class="fa-solid fa-hand-holding-heart text-brand-600 text-lg mb-3"></i>
+          <h3 class="font-serif text-lg text-gray-900 mb-2">Serve, Don&rsquo;t Just Service</h3>
+          <p class="text-gray-500 text-[14px] leading-relaxed">I&rsquo;m not just cleaning your pool. I&rsquo;m caring for the place where your kids play and your family gathers. That matters.</p>
+        </div>
+        <div class="anim scripture-card border border-sand-200 p-6">
+          <i class="fa-solid fa-scale-balanced text-brand-600 text-lg mb-3"></i>
+          <h3 class="font-serif text-lg text-gray-900 mb-2">Honesty in Everything</h3>
+          <p class="text-gray-500 text-[14px] leading-relaxed">If something needs fixing, I&rsquo;ll tell you. If it doesn&rsquo;t, I won&rsquo;t upsell you. Integrity isn&rsquo;t a marketing strategy &mdash; it&rsquo;s a conviction.</p>
+        </div>
+        <div class="anim scripture-card border border-sand-200 p-6">
+          <i class="fa-solid fa-people-arrows text-brand-600 text-lg mb-3"></i>
+          <h3 class="font-serif text-lg text-gray-900 mb-2">Treat People Like Family</h3>
+          <p class="text-gray-500 text-[14px] leading-relaxed">Every customer gets the same care I&rsquo;d give my own home. Not because it&rsquo;s good business &mdash; because it&rsquo;s the right thing to do.</p>
+        </div>
+        <div class="anim scripture-card border border-sand-200 p-6">
+          <i class="fa-solid fa-seedling text-brand-600 text-lg mb-3"></i>
+          <h3 class="font-serif text-lg text-gray-900 mb-2">Excellence as Worship</h3>
+          <p class="text-gray-500 text-[14px] leading-relaxed">&ldquo;Whatever you do, work at it with all your heart, as working for the Lord.&rdquo; &mdash; Colossians 3:23. That&rsquo;s the standard.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Water in Scripture -->
+  <section class="py-24 md:py-32 bg-sand-50">
+    <div class="max-w-3xl mx-auto px-6 lg:px-10">
+      <div class="text-center mb-16">
+        <p class="anim text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-4">Water &amp; Scripture</p>
+        <h2 class="anim d1 font-serif text-3xl sm:text-4xl text-gray-900 mb-6">Water Runs Through the Whole Story</h2>
+        <div class="anim d2 gold-line w-16 mx-auto"></div>
+      </div>
+
+      <div class="space-y-8">
+        <div class="anim scripture-card border border-sand-200 p-6 md:p-8">
+          <p class="font-serif text-lg text-gray-800 italic mb-2">&ldquo;The Spirit of God was hovering over the waters.&rdquo;</p>
+          <p class="text-[13px] tracking-luxury uppercase text-sand-500 font-medium mb-3">Genesis 1:2</p>
+          <p class="text-gray-500 text-[14px]">Water was there at the very beginning &mdash; before light, before land, before life. Creation started with water.</p>
+        </div>
+
+        <div class="anim scripture-card border border-sand-200 p-6 md:p-8">
+          <p class="font-serif text-lg text-gray-800 italic mb-2">&ldquo;Whoever believes in me, rivers of living water will flow from within them.&rdquo;</p>
+          <p class="text-[13px] tracking-luxury uppercase text-sand-500 font-medium mb-3">John 7:38</p>
+          <p class="text-gray-500 text-[14px]">Jesus used water as a picture of the life He offers &mdash; abundant, overflowing, and available to anyone who comes to Him.</p>
+        </div>
+
+        <div class="anim scripture-card border border-sand-200 p-6 md:p-8">
+          <p class="font-serif text-lg text-gray-800 italic mb-2">&ldquo;Let us purify ourselves from everything that contaminates body and spirit, perfecting holiness.&rdquo;</p>
+          <p class="text-[13px] tracking-luxury uppercase text-sand-500 font-medium mb-3">2 Corinthians 7:1</p>
+          <p class="text-gray-500 text-[14px]">Clean water matters &mdash; physically and spiritually. There&rsquo;s something beautiful about keeping things pure and healthy for the people you love.</p>
+        </div>
+
+        <div class="anim scripture-card border border-sand-200 p-6 md:p-8">
+          <p class="font-serif text-lg text-gray-800 italic mb-2">&ldquo;He leads me beside quiet waters, he refreshes my soul.&rdquo;</p>
+          <p class="text-[13px] tracking-luxury uppercase text-sand-500 font-medium mb-3">Psalm 23:2</p>
+          <p class="text-gray-500 text-[14px]">Still water brings peace. That&rsquo;s what a beautiful pool should feel like &mdash; a place of rest and refreshment for your whole family.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Personal Invitation -->
+  <section class="py-24 md:py-32 bg-white border-t border-gray-100">
+    <div class="max-w-2xl mx-auto px-6 lg:px-10 text-center">
+      <p class="anim text-[12px] tracking-luxury uppercase text-sand-500 font-medium mb-4">An Invitation</p>
+      <h2 class="anim d1 font-serif text-3xl sm:text-4xl text-gray-900 mb-6">The Door Is Always Open</h2>
+      <div class="anim d2 gold-line w-16 mx-auto mb-8"></div>
+
+      <div class="anim d2 space-y-5 text-gray-500 text-[16px] leading-relaxed">
+        <p>I didn&rsquo;t build this page to preach at you. I built it because my faith is the reason I do what I do &mdash; and I&rsquo;d feel dishonest hiding that.</p>
+
+        <p>If you&rsquo;re curious about Jesus, if you&rsquo;re going through something hard, or if you just want to talk to someone who cares &mdash; I&rsquo;m here. Not as a salesman. Just as a person who&rsquo;s been through the storms and found something worth holding onto.</p>
+
+        <p class="text-gray-800 font-medium text-lg">You don&rsquo;t have to walk on water. You just have to step out of the boat. &nbsp;✝️</p>
+      </div>
+
+      <div class="anim d3 mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="index.html#contact" class="inline-flex items-center justify-center bg-gray-900 text-white px-10 py-4 text-[13px] font-semibold tracking-luxury uppercase hover:bg-gray-800 transition-all">
+          Get in Touch
+        </a>
+        <a href="about.html" class="inline-flex items-center justify-center border border-gray-300 text-gray-700 px-10 py-4 text-[13px] font-medium tracking-luxury uppercase hover:bg-gray-50 transition-all">
+          Read Our Story
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-brand-950 text-white/40 border-t border-white/[0.06]">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-16">
+      <div class="grid md:grid-cols-4 gap-12 mb-16">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <svg class="w-10 h-10 flex-shrink-0" viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" stroke="white" stroke-width="2" opacity="0.6"/><circle cx="40" cy="40" r="34" stroke="white" stroke-width="0.5" opacity="0.2"/><path d="M14 46 Q27 36, 40 46 Q53 56, 66 46" stroke="white" stroke-width="2.5" opacity="0.35" fill="none" stroke-linecap="round"/><path d="M14 53 Q27 43, 40 53 Q53 63, 66 53" stroke="white" stroke-width="2" opacity="0.22" fill="none" stroke-linecap="round"/><text x="40" y="42" text-anchor="middle" fill="white" font-family="'DM Serif Display', Georgia, serif" font-size="22" letter-spacing="2" opacity="0.9">OC</text></svg>
+            <p class="font-serif text-2xl text-white">OC Pools</p>
+          </div>
+          <p class="text-sm leading-relaxed">Premium pool care trusted by luxury homeowners across Orange County's coast.</p>
+        </div>
+        <div>
+          <h4 class="text-[11px] tracking-luxury uppercase text-white/60 font-medium mb-5">Pages</h4>
+          <ul class="space-y-3 text-sm"><li><a href="index.html" class="hover:text-white transition-colors">Home</a></li><li><a href="about.html" class="hover:text-white transition-colors">About</a></li><li><a href="process.html" class="hover:text-white transition-colors">Our Process</a></li><li><a href="faq.html" class="hover:text-white transition-colors">FAQ</a></li><li><a href="pool-care.html" class="hover:text-white transition-colors">Pool Care Guide</a></li><li><a href="faith.html" class="hover:text-white transition-colors">Our Faith</a></li></ul>
+        </div>
+        <div>
+          <h4 class="text-[11px] tracking-luxury uppercase text-white/60 font-medium mb-5">Service Areas</h4>
+          <ul class="space-y-3 text-sm"><li>Newport Coast</li><li>Laguna Beach</li><li>Corona del Mar</li><li>Newport Beach</li></ul>
+        </div>
+        <div>
+          <h4 class="text-[11px] tracking-luxury uppercase text-white/60 font-medium mb-5">Connect</h4>
+          <ul class="space-y-3 text-sm"><li><a href="tel:9498928944" class="hover:text-white transition-colors">949.892.8944</a></li><li><a href="mailto:justinnassie@gmail.com" class="hover:text-white transition-colors">justinnassie@gmail.com</a></li></ul>
+        </div>
+      </div>
+      <div class="border-t border-white/[0.06] pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p class="text-xs">&copy; 2026 OC Pools. All rights reserved.</p>
+        <p class="text-xs">3525 Hyland Ave, Suite 235 &middot; Costa Mesa, CA 92626</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('vis'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.anim').forEach(el => observer.observe(el));
+    const menuBtn = document.getElementById('menuBtn');
+    const menuIcon = document.getElementById('menuIcon');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let menuOpen = false;
+    menuBtn.addEventListener('click', () => { menuOpen = !menuOpen; mobileMenu.classList.toggle('hidden'); menuIcon.className = menuOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'; });
+    document.querySelectorAll('.mobile-link').forEach(link => { link.addEventListener('click', () => { mobileMenu.classList.add('hidden'); menuOpen = false; menuIcon.className = 'fa-solid fa-bars'; }); });
+  </script>
+  <script src="pool-calculator.js"></script>
+</body>
+</html>
