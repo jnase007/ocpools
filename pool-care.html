@@ -406,6 +406,29 @@
           <input type="number" id="poolVolume" value="10000" min="1000" max="100000" class="w-full border border-gray-200 px-4 py-3 text-gray-800 focus:outline-none focus:border-brand-600 transition-colors" placeholder="Or enter custom gallons">
         </div>
 
+        <!-- Salt Toggle -->
+        <div class="mb-6">
+          <label class="flex items-center gap-3 cursor-pointer select-none">
+            <input type="checkbox" id="inlineSaltToggle" class="hidden peer">
+            <span class="w-11 h-6 bg-gray-200 peer-checked:bg-brand-600 rounded-full relative transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:w-5 after:h-5 after:bg-white after:rounded-full after:transition-transform peer-checked:after:translate-x-5"></span>
+            <span class="text-sm text-gray-600 font-medium">Salt water pool</span>
+          </label>
+        </div>
+
+        <!-- Salt Fields (hidden by default) -->
+        <div id="inlineSaltFields" class="grid sm:grid-cols-2 gap-6 mb-8 hidden">
+          <div>
+            <label class="block text-[12px] tracking-luxury uppercase text-sand-500 font-semibold mb-2">Salt Level (ppm)</label>
+            <input type="number" id="inputSalt" step="100" min="0" max="10000" placeholder="e.g. 2800" class="w-full border border-gray-200 px-4 py-3 text-gray-800 focus:outline-none focus:border-brand-600 transition-colors">
+            <p class="text-[12px] text-gray-400 mt-1">Ideal: 2,700 &ndash; 3,400 ppm</p>
+          </div>
+          <div>
+            <label class="block text-[12px] tracking-luxury uppercase text-sand-500 font-semibold mb-2">CYA / Stabilizer (ppm)</label>
+            <input type="number" id="inputCYA" step="1" min="0" max="200" placeholder="e.g. 25" class="w-full border border-gray-200 px-4 py-3 text-gray-800 focus:outline-none focus:border-brand-600 transition-colors">
+            <p class="text-[12px] text-gray-400 mt-1">Ideal: 30 &ndash; 50 ppm</p>
+          </div>
+        </div>
+
         <!-- Chemical Inputs -->
         <div class="grid sm:grid-cols-2 gap-6 mb-8">
           <div>
@@ -458,12 +481,20 @@
     event.target.classList.add('border-brand-600','text-brand-700','bg-brand-50');
   }
 
+  // Salt toggle for inline calculator
+  document.getElementById('inlineSaltToggle').addEventListener('change', function() {
+    document.getElementById('inlineSaltFields').classList.toggle('hidden', !this.checked);
+  });
+
   function calculate() {
     const vol = parseFloat(document.getElementById('poolVolume').value) || 10000;
     const ph = parseFloat(document.getElementById('inputPH').value);
     const cl = parseFloat(document.getElementById('inputCL').value);
     const ta = parseFloat(document.getElementById('inputTA').value);
     const ch = parseFloat(document.getElementById('inputCH').value);
+    const isSalt = document.getElementById('inlineSaltToggle').checked;
+    const salt = parseFloat(document.getElementById('inputSalt').value);
+    const cya = parseFloat(document.getElementById('inputCYA').value);
     const ratio = vol / 10000;
     const results = [];
 
@@ -494,7 +525,7 @@
           icon: 'fa-arrow-up',
           current: ph,
           target: '7.4',
-          action: `Add <strong>${ozNeeded} oz dry acid</strong> (pH Decreaser) OR <strong>${acidCups} cups muriatic acid</strong> to lower pH from ${ph} to ~7.4. Pour into deep end with pump on. <br><em>⏱ Wait 15–30 min before swimming.</em>`
+          action: `Add <strong>${ozNeeded} oz dry acid</strong> (pH Decreaser) OR <strong>${acidCups} cups muriatic acid</strong> to lower pH from ${ph} to ~7.4. Pour into deep end with pump on. <br><em>⏱ Wait 15–30 min before swimming.</em>${isSalt ? ' <em>Salt pools run high pH naturally — you\'ll dose acid weekly.</em>' : ''}`
         });
       } else {
         results.push({ label: 'pH', status: 'ok', color: 'green', icon: 'fa-check', current: ph, target: '7.2–7.6', action: 'Your pH is in range. No adjustment needed.' });
@@ -595,6 +626,38 @@
         });
       } else {
         results.push({ label: 'Calcium Hardness', status: 'ok', color: 'green', icon: 'fa-check', current: ch + ' ppm', target: '200–400 ppm', action: 'Calcium hardness is in range. No adjustment needed.' });
+      }
+    }
+
+    // Salt (salt pools only)
+    if (isSalt && !isNaN(salt)) {
+      if (salt < 2700) {
+        const deficit = 3200 - salt;
+        const lbs = (deficit / 360 * 30 * ratio).toFixed(0);
+        results.push({ label: 'Salt Level', status: 'low', color: 'red', icon: 'fa-arrow-down', current: salt + ' ppm', target: '3,200 ppm',
+          action: `Add <strong>${lbs} lbs pool-grade salt</strong> to raise from ${salt} to ~3,200 ppm. Spread around pool perimeter, brush to dissolve. Run pump 24 hrs. Your cell can&rsquo;t generate chlorine below ~2,500 ppm. <br><em>⏱ Wait 20–30 min before swimming (after salt is brushed in and dissolved).</em>` });
+      } else if (salt > 3400) {
+        const pct = Math.min(Math.round(((salt - 3200) / salt) * 100), 25);
+        results.push({ label: 'Salt Level', status: 'high', color: 'blue', icon: 'fa-arrow-up', current: salt + ' ppm', target: '2,700–3,400 ppm',
+          action: `<strong>Partially drain &amp; refill</strong> &mdash; remove ~${pct}% of water and replace with fresh. No chemical removes salt. High salt corrodes equipment and metal fixtures. <br><em>⏱ Safe to swim once refill is complete and water is rebalanced.</em>${salt > 4000 ? ' <strong>Warning: levels this high can damage your salt cell.</strong>' : ''}` });
+      } else {
+        results.push({ label: 'Salt Level', status: 'ok', color: 'green', icon: 'fa-check', current: salt + ' ppm', target: '2,700–3,400 ppm', action: 'Salt level is in range. Your cell should be generating properly.' });
+      }
+    }
+
+    // CYA / Stabilizer (salt pools)
+    if (isSalt && !isNaN(cya)) {
+      if (cya < 30) {
+        const lbs = ((50 - cya) / 30 * 3 * ratio).toFixed(1);
+        results.push({ label: 'CYA / Stabilizer', status: 'low', color: 'red', icon: 'fa-arrow-down', current: cya + ' ppm', target: '30–50 ppm',
+          action: `Add <strong>${lbs} lbs cyanuric acid</strong> (stabilizer) to raise from ${cya} to ~50 ppm. Dissolve in a sock/stocking in the skimmer basket. Takes 3–5 days to fully dissolve. <strong>Critical for salt pools</strong> &mdash; without CYA, sunlight destroys chlorine faster than your cell makes it. <br><em>⏱ Wait 20 min after stabilizer dissolves before swimming.</em>` });
+      } else if (cya > 50) {
+        const pct = Math.min(Math.round(((cya - 40) / cya) * 100), 40);
+        const note = cya > 80 ? ' <strong>Warning:</strong> Above 80 ppm, chlorine effectiveness drops significantly. Partial drain is urgent.' : '';
+        results.push({ label: 'CYA / Stabilizer', status: 'high', color: 'blue', icon: 'fa-arrow-up', current: cya + ' ppm', target: '30–50 ppm',
+          action: `<strong>Partially drain &amp; refill</strong> &mdash; remove ~${pct}% of water. No chemical lowers CYA.${note} <br><em>⏱ Safe to swim once refill is complete and water is rebalanced.</em>` });
+      } else {
+        results.push({ label: 'CYA / Stabilizer', status: 'ok', color: 'green', icon: 'fa-check', current: cya + ' ppm', target: '30–50 ppm', action: 'Stabilizer is in range. Your chlorine is protected from UV.' });
       }
     }
 
