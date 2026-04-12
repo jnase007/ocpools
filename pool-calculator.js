@@ -245,13 +245,13 @@
       if (ph < 7.2) {
         const oz = ((7.4 - ph) / 0.2 * 7 * r).toFixed(0);
         res.push({ label:'pH', status:'low', current:ph, target:'7.4',
-          action:`Add <strong>${oz} oz soda ash</strong> (pH Increaser) to raise pH from ${ph} to ~7.4. Add slowly with pump running, retest after 20 min.` });
+          action:`Add <strong>${oz} oz soda ash</strong> (pH Increaser) to raise pH from ${ph} to ~7.4. Add slowly with pump running, retest after 20 min. <br><em>⏱ Wait 20–30 min before swimming.</em>` });
       } else if (ph > 7.6) {
         const oz = ((ph - 7.4) / 0.2 * 10 * r).toFixed(0);
         const cups = ((ph - 7.4) / 0.2 * 0.75 * r).toFixed(1);
         let note = isSalt ? ' <em>Salt pools run high pH naturally — you\'ll dose acid weekly.</em>' : '';
         res.push({ label:'pH', status:'high', current:ph, target:'7.4',
-          action:`Add <strong>${oz} oz dry acid</strong> OR <strong>${cups} cups muriatic acid</strong> to lower pH from ${ph} to ~7.4. Pour into deep end with pump on.${note}` });
+          action:`Add <strong>${oz} oz dry acid</strong> OR <strong>${cups} cups muriatic acid</strong> to lower pH from ${ph} to ~7.4. Pour into deep end with pump on. <br><em>⏱ Wait 15–30 min before swimming.</em>${note}` });
       } else {
         res.push({ label:'pH', status:'ok', current:ph, target:'7.2–7.6', action:'pH is in range. No adjustment needed.' });
       }
@@ -265,12 +265,12 @@
         const note = isSalt ? ' Also check your salt cell — it may not be generating enough. Inspect for scale buildup.' : '';
         res.push({ label:'Free Chlorine', status:'low', current:cl+' ppm', target:'3 ppm',
           action: cl < 1
-            ? `<strong>Shock your pool!</strong> Add <strong>${(1*r).toFixed(1)} lbs granular shock</strong> OR <strong>${(1*r).toFixed(1)} gal liquid chlorine</strong>. Run pump 8+ hrs, don't swim until below 4 ppm.${note}`
-            : `Add <strong>${lbs} lbs granular chlorine</strong> OR <strong>${gals} gal liquid chlorine</strong> to raise from ${cl} to ~3 ppm. Broadcast into deep end at dusk.${note}` });
+            ? `<strong>Shock your pool!</strong> Add <strong>${(1*r).toFixed(1)} lbs granular shock</strong> OR <strong>${(1*r).toFixed(1)} gal liquid chlorine</strong>. Run pump 8+ hrs. <br><em>⏱ Do NOT swim for at least 8 hours — retest and confirm chlorine is below 4 ppm.</em>${note}`
+            : `Add <strong>${lbs} lbs granular chlorine</strong> OR <strong>${gals} gal liquid chlorine</strong> to raise from ${cl} to ~3 ppm. Broadcast into deep end at dusk. <br><em>⏱ Wait 30 min before swimming (with pump running).</em>${note}` });
       } else if (cl > 4) {
         const note = isSalt ? ' Turn your salt cell output down or set to standby mode.' : '';
         res.push({ label:'Free Chlorine', status:'high', current:cl+' ppm', target:'2–4 ppm',
-          action:`<strong>Stop adding chlorine.</strong>${note} Run pump and let sunlight burn it off. Retest in 24–48 hrs. ${cl > 8 ? 'Consider partial drain — levels are very high.' : 'Don\'t swim until below 4 ppm.'}` });
+          action:`<strong>Stop adding chlorine.</strong>${note} Run pump and let sunlight burn it off. Retest in 24–48 hrs. ${cl > 8 ? 'Consider partial drain — levels are very high.' : 'Don\'t swim until chlorine drops below 4 ppm — retest to confirm.'}` });
       } else {
         res.push({ label:'Free Chlorine', status:'ok', current:cl+' ppm', target:'2–4 ppm', action:'Chlorine is in range. No adjustment needed.' });
       }
@@ -281,11 +281,11 @@
       if (ta < 80) {
         const lbs = ((100 - ta) / 10 * 1.5 * r).toFixed(1);
         res.push({ label:'Total Alkalinity', status:'low', current:ta+' ppm', target:'100 ppm',
-          action:`Add <strong>${lbs} lbs baking soda</strong> (Alkalinity Increaser) to raise from ${ta} to ~100 ppm. Add max 2 lbs at a time, retest after 6 hrs. Always adjust alkalinity before pH.` });
+          action:`Add <strong>${lbs} lbs baking soda</strong> (Alkalinity Increaser) to raise from ${ta} to ~100 ppm. Add max 2 lbs at a time, retest after 6 hrs. Always adjust alkalinity before pH. <br><em>⏱ Wait 20–30 min before swimming.</em>` });
       } else if (ta > 120) {
         const qts = ((ta - 100) / 10 * 1 * r).toFixed(1);
         res.push({ label:'Total Alkalinity', status:'high', current:ta+' ppm', target:'100 ppm',
-          action:`Add <strong>${qts} qts muriatic acid</strong> to lower from ${ta} to ~100 ppm. Max 1 qt per 10K gal at a time. Pour into deep end, retest after 4 hrs. This will also lower pH.` });
+          action:`Add <strong>${qts} qts muriatic acid</strong> to lower from ${ta} to ~100 ppm. Max 1 qt per 10K gal at a time. Pour into deep end, retest after 4 hrs. This will also lower pH. <br><em>⏱ Wait 30 min before swimming.</em>` });
       } else {
         res.push({ label:'Total Alkalinity', status:'ok', current:ta+' ppm', target:'80–120 ppm', action:'Alkalinity is in range. No adjustment needed.' });
       }
@@ -296,11 +296,11 @@
       if (ch < 200) {
         const lbs = ((300 - ch) / 10 * 1.25 * r).toFixed(1);
         res.push({ label:'Calcium Hardness', status:'low', current:ch+' ppm', target:'300 ppm',
-          action:`Add <strong>${lbs} lbs calcium chloride</strong> to raise from ${ch} to ~300 ppm. Dissolve in a bucket first, pour around edges. Max 5 lbs at a time, retest next day.` });
+          action:`Add <strong>${lbs} lbs calcium chloride</strong> to raise from ${ch} to ~300 ppm. Dissolve in a bucket first, pour around edges. Max 5 lbs at a time, retest next day. <br><em>⏱ Wait 2–4 hours before swimming — calcium chloride generates heat.</em>` });
       } else if (ch > 400) {
         const pct = Math.min(Math.round(((ch - 300) / ch) * 100), 33);
         res.push({ label:'Calcium Hardness', status:'high', current:ch+' ppm', target:'200–400 ppm',
-          action:`<strong>Partial drain & refill required.</strong> Drain ~${pct}% of water and refill with fresh. No chemical lowers calcium. ${isSalt ? 'Be careful — salt pools scale faster with high calcium. Inspect your cell.' : 'Consider calling a pro — improper draining can damage plaster.'}` });
+          action:`<strong>Partial drain & refill required.</strong> Drain ~${pct}% of water and refill with fresh. No chemical lowers calcium. ${isSalt ? 'Be careful — salt pools scale faster with high calcium. Inspect your cell. <br><em>⏱ Safe to swim once refill is complete and water is rebalanced.</em>' : 'Consider calling a pro — improper draining can damage plaster. <br><em>⏱ Safe to swim once refill is complete and water is rebalanced.</em>'}` });
       } else {
         res.push({ label:'Calcium Hardness', status:'ok', current:ch+' ppm', target:'200–400 ppm', action:'Calcium hardness is in range. No adjustment needed.' });
       }
@@ -314,11 +314,11 @@
         const deficit = 3200 - salt;
         const lbs = (deficit / 360 * 30 * r).toFixed(0);
         res.push({ label:'Salt Level', status:'low', current:salt+' ppm', target:'3,200 ppm',
-          action:`Add <strong>${lbs} lbs pool-grade salt</strong> to raise from ${salt} to ~3,200 ppm. Spread around pool perimeter, brush to dissolve. Run pump 24 hrs. Your cell can't generate chlorine below ~2,500 ppm.` });
+          action:`Add <strong>${lbs} lbs pool-grade salt</strong> to raise from ${salt} to ~3,200 ppm. Spread around pool perimeter, brush to dissolve. Run pump 24 hrs. Your cell can't generate chlorine below ~2,500 ppm. <br><em>⏱ Wait 20–30 min before swimming (after salt is brushed in and dissolved).</em>` });
       } else if (salt > 3400) {
         const pct = Math.min(Math.round(((salt - 3200) / salt) * 100), 25);
         res.push({ label:'Salt Level', status:'high', current:salt+' ppm', target:'2,700–3,400 ppm',
-          action:`<strong>Partially drain & refill</strong> — remove ~${pct}% of water and replace with fresh. No chemical removes salt. High salt corrodes equipment and metal fixtures. ${salt > 4000 ? '<strong>Warning: levels this high can damage your salt cell.</strong>' : ''}` });
+          action:`<strong>Partially drain & refill</strong> — remove ~${pct}% of water and replace with fresh. No chemical removes salt. High salt corrodes equipment and metal fixtures. <br><em>⏱ Safe to swim once refill is complete and water is rebalanced.</em> ${salt > 4000 ? '<strong>Warning: levels this high can damage your salt cell.</strong>' : ''}` });
       } else {
         res.push({ label:'Salt Level', status:'ok', current:salt+' ppm', target:'2,700–3,400 ppm', action:'Salt level is in range. Your cell should be generating properly.' });
       }
@@ -330,7 +330,7 @@
         // ~3 lbs CYA per 10K gal raises ~30 ppm
         const lbs = ((50 - cya) / 30 * 3 * r).toFixed(1);
         res.push({ label:'CYA / Stabilizer', status:'low', current:cya+' ppm', target:'30–50 ppm',
-          action:`Add <strong>${lbs} lbs cyanuric acid</strong> (stabilizer) to raise from ${cya} to ~50 ppm. Dissolve in a sock/stocking in the skimmer basket. Takes 3–5 days to fully dissolve. <strong>Critical for salt pools</strong> — without CYA, sunlight destroys chlorine faster than your cell makes it.` });
+          action:`Add <strong>${lbs} lbs cyanuric acid</strong> (stabilizer) to raise from ${cya} to ~50 ppm. Dissolve in a sock/stocking in the skimmer basket. Takes 3–5 days to fully dissolve. <strong>Critical for salt pools</strong> — without CYA, sunlight destroys chlorine faster than your cell makes it. <br><em>⏱ Wait 20 min after stabilizer dissolves before swimming.</em>` });
       } else if (cya > 50) {
         const note = cya > 80 ? '<strong>Warning:</strong> Above 80 ppm, chlorine effectiveness drops significantly. Partial drain is urgent.' : '';
         const pct = Math.min(Math.round(((cya - 40) / cya) * 100), 40);
