@@ -167,7 +167,7 @@
           </div>
         </div>
 
-        <p class="calc-hint" style="margin-top:16px; margin-bottom:8px; font-style:italic; color:#9ca3af;">Matches your 7-point test strip — read top to bottom.</p>
+        <p class="calc-hint" style="margin-top:16px; margin-bottom:8px; font-style:italic; color:#9ca3af;">Matches your 6-point test strip — read top to bottom.</p>
         <div class="calc-grid" style="margin-top:8px">
           <div>
             <span class="calc-label">① Total Hardness (ppm)</span>
@@ -175,32 +175,27 @@
             <p class="calc-hint">Ideal: 200 – 400 ppm</p>
           </div>
           <div>
-            <span class="calc-label">② Total Chlorine (ppm)</span>
+            <span class="calc-label">② Total Chlorine / Bromine (ppm)</span>
             <input type="number" class="calc-input" id="cTCL" step="0.1" min="0" max="20" placeholder="e.g. 3.0">
-            <p class="calc-hint">Ideal: 2 – 4 ppm (should be close to Free Chlorine)</p>
+            <p class="calc-hint">Ideal: 2 – 4 ppm chlorine / 3 – 5 ppm bromine</p>
           </div>
           <div>
-            <span class="calc-label">③ Total Bromine (ppm)</span>
-            <input type="number" class="calc-input" id="cBR" step="0.5" min="0" max="20" placeholder="e.g. 0">
-            <p class="calc-hint">Ideal: 3 – 5 ppm (bromine pools only — leave blank for chlorine pools)</p>
-          </div>
-          <div>
-            <span class="calc-label">④ Free Chlorine (ppm)</span>
+            <span class="calc-label">③ Free Chlorine (ppm)</span>
             <input type="number" class="calc-input" id="cCL" step="0.1" min="0" max="20" placeholder="e.g. 1.0">
             <p class="calc-hint">Ideal: 2 – 4 ppm</p>
           </div>
           <div>
-            <span class="calc-label">⑤ pH</span>
+            <span class="calc-label">④ pH</span>
             <input type="number" class="calc-input" id="cPH" step="0.1" min="5" max="10" placeholder="e.g. 7.0">
             <p class="calc-hint">Ideal: 7.2 – 7.6</p>
           </div>
           <div>
-            <span class="calc-label">⑥ Total Alkalinity (ppm)</span>
+            <span class="calc-label">⑤ Total Alkalinity (ppm)</span>
             <input type="number" class="calc-input" id="cTA" step="1" min="0" max="500" placeholder="e.g. 60">
             <p class="calc-hint">Ideal: 80 – 120 ppm</p>
           </div>
           <div>
-            <span class="calc-label">⑦ Cyanuric Acid / CYA (ppm)</span>
+            <span class="calc-label">⑥ Cyanuric Acid / CYA (ppm)</span>
             <input type="number" class="calc-input" id="cCYAAll" step="1" min="0" max="200" placeholder="e.g. 40">
             <p class="calc-hint">Ideal: 30 – 50 ppm (protects chlorine from UV)</p>
           </div>
@@ -248,7 +243,6 @@
     const vol = parseFloat(document.getElementById('cVol').value) || 10000;
     const ch = parseFloat(document.getElementById('cCH').value);
     const tcl = parseFloat(document.getElementById('cTCL').value);
-    const br = parseFloat(document.getElementById('cBR').value);
     const cl = parseFloat(document.getElementById('cCL').value);
     const ph = parseFloat(document.getElementById('cPH').value);
     const ta = parseFloat(document.getElementById('cTA').value);
@@ -290,20 +284,7 @@
       res.push({ label:'Total Chlorine', status:'ok', current:tcl+' ppm', target:'2–4 ppm', action:'Enter Free Chlorine too — we compare them to detect chloramines.' });
     }
 
-    // 3. Total Bromine (bromine pools only)
-    if (!isNaN(br) && br > 0) {
-      if (br < 3) {
-        res.push({ label:'Total Bromine', status:'low', current:br+' ppm', target:'3–5 ppm',
-          action:`Add bromine tablets or granules to raise from ${br} to ~4 ppm. If using a floater, open more slots. <br><em>⏱ Wait 15–20 min before swimming.</em>` });
-      } else if (br > 5) {
-        res.push({ label:'Total Bromine', status:'high', current:br+' ppm', target:'3–5 ppm',
-          action:`Bromine is high. Remove floater or reduce tablet count. Run pump and wait — bromine dissipates slower than chlorine. ${br > 10 ? '<strong>Do not swim until below 5 ppm.</strong>' : 'Retest in a few hours.'}` });
-      } else {
-        res.push({ label:'Total Bromine', status:'ok', current:br+' ppm', target:'3–5 ppm', action:'Bromine is in range. No adjustment needed.' });
-      }
-    }
-
-    // 4. Free Chlorine
+    // 3. Free Chlorine
     if (!isNaN(cl)) {
       if (cl < 2) {
         const lbs = (Math.max(3 - cl, 1) / 2.5 * r).toFixed(1);
