@@ -167,11 +167,12 @@
           </div>
         </div>
 
-        <div class="calc-grid" style="margin-top:16px">
+        <p class="calc-hint" style="margin-top:16px; margin-bottom:8px; font-style:italic; color:#9ca3af;">Read your test strip top-to-bottom — fields are in the same order.</p>
+        <div class="calc-grid" style="margin-top:8px">
           <div>
-            <span class="calc-label">Current pH</span>
-            <input type="number" class="calc-input" id="cPH" step="0.1" min="5" max="10" placeholder="e.g. 7.0">
-            <p class="calc-hint">Ideal: 7.2 – 7.6</p>
+            <span class="calc-label">Calcium Hardness (ppm)</span>
+            <input type="number" class="calc-input" id="cCH" step="1" min="0" max="1000" placeholder="e.g. 150">
+            <p class="calc-hint">Ideal: 200 – 400 ppm</p>
           </div>
           <div>
             <span class="calc-label">Free Chlorine (ppm)</span>
@@ -179,14 +180,14 @@
             <p class="calc-hint">Ideal: 2 – 4 ppm</p>
           </div>
           <div>
+            <span class="calc-label">Current pH</span>
+            <input type="number" class="calc-input" id="cPH" step="0.1" min="5" max="10" placeholder="e.g. 7.0">
+            <p class="calc-hint">Ideal: 7.2 – 7.6</p>
+          </div>
+          <div>
             <span class="calc-label">Total Alkalinity (ppm)</span>
             <input type="number" class="calc-input" id="cTA" step="1" min="0" max="500" placeholder="e.g. 60">
             <p class="calc-hint">Ideal: 80 – 120 ppm</p>
-          </div>
-          <div>
-            <span class="calc-label">Calcium Hardness (ppm)</span>
-            <input type="number" class="calc-input" id="cCH" step="1" min="0" max="1000" placeholder="e.g. 150">
-            <p class="calc-hint">Ideal: 200 – 400 ppm</p>
           </div>
         </div>
 
@@ -240,24 +241,25 @@
     const r = vol / 10000;
     const res = [];
 
-    // pH
-    if (!isNaN(ph)) {
-      if (ph < 7.2) {
-        const oz = ((7.4 - ph) / 0.2 * 7 * r).toFixed(0);
-        res.push({ label:'pH', status:'low', current:ph, target:'7.4',
-          action:`Add <strong>${oz} oz soda ash</strong> (pH Increaser) to raise pH from ${ph} to ~7.4. Add slowly with pump running, retest after 20 min. <br><em>⏱ Wait 20–30 min before swimming.</em>` });
-      } else if (ph > 7.6) {
-        const oz = ((ph - 7.4) / 0.2 * 10 * r).toFixed(0);
-        const cups = ((ph - 7.4) / 0.2 * 0.75 * r).toFixed(1);
-        let note = isSalt ? ' <em>Salt pools run high pH naturally — you\'ll dose acid weekly.</em>' : '';
-        res.push({ label:'pH', status:'high', current:ph, target:'7.4',
-          action:`Add <strong>${oz} oz dry acid</strong> OR <strong>${cups} cups muriatic acid</strong> to lower pH from ${ph} to ~7.4. Pour into deep end with pump on. <br><em>⏱ Wait 15–30 min before swimming.</em>${note}` });
+    // Results ordered to match test strip (top to bottom):
+    // 1. Calcium Hardness, 2. Free Chlorine, 3. pH, 4. Total Alkalinity, 5. CYA
+
+    // 1. Calcium Hardness
+    if (!isNaN(ch)) {
+      if (ch < 200) {
+        const lbs = ((300 - ch) / 10 * 1.25 * r).toFixed(1);
+        res.push({ label:'Calcium Hardness', status:'low', current:ch+' ppm', target:'300 ppm',
+          action:`Add <strong>${lbs} lbs calcium chloride</strong> to raise from ${ch} to ~300 ppm. Dissolve in a bucket first, pour around edges. Max 5 lbs at a time, retest next day. <br><em>⏱ Wait 2–4 hours before swimming — calcium chloride generates heat.</em>` });
+      } else if (ch > 400) {
+        const pct = Math.min(Math.round(((ch - 300) / ch) * 100), 33);
+        res.push({ label:'Calcium Hardness', status:'high', current:ch+' ppm', target:'200–400 ppm',
+          action:`<strong>Partial drain & refill required.</strong> Drain ~${pct}% of water and refill with fresh. No chemical lowers calcium. ${isSalt ? 'Be careful — salt pools scale faster with high calcium. Inspect your cell. <br><em>⏱ Safe to swim once refill is complete and water is rebalanced.</em>' : 'Consider calling a pro — improper draining can damage plaster. <br><em>⏱ Safe to swim once refill is complete and water is rebalanced.</em>'}` });
       } else {
-        res.push({ label:'pH', status:'ok', current:ph, target:'7.2–7.6', action:'pH is in range. No adjustment needed.' });
+        res.push({ label:'Calcium Hardness', status:'ok', current:ch+' ppm', target:'200–400 ppm', action:'Calcium hardness is in range. No adjustment needed.' });
       }
     }
 
-    // Chlorine
+    // 2. Free Chlorine
     if (!isNaN(cl)) {
       if (cl < 2) {
         const lbs = (Math.max(3 - cl, 1) / 2.5 * r).toFixed(1);
@@ -276,7 +278,24 @@
       }
     }
 
-    // Total Alkalinity
+    // 3. pH
+    if (!isNaN(ph)) {
+      if (ph < 7.2) {
+        const oz = ((7.4 - ph) / 0.2 * 7 * r).toFixed(0);
+        res.push({ label:'pH', status:'low', current:ph, target:'7.4',
+          action:`Add <strong>${oz} oz soda ash</strong> (pH Increaser) to raise pH from ${ph} to ~7.4. Add slowly with pump running, retest after 20 min. <br><em>⏱ Wait 20–30 min before swimming.</em>` });
+      } else if (ph > 7.6) {
+        const oz = ((ph - 7.4) / 0.2 * 10 * r).toFixed(0);
+        const cups = ((ph - 7.4) / 0.2 * 0.75 * r).toFixed(1);
+        let note = isSalt ? ' <em>Salt pools run high pH naturally — you\'ll dose acid weekly.</em>' : '';
+        res.push({ label:'pH', status:'high', current:ph, target:'7.4',
+          action:`Add <strong>${oz} oz dry acid</strong> OR <strong>${cups} cups muriatic acid</strong> to lower pH from ${ph} to ~7.4. Pour into deep end with pump on. <br><em>⏱ Wait 15–30 min before swimming.</em>${note}` });
+      } else {
+        res.push({ label:'pH', status:'ok', current:ph, target:'7.2–7.6', action:'pH is in range. No adjustment needed.' });
+      }
+    }
+
+    // 4. Total Alkalinity
     if (!isNaN(ta)) {
       if (ta < 80) {
         const lbs = ((100 - ta) / 10 * 1.5 * r).toFixed(1);
@@ -288,21 +307,6 @@
           action:`Add <strong>${qts} qts muriatic acid</strong> to lower from ${ta} to ~100 ppm. Max 1 qt per 10K gal at a time. Pour into deep end, retest after 4 hrs. This will also lower pH. <br><em>⏱ Wait 30 min before swimming.</em>` });
       } else {
         res.push({ label:'Total Alkalinity', status:'ok', current:ta+' ppm', target:'80–120 ppm', action:'Alkalinity is in range. No adjustment needed.' });
-      }
-    }
-
-    // Calcium Hardness
-    if (!isNaN(ch)) {
-      if (ch < 200) {
-        const lbs = ((300 - ch) / 10 * 1.25 * r).toFixed(1);
-        res.push({ label:'Calcium Hardness', status:'low', current:ch+' ppm', target:'300 ppm',
-          action:`Add <strong>${lbs} lbs calcium chloride</strong> to raise from ${ch} to ~300 ppm. Dissolve in a bucket first, pour around edges. Max 5 lbs at a time, retest next day. <br><em>⏱ Wait 2–4 hours before swimming — calcium chloride generates heat.</em>` });
-      } else if (ch > 400) {
-        const pct = Math.min(Math.round(((ch - 300) / ch) * 100), 33);
-        res.push({ label:'Calcium Hardness', status:'high', current:ch+' ppm', target:'200–400 ppm',
-          action:`<strong>Partial drain & refill required.</strong> Drain ~${pct}% of water and refill with fresh. No chemical lowers calcium. ${isSalt ? 'Be careful — salt pools scale faster with high calcium. Inspect your cell. <br><em>⏱ Safe to swim once refill is complete and water is rebalanced.</em>' : 'Consider calling a pro — improper draining can damage plaster. <br><em>⏱ Safe to swim once refill is complete and water is rebalanced.</em>'}` });
-      } else {
-        res.push({ label:'Calcium Hardness', status:'ok', current:ch+' ppm', target:'200–400 ppm', action:'Calcium hardness is in range. No adjustment needed.' });
       }
     }
 
