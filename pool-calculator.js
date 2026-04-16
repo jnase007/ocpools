@@ -167,27 +167,42 @@
           </div>
         </div>
 
-        <p class="calc-hint" style="margin-top:16px; margin-bottom:8px; font-style:italic; color:#9ca3af;">Read your test strip top-to-bottom — fields are in the same order.</p>
+        <p class="calc-hint" style="margin-top:16px; margin-bottom:8px; font-style:italic; color:#9ca3af;">Matches your 7-point test strip — read top to bottom.</p>
         <div class="calc-grid" style="margin-top:8px">
           <div>
-            <span class="calc-label">Calcium Hardness (ppm)</span>
+            <span class="calc-label">① Total Hardness (ppm)</span>
             <input type="number" class="calc-input" id="cCH" step="1" min="0" max="1000" placeholder="e.g. 150">
             <p class="calc-hint">Ideal: 200 – 400 ppm</p>
           </div>
           <div>
-            <span class="calc-label">Free Chlorine (ppm)</span>
+            <span class="calc-label">② Total Chlorine (ppm)</span>
+            <input type="number" class="calc-input" id="cTCL" step="0.1" min="0" max="20" placeholder="e.g. 3.0">
+            <p class="calc-hint">Ideal: 2 – 4 ppm (should be close to Free Chlorine)</p>
+          </div>
+          <div>
+            <span class="calc-label">③ Total Bromine (ppm)</span>
+            <input type="number" class="calc-input" id="cBR" step="0.5" min="0" max="20" placeholder="e.g. 0">
+            <p class="calc-hint">Ideal: 3 – 5 ppm (bromine pools only — leave blank for chlorine pools)</p>
+          </div>
+          <div>
+            <span class="calc-label">④ Free Chlorine (ppm)</span>
             <input type="number" class="calc-input" id="cCL" step="0.1" min="0" max="20" placeholder="e.g. 1.0">
             <p class="calc-hint">Ideal: 2 – 4 ppm</p>
           </div>
           <div>
-            <span class="calc-label">Current pH</span>
+            <span class="calc-label">⑤ pH</span>
             <input type="number" class="calc-input" id="cPH" step="0.1" min="5" max="10" placeholder="e.g. 7.0">
             <p class="calc-hint">Ideal: 7.2 – 7.6</p>
           </div>
           <div>
-            <span class="calc-label">Total Alkalinity (ppm)</span>
+            <span class="calc-label">⑥ Total Alkalinity (ppm)</span>
             <input type="number" class="calc-input" id="cTA" step="1" min="0" max="500" placeholder="e.g. 60">
             <p class="calc-hint">Ideal: 80 – 120 ppm</p>
+          </div>
+          <div>
+            <span class="calc-label">⑦ Cyanuric Acid / CYA (ppm)</span>
+            <input type="number" class="calc-input" id="cCYAAll" step="1" min="0" max="200" placeholder="e.g. 40">
+            <p class="calc-hint">Ideal: 30 – 50 ppm (protects chlorine from UV)</p>
           </div>
         </div>
 
@@ -231,13 +246,16 @@
 
   function runCalc() {
     const vol = parseFloat(document.getElementById('cVol').value) || 10000;
-    const ph = parseFloat(document.getElementById('cPH').value);
-    const cl = parseFloat(document.getElementById('cCL').value);
-    const ta = parseFloat(document.getElementById('cTA').value);
     const ch = parseFloat(document.getElementById('cCH').value);
+    const tcl = parseFloat(document.getElementById('cTCL').value);
+    const br = parseFloat(document.getElementById('cBR').value);
+    const cl = parseFloat(document.getElementById('cCL').value);
+    const ph = parseFloat(document.getElementById('cPH').value);
+    const ta = parseFloat(document.getElementById('cTA').value);
+    const cyaAll = parseFloat(document.getElementById('cCYAAll').value);
     const isSalt = document.getElementById('cSaltToggle').checked;
     const salt = parseFloat(document.getElementById('cSalt').value);
-    const cya = parseFloat(document.getElementById('cCYA').value);
+    const cya = isSalt ? parseFloat(document.getElementById('cCYA').value) : cyaAll;
     const r = vol / 10000;
     const res = [];
 
@@ -259,7 +277,33 @@
       }
     }
 
-    // 2. Free Chlorine
+    // 2. Total Chlorine (Combined Chlorine = Total - Free; high combined means chloramines)
+    if (!isNaN(tcl) && !isNaN(cl)) {
+      const combined = tcl - cl;
+      if (combined > 0.5) {
+        res.push({ label:'Total Chlorine', status:'high', current:tcl+' ppm', target:'Close to Free Cl',
+          action:`<strong>Combined chlorine is ${combined.toFixed(1)} ppm</strong> (Total ${tcl} − Free ${cl}). Above 0.5 ppm means chloramines — that "chlorine smell." <strong>Shock your pool</strong> to break them down. Run pump 8+ hrs after shocking. <br><em>⏱ Don't swim until free chlorine drops below 4 ppm.</em>` });
+      } else {
+        res.push({ label:'Total Chlorine', status:'ok', current:tcl+' ppm', target:'Close to Free Cl', action:`Combined chlorine is ${combined.toFixed(1)} ppm — healthy. No chloramine buildup.` });
+      }
+    } else if (!isNaN(tcl)) {
+      res.push({ label:'Total Chlorine', status:'ok', current:tcl+' ppm', target:'2–4 ppm', action:'Enter Free Chlorine too — we compare them to detect chloramines.' });
+    }
+
+    // 3. Total Bromine (bromine pools only)
+    if (!isNaN(br) && br > 0) {
+      if (br < 3) {
+        res.push({ label:'Total Bromine', status:'low', current:br+' ppm', target:'3–5 ppm',
+          action:`Add bromine tablets or granules to raise from ${br} to ~4 ppm. If using a floater, open more slots. <br><em>⏱ Wait 15–20 min before swimming.</em>` });
+      } else if (br > 5) {
+        res.push({ label:'Total Bromine', status:'high', current:br+' ppm', target:'3–5 ppm',
+          action:`Bromine is high. Remove floater or reduce tablet count. Run pump and wait — bromine dissipates slower than chlorine. ${br > 10 ? '<strong>Do not swim until below 5 ppm.</strong>' : 'Retest in a few hours.'}` });
+      } else {
+        res.push({ label:'Total Bromine', status:'ok', current:br+' ppm', target:'3–5 ppm', action:'Bromine is in range. No adjustment needed.' });
+      }
+    }
+
+    // 4. Free Chlorine
     if (!isNaN(cl)) {
       if (cl < 2) {
         const lbs = (Math.max(3 - cl, 1) / 2.5 * r).toFixed(1);
@@ -328,13 +372,13 @@
       }
     }
 
-    // CYA / Stabilizer (salt pools)
-    if (isSalt && !isNaN(cya)) {
+    // 7. CYA / Stabilizer (all pools — protects chlorine from UV)
+    if (!isNaN(cya)) {
+      const saltNote = isSalt ? ' <strong>Critical for salt pools</strong> — without CYA, sunlight destroys chlorine faster than your cell makes it.' : '';
       if (cya < 30) {
-        // ~3 lbs CYA per 10K gal raises ~30 ppm
         const lbs = ((50 - cya) / 30 * 3 * r).toFixed(1);
         res.push({ label:'CYA / Stabilizer', status:'low', current:cya+' ppm', target:'30–50 ppm',
-          action:`Add <strong>${lbs} lbs cyanuric acid</strong> (stabilizer) to raise from ${cya} to ~50 ppm. Dissolve in a sock/stocking in the skimmer basket. Takes 3–5 days to fully dissolve. <strong>Critical for salt pools</strong> — without CYA, sunlight destroys chlorine faster than your cell makes it. <br><em>⏱ Wait 20 min after stabilizer dissolves before swimming.</em>` });
+          action:`Add <strong>${lbs} lbs cyanuric acid</strong> (stabilizer) to raise from ${cya} to ~50 ppm. Dissolve in a sock/stocking in the skimmer basket. Takes 3–5 days to fully dissolve.${saltNote} <br><em>⏱ Wait 20 min after stabilizer dissolves before swimming.</em>` });
       } else if (cya > 50) {
         const note = cya > 80 ? '<strong>Warning:</strong> Above 80 ppm, chlorine effectiveness drops significantly. Partial drain is urgent.' : '';
         const pct = Math.min(Math.round(((cya - 40) / cya) * 100), 40);
