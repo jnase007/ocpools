@@ -1235,7 +1235,7 @@
               <h3 class="font-serif text-xl mb-2 text-white">You're In! 🎉</h3>
               <p class="text-gray-400 text-sm mb-4">Your playbook is downloading now.</p>
               <a href="https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/playbook_Ocpools.pdf" 
-                download="The-Pool-Owners-Playbook-OC-Pools.pdf"
+                target="_blank" rel="noopener noreferrer"
                 class="inline-flex items-center gap-2 text-sand-400 hover:text-sand-300 text-sm font-medium transition">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                 Click here if download didn't start
@@ -1625,13 +1625,8 @@
       leads.push({ name, email, source: 'exit_popup', date: new Date().toISOString() });
       localStorage.setItem('oc_playbook_leads', JSON.stringify(leads));
       
-      // Trigger PDF download
-      const link = document.createElement('a');
-      link.href = 'https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/playbook_Ocpools.pdf';
-      link.download = 'The-Pool-Owners-Playbook-OC-Pools.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      // Open PDF in new tab
+      window.open('https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/playbook_Ocpools.pdf', '_blank');
       
       exitPopup.querySelector('.popup-card').innerHTML = `
         <div class="text-center py-6">
@@ -1640,7 +1635,7 @@
           </div>
           <h3 class="font-serif text-2xl text-gray-900 mb-3">Your Playbook is Downloading! 🎉</h3>
           <p class="text-gray-500 text-[15px] mb-4">Check your downloads folder.</p>
-          <a href="https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/playbook_Ocpools.pdf" download class="text-sand-500 hover:text-sand-600 text-sm font-medium underline">Click here if it didn't start</a>
+          <a href="https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/playbook_Ocpools.pdf" target="_blank" rel="noopener noreferrer" class="text-sand-500 hover:text-sand-600 text-sm font-medium underline">Click here to open it</a>
         </div>
       `;
       setTimeout(() => exitPopup.classList.remove('show'), 5000);
@@ -1762,13 +1757,8 @@
         playbookForm.classList.add('hidden');
         playbookSuccess.classList.remove('hidden');
         
-        // Auto-trigger PDF download
-        const link = document.createElement('a');
-        link.href = 'https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/playbook_Ocpools.pdf';
-        link.download = 'The-Pool-Owners-Playbook-OC-Pools.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        // Open PDF in new tab (cross-origin PDFs can't use download attribute)
+        window.open('https://rhimzbcmmdsjjfldbulf.supabase.co/storage/v1/object/public/images/playbook_Ocpools.pdf', '_blank');
       });
     }
   </script>
