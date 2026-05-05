@@ -888,6 +888,8 @@
     Chart.defaults.font.family = chartFont.family;
     Chart.defaults.font.size = chartFont.size;
     Chart.defaults.color = '#9ca3af';
+    Chart.defaults.responsive = false;
+    Chart.defaults.maintainAspectRatio = false;
 
     // Helper: create a canvas inside a wrapper div with fixed dimensions
     function makeCanvas(wrapperId, canvasId, w, h) {
