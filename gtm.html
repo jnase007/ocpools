@@ -671,13 +671,13 @@
           <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 lg:p-8">
             <h3 class="font-serif text-lg text-gray-900 mb-1">Monthly Revenue vs. Costs</h3>
             <p class="text-gray-400 text-xs mb-6">Green = revenue, Red = total costs (monitors + chemicals + software + gas)</p>
-            <div id="revenueChartWrap" style="overflow:hidden;"></div>
+            <img id="revenueChartImg" alt="Revenue vs Costs chart" style="width:100%; height:auto;">
           </div>
           <!-- Cumulative Profit Chart -->
           <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 lg:p-8">
             <h3 class="font-serif text-lg text-gray-900 mb-1">Cumulative Net Profit</h3>
             <p class="text-gray-400 text-xs mb-6">Running total after all expenses including startup gear</p>
-            <div id="profitChartWrap" style="overflow:hidden;"></div>
+            <img id="profitChartImg" alt="Cumulative Profit chart" style="width:100%; height:auto;">
           </div>
         </div>
       </div>
@@ -687,7 +687,7 @@
         <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 lg:p-8">
           <h3 class="font-serif text-lg text-gray-900 mb-1">Weekly Hours: Remote Monitoring vs. Traditional</h3>
           <p class="text-gray-400 text-xs mb-6">Blue = OC Pools smart model (monitoring + on-demand visits), Gray = if you visited every pool weekly</p>
-          <div id="timeChartWrap" style="overflow:hidden;"></div>
+          <img id="timeChartImg" alt="Time Investment chart" style="width:100%; height:auto;">
         </div>
       </div>
 
@@ -891,162 +891,78 @@
     Chart.defaults.responsive = false;
     Chart.defaults.maintainAspectRatio = false;
 
-    // Helper: create a canvas inside a wrapper div with fixed dimensions
-    function makeCanvas(wrapperId, canvasId, w, h) {
-      const wrap = document.getElementById(wrapperId);
-      if (!wrap) return null;
+    // Helper: create offscreen canvas, render chart, convert to image
+    function renderChartToImg(imgId, w, h, chartConfig) {
       const canvas = document.createElement('canvas');
-      canvas.id = canvasId;
       canvas.width = w;
       canvas.height = h;
-      canvas.style.cssText = 'display:block; width:100%; max-width:' + w + 'px; height:auto;';
-      wrap.appendChild(canvas);
-      return canvas;
+      // Must be in DOM briefly for Chart.js but hidden
+      canvas.style.cssText = 'position:fixed; top:-9999px; left:-9999px;';
+      document.body.appendChild(canvas);
+      
+      const chart = new Chart(canvas, chartConfig);
+      
+      // Convert to image after render
+      requestAnimationFrame(() => {
+        const img = document.getElementById(imgId);
+        if (img) img.src = canvas.toDataURL('image/png');
+        chart.destroy();
+        document.body.removeChild(canvas);
+      });
     }
 
     // Revenue vs Costs Chart
-    const ctx1 = makeCanvas('revenueChartWrap', 'revenueChart', 500, 300);
-    if (ctx1) {
-      new Chart(ctx1, {
-        type: 'bar',
-        data: {
-          labels: months,
-          datasets: [
-            {
-              label: 'Revenue',
-              data: revenueData,
-              backgroundColor: 'rgba(16, 185, 129, 0.7)',
-              borderRadius: 6,
-              borderSkipped: false,
-            },
-            {
-              label: 'Total Costs',
-              data: costData,
-              backgroundColor: 'rgba(239, 68, 68, 0.5)',
-              borderRadius: 6,
-              borderSkipped: false,
-            }
-          ]
-        },
-        options: {
-          responsive: false,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } },
-            tooltip: {
-              callbacks: { label: ctx => ctx.dataset.label + ': $' + ctx.raw.toLocaleString() }
-            }
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-              grid: { color: gridColor },
-              ticks: { callback: v => '$' + (v/1000) + 'K' }
-            },
-            x: { grid: { display: false } }
-          }
-        }
-      });
-    }
+    renderChartToImg('revenueChartImg', 800, 400, {
+      type: 'bar',
+      data: {
+        labels: months,
+        datasets: [
+          { label: 'Revenue', data: revenueData, backgroundColor: 'rgba(16, 185, 129, 0.7)', borderRadius: 6, borderSkipped: false },
+          { label: 'Total Costs', data: costData, backgroundColor: 'rgba(239, 68, 68, 0.5)', borderRadius: 6, borderSkipped: false }
+        ]
+      },
+      options: {
+        responsive: false, maintainAspectRatio: false, animation: false,
+        plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } } },
+        scales: { y: { beginAtZero: true, grid: { color: gridColor }, ticks: { callback: v => '$' + (v/1000) + 'K' } }, x: { grid: { display: false } } }
+      }
+    });
 
     // Cumulative Profit Chart
-    const ctx2 = makeCanvas('profitChartWrap', 'profitChart', 500, 300);
-    if (ctx2) {
-      new Chart(ctx2, {
-        type: 'line',
-        data: {
-          labels: months,
-          datasets: [{
-            label: 'Cumulative Profit',
-            data: cumulativeProfit,
-            borderColor: '#0c93e8',
-            backgroundColor: 'rgba(12, 147, 232, 0.08)',
-            fill: true,
-            tension: 0.4,
-            pointRadius: 5,
-            pointBackgroundColor: cumulativeProfit.map(v => v >= 0 ? '#10b981' : '#ef4444'),
-            pointBorderColor: '#fff',
-            pointBorderWidth: 2,
-            borderWidth: 3,
-          }]
-        },
-        options: {
-          responsive: false,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { display: false },
-            tooltip: {
-              callbacks: { label: ctx => '$' + Math.round(ctx.raw).toLocaleString() }
-            }
-          },
-          scales: {
-            y: {
-              grid: { color: gridColor },
-              ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' }
-            },
-            x: { grid: { display: false } }
-          }
-        }
-      });
-    }
+    renderChartToImg('profitChartImg', 800, 400, {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [{
+          label: 'Cumulative Profit', data: cumulativeProfit, borderColor: '#0c93e8',
+          backgroundColor: 'rgba(12, 147, 232, 0.08)', fill: true, tension: 0.4,
+          pointRadius: 5, pointBackgroundColor: cumulativeProfit.map(v => v >= 0 ? '#10b981' : '#ef4444'),
+          pointBorderColor: '#fff', pointBorderWidth: 2, borderWidth: 3
+        }]
+      },
+      options: {
+        responsive: false, maintainAspectRatio: false, animation: false,
+        plugins: { legend: { display: false } },
+        scales: { y: { grid: { color: gridColor }, ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' } }, x: { grid: { display: false } } }
+      }
+    });
 
     // Time Investment Chart
-    const ctx3 = makeCanvas('timeChartWrap', 'timeChart', 900, 300);
-    if (ctx3) {
-      new Chart(ctx3, {
-        type: 'line',
-        data: {
-          labels: months,
-          datasets: [
-            {
-              label: 'OC Pools Smart Model',
-              data: hoursRemote,
-              borderColor: '#0c93e8',
-              backgroundColor: 'rgba(12, 147, 232, 0.08)',
-              fill: true,
-              tension: 0.4,
-              borderWidth: 3,
-              pointRadius: 5,
-              pointBackgroundColor: '#0c93e8',
-              pointBorderColor: '#fff',
-              pointBorderWidth: 2,
-            },
-            {
-              label: 'Traditional Weekly Visits',
-              data: hoursTraditional,
-              borderColor: '#d1d5db',
-              backgroundColor: 'rgba(209, 213, 219, 0.1)',
-              fill: true,
-              tension: 0.4,
-              borderWidth: 2,
-              borderDash: [6, 4],
-              pointRadius: 4,
-              pointBackgroundColor: '#d1d5db',
-              pointBorderColor: '#fff',
-              pointBorderWidth: 2,
-            }
-          ]
-        },
-        options: {
-          responsive: false,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } },
-            tooltip: {
-              callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.raw + ' hrs/week' }
-            }
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-              grid: { color: gridColor },
-              ticks: { callback: v => v + ' hrs' }
-            },
-            x: { grid: { display: false } }
-          }
-        }
-      });
-    }
+    renderChartToImg('timeChartImg', 1000, 400, {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [
+          { label: 'OC Pools Smart Model', data: hoursRemote, borderColor: '#0c93e8', backgroundColor: 'rgba(12, 147, 232, 0.08)', fill: true, tension: 0.4, borderWidth: 3, pointRadius: 5, pointBackgroundColor: '#0c93e8', pointBorderColor: '#fff', pointBorderWidth: 2 },
+          { label: 'Traditional Weekly Visits', data: hoursTraditional, borderColor: '#d1d5db', backgroundColor: 'rgba(209, 213, 219, 0.1)', fill: true, tension: 0.4, borderWidth: 2, borderDash: [6, 4], pointRadius: 4, pointBackgroundColor: '#d1d5db', pointBorderColor: '#fff', pointBorderWidth: 2 }
+        ]
+      },
+      options: {
+        responsive: false, maintainAspectRatio: false, animation: false,
+        plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } } },
+        scales: { y: { beginAtZero: true, grid: { color: gridColor }, ticks: { callback: v => v + ' hrs' } }, x: { grid: { display: false } } }
+      }
+    });
   })();
   </script>
 </body>
