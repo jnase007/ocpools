@@ -626,6 +626,125 @@
     </div>
   </section>
 
+  <!-- 12-Month Growth Projection -->
+  <section id="growth" class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <p class="anim text-sand-600 text-[13px] font-medium tracking-luxury uppercase mb-4">12-Month Projection</p>
+        <h2 class="anim d1 text-3xl lg:text-4xl font-serif text-gray-900 mb-4">Growth & Scale at 10 Clients/Month</h2>
+        <div class="anim d2 gold-line w-16 mx-auto my-6"></div>
+        <p class="anim d3 text-gray-500 leading-relaxed">Adding 10 new monitored pools per month. Here's how revenue, time investment, and profit scale — with the remote monitoring advantage built in.</p>
+      </div>
+
+      <!-- Key Assumptions -->
+      <div class="anim max-w-4xl mx-auto mb-12">
+        <div class="bg-sand-50 border border-sand-200 rounded-2xl p-6 lg:p-8">
+          <h3 class="font-semibold text-gray-900 text-sm mb-4 flex items-center gap-2"><i class="fa-solid fa-sliders text-brand-500"></i> Assumptions</h3>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+            <div class="bg-white rounded-xl p-4 text-center">
+              <p class="text-gray-400 text-xs uppercase tracking-wider mb-1">New Clients/Month</p>
+              <p class="text-2xl font-serif text-gray-900">10</p>
+            </div>
+            <div class="bg-white rounded-xl p-4 text-center">
+              <p class="text-gray-400 text-xs uppercase tracking-wider mb-1">Avg Monthly Rate</p>
+              <p class="text-2xl font-serif text-gray-900">$200</p>
+            </div>
+            <div class="bg-white rounded-xl p-4 text-center">
+              <p class="text-gray-400 text-xs uppercase tracking-wider mb-1">Monitor Cost (each)</p>
+              <p class="text-2xl font-serif text-gray-900">$300</p>
+            </div>
+            <div class="bg-white rounded-xl p-4 text-center">
+              <p class="text-gray-400 text-xs uppercase tracking-wider mb-1">Chemicals/Pool/Mo</p>
+              <p class="text-2xl font-serif text-gray-900">$35</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts -->
+      <div class="anim max-w-5xl mx-auto mb-16">
+        <div class="grid lg:grid-cols-2 gap-8">
+          <!-- Revenue Chart -->
+          <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 lg:p-8">
+            <h3 class="font-serif text-lg text-gray-900 mb-1">Monthly Revenue vs. Costs</h3>
+            <p class="text-gray-400 text-xs mb-6">Green = revenue, Red = total costs (monitors + chemicals + software + gas)</p>
+            <canvas id="revenueChart" height="280"></canvas>
+          </div>
+          <!-- Cumulative Profit Chart -->
+          <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 lg:p-8">
+            <h3 class="font-serif text-lg text-gray-900 mb-1">Cumulative Net Profit</h3>
+            <p class="text-gray-400 text-xs mb-6">Running total after all expenses including startup gear</p>
+            <canvas id="profitChart" height="280"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Time Investment Chart -->
+      <div class="anim max-w-5xl mx-auto mb-16">
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 lg:p-8">
+          <h3 class="font-serif text-lg text-gray-900 mb-1">Weekly Hours: Remote Monitoring vs. Traditional</h3>
+          <p class="text-gray-400 text-xs mb-6">Blue = OC Pools smart model (monitoring + on-demand visits), Gray = if you visited every pool weekly</p>
+          <canvas id="timeChart" height="260"></canvas>
+        </div>
+      </div>
+
+      <!-- Year-End Summary Cards -->
+      <div class="anim max-w-5xl mx-auto">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-gradient-to-br from-brand-950 to-brand-900 rounded-2xl p-6 text-white text-center">
+            <p class="text-white/50 text-xs uppercase tracking-wider mb-2">Total Clients (Month 12)</p>
+            <p class="text-4xl font-serif text-sand-300 mb-1" id="stat-clients">120</p>
+            <p class="text-white/40 text-xs">monitored pools</p>
+          </div>
+          <div class="bg-gradient-to-br from-brand-950 to-brand-900 rounded-2xl p-6 text-white text-center">
+            <p class="text-white/50 text-xs uppercase tracking-wider mb-2">Monthly Revenue (Mo 12)</p>
+            <p class="text-4xl font-serif text-green-400 mb-1" id="stat-revenue">$24K</p>
+            <p class="text-white/40 text-xs">recurring</p>
+          </div>
+          <div class="bg-gradient-to-br from-brand-950 to-brand-900 rounded-2xl p-6 text-white text-center">
+            <p class="text-white/50 text-xs uppercase tracking-wider mb-2">Year 1 Net Profit</p>
+            <p class="text-4xl font-serif text-green-400 mb-1" id="stat-profit">$112K+</p>
+            <p class="text-white/40 text-xs">after all expenses</p>
+          </div>
+          <div class="bg-gradient-to-br from-brand-950 to-brand-900 rounded-2xl p-6 text-white text-center">
+            <p class="text-white/50 text-xs uppercase tracking-wider mb-2">Weekly Hours (Mo 12)</p>
+            <p class="text-4xl font-serif text-sand-300 mb-1" id="stat-hours">~18 hrs</p>
+            <p class="text-white/40 text-xs">vs. ~60 hrs traditional</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Month-by-Month Table -->
+      <div class="anim max-w-5xl mx-auto mt-12">
+        <details class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <summary class="px-6 py-5 cursor-pointer font-serif text-lg text-gray-900 hover:bg-sand-50/50 transition-colors flex items-center justify-between">
+            <span><i class="fa-solid fa-table text-brand-500 mr-3"></i>Full Month-by-Month Breakdown</span>
+            <i class="fa-solid fa-chevron-down text-gray-400 text-sm"></i>
+          </summary>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm" id="growthTable">
+              <thead class="bg-brand-950 text-white">
+                <tr>
+                  <th class="text-left px-4 py-3 font-medium text-[11px] tracking-luxury uppercase">Month</th>
+                  <th class="text-right px-4 py-3 font-medium text-[11px] tracking-luxury uppercase">Clients</th>
+                  <th class="text-right px-4 py-3 font-medium text-[11px] tracking-luxury uppercase">Revenue</th>
+                  <th class="text-right px-4 py-3 font-medium text-[11px] tracking-luxury uppercase">Costs</th>
+                  <th class="text-right px-4 py-3 font-medium text-[11px] tracking-luxury uppercase">Net Profit</th>
+                  <th class="text-right px-4 py-3 font-medium text-[11px] tracking-luxury uppercase">Cumulative</th>
+                  <th class="text-right px-4 py-3 font-medium text-[11px] tracking-luxury uppercase">Hrs/Wk</th>
+                </tr>
+              </thead>
+              <tbody id="growthTableBody" class="divide-y divide-gray-100"></tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="gold-line max-w-5xl mx-auto"></div>
+
   <!-- Footer -->
   <footer class="bg-brand-950 text-white/50 py-16">
     <div class="max-w-7xl mx-auto px-6 lg:px-10">
@@ -669,6 +788,248 @@
         icon.classList.toggle('fa-xmark');
       });
     }
+  </script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script>
+  (function() {
+    // === ASSUMPTIONS ===
+    const newClientsPerMonth = 10;
+    const monthlyRate = 200;        // per pool
+    const monitorCost = 300;        // per new client (one-time)
+    const chemicalsPerPool = 35;    // per pool/month
+    const softwareCost = 50;        // monthly flat
+    const gasCostPerVisit = 8;      // avg gas per on-demand visit
+    const startupGear = 2600;       // tester $2300 + pods $300
+    const visitRateRemote = 0.3;    // 30% of pools need a visit each month (remote model)
+    const visitRateTraditional = 4.33; // weekly = ~4.33 visits/month per pool
+    const minutesPerVisit = 40;
+    const minutesMonitorCheck = 3;  // daily dashboard check per pool (remote)
+
+    const months = [];
+    const revenueData = [];
+    const costData = [];
+    const cumulativeProfit = [];
+    const hoursRemote = [];
+    const hoursTraditional = [];
+    let cumProfit = -startupGear;   // start negative (gear investment)
+    let totalClients = 0;
+
+    for (let m = 1; m <= 12; m++) {
+      totalClients += newClientsPerMonth;
+
+      // Revenue
+      const revenue = totalClients * monthlyRate;
+
+      // Costs
+      const monitors = newClientsPerMonth * monitorCost;  // new monitors this month
+      const chemicals = totalClients * chemicalsPerPool;
+      const onDemandVisits = Math.round(totalClients * visitRateRemote);
+      const gas = onDemandVisits * gasCostPerVisit;
+      const totalCost = monitors + chemicals + softwareCost + gas;
+
+      // Profit
+      const netProfit = revenue - totalCost;
+      cumProfit += netProfit;
+
+      // Time (weekly hours)
+      // Remote: dashboard monitoring (quick daily scan) + on-demand visits
+      const weeklyMonitorMinutes = totalClients * minutesMonitorCheck * 1.5; // ~1.5 check sessions/week
+      const weeklyVisitMinutes = (onDemandVisits / 4.33) * minutesPerVisit; // visits per week
+      const canvassingHours = m <= 6 ? 8 : 4; // weekend door-knocking tapers
+      const remoteHoursWeekly = (weeklyMonitorMinutes + weeklyVisitMinutes) / 60 + canvassingHours;
+
+      // Traditional: visit every pool every week
+      const tradVisitsPerWeek = totalClients; // once per pool per week
+      const tradHoursWeekly = (tradVisitsPerWeek * minutesPerVisit) / 60 + canvassingHours;
+
+      months.push('Mo ' + m);
+      revenueData.push(revenue);
+      costData.push(totalCost);
+      cumulativeProfit.push(cumProfit);
+      hoursRemote.push(Math.round(remoteHoursWeekly * 10) / 10);
+      hoursTraditional.push(Math.round(tradHoursWeekly * 10) / 10);
+
+      // Build table row
+      const tbody = document.getElementById('growthTableBody');
+      if (tbody) {
+        const row = document.createElement('tr');
+        row.className = 'hover:bg-sand-50/50 transition-colors';
+        const profitColor = netProfit >= 0 ? 'text-green-600' : 'text-red-500';
+        const cumColor = cumProfit >= 0 ? 'text-green-600' : 'text-red-500';
+        row.innerHTML = `
+          <td class="px-4 py-3 font-medium text-gray-900">Month ${m}</td>
+          <td class="px-4 py-3 text-right text-gray-600">${totalClients}</td>
+          <td class="px-4 py-3 text-right text-gray-600">$${revenue.toLocaleString()}</td>
+          <td class="px-4 py-3 text-right text-gray-600">$${totalCost.toLocaleString()}</td>
+          <td class="px-4 py-3 text-right ${profitColor} font-medium">$${netProfit.toLocaleString()}</td>
+          <td class="px-4 py-3 text-right ${cumColor} font-medium">$${Math.round(cumProfit).toLocaleString()}</td>
+          <td class="px-4 py-3 text-right text-gray-600">${hoursRemote[m-1]} hrs</td>
+        `;
+        tbody.appendChild(row);
+      }
+    }
+
+    // Update summary stats
+    const el = (id, val) => { const e = document.getElementById(id); if (e) e.textContent = val; };
+    el('stat-clients', totalClients);
+    el('stat-revenue', '$' + revenueData[11].toLocaleString());
+    el('stat-profit', '$' + Math.round(cumProfit).toLocaleString());
+    el('stat-hours', '~' + hoursRemote[11] + ' hrs');
+
+    // === CHART STYLES ===
+    const chartFont = { family: "'DM Sans', system-ui, sans-serif", size: 12 };
+    const gridColor = 'rgba(0,0,0,0.04)';
+
+    Chart.defaults.font.family = chartFont.family;
+    Chart.defaults.font.size = chartFont.size;
+    Chart.defaults.color = '#9ca3af';
+
+    // Revenue vs Costs Chart
+    const ctx1 = document.getElementById('revenueChart');
+    if (ctx1) {
+      new Chart(ctx1, {
+        type: 'bar',
+        data: {
+          labels: months,
+          datasets: [
+            {
+              label: 'Revenue',
+              data: revenueData,
+              backgroundColor: 'rgba(16, 185, 129, 0.7)',
+              borderRadius: 6,
+              borderSkipped: false,
+            },
+            {
+              label: 'Total Costs',
+              data: costData,
+              backgroundColor: 'rgba(239, 68, 68, 0.5)',
+              borderRadius: 6,
+              borderSkipped: false,
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } },
+            tooltip: {
+              callbacks: { label: ctx => ctx.dataset.label + ': $' + ctx.raw.toLocaleString() }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: { color: gridColor },
+              ticks: { callback: v => '$' + (v/1000) + 'K' }
+            },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+    }
+
+    // Cumulative Profit Chart
+    const ctx2 = document.getElementById('profitChart');
+    if (ctx2) {
+      new Chart(ctx2, {
+        type: 'line',
+        data: {
+          labels: months,
+          datasets: [{
+            label: 'Cumulative Profit',
+            data: cumulativeProfit,
+            borderColor: '#0c93e8',
+            backgroundColor: 'rgba(12, 147, 232, 0.08)',
+            fill: true,
+            tension: 0.4,
+            pointRadius: 5,
+            pointBackgroundColor: cumulativeProfit.map(v => v >= 0 ? '#10b981' : '#ef4444'),
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            borderWidth: 3,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: { label: ctx => '$' + Math.round(ctx.raw).toLocaleString() }
+            }
+          },
+          scales: {
+            y: {
+              grid: { color: gridColor },
+              ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' }
+            },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+    }
+
+    // Time Investment Chart
+    const ctx3 = document.getElementById('timeChart');
+    if (ctx3) {
+      new Chart(ctx3, {
+        type: 'line',
+        data: {
+          labels: months,
+          datasets: [
+            {
+              label: 'OC Pools Smart Model',
+              data: hoursRemote,
+              borderColor: '#0c93e8',
+              backgroundColor: 'rgba(12, 147, 232, 0.08)',
+              fill: true,
+              tension: 0.4,
+              borderWidth: 3,
+              pointRadius: 5,
+              pointBackgroundColor: '#0c93e8',
+              pointBorderColor: '#fff',
+              pointBorderWidth: 2,
+            },
+            {
+              label: 'Traditional Weekly Visits',
+              data: hoursTraditional,
+              borderColor: '#d1d5db',
+              backgroundColor: 'rgba(209, 213, 219, 0.1)',
+              fill: true,
+              tension: 0.4,
+              borderWidth: 2,
+              borderDash: [6, 4],
+              pointRadius: 4,
+              pointBackgroundColor: '#d1d5db',
+              pointBorderColor: '#fff',
+              pointBorderWidth: 2,
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } },
+            tooltip: {
+              callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.raw + ' hrs/week' }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: { color: gridColor },
+              ticks: { callback: v => v + ' hrs' }
+            },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+    }
+  })();
   </script>
 </body>
 </html>
