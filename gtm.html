@@ -39,6 +39,8 @@
     .nav-link::after { content:''; position:absolute; bottom:-4px; left:50%; width:0; height:1px; background:currentColor; transition:all 0.3s ease; transform:translateX(-50%); }
     .nav-link:hover::after { width:100%; }
     .nav-link.active::after { width:100%; }
+    .chart-box { position: relative; width: 100%; height: 300px !important; max-height: 300px !important; overflow: hidden !important; }
+    .chart-box canvas { display: block; max-height: 300px !important; }
     .phase-card { transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease; }
     .phase-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.08); }
     .step-number { background: linear-gradient(135deg, #0b426e, #0c93e8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -670,7 +672,7 @@
           <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 lg:p-8" style="min-height:0;">
             <h3 class="font-serif text-lg text-gray-900 mb-1">Monthly Revenue vs. Costs</h3>
             <p class="text-gray-400 text-xs mb-6">Green = revenue, Red = total costs (monitors + chemicals + software + gas)</p>
-            <div style="position:relative; height:300px; width:100%;">
+            <div class="chart-box">
               <canvas id="revenueChart"></canvas>
             </div>
           </div>
@@ -678,7 +680,7 @@
           <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 lg:p-8" style="min-height:0;">
             <h3 class="font-serif text-lg text-gray-900 mb-1">Cumulative Net Profit</h3>
             <p class="text-gray-400 text-xs mb-6">Running total after all expenses including startup gear</p>
-            <div style="position:relative; height:300px; width:100%;">
+            <div class="chart-box">
               <canvas id="profitChart"></canvas>
             </div>
           </div>
@@ -690,7 +692,7 @@
         <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 lg:p-8" style="min-height:0;">
           <h3 class="font-serif text-lg text-gray-900 mb-1">Weekly Hours: Remote Monitoring vs. Traditional</h3>
           <p class="text-gray-400 text-xs mb-6">Blue = OC Pools smart model (monitoring + on-demand visits), Gray = if you visited every pool weekly</p>
-          <div style="position:relative; height:300px; width:100%;">
+          <div class="chart-box">
             <canvas id="timeChart"></canvas>
           </div>
         </div>
