@@ -667,18 +667,18 @@
       <div class="anim max-w-5xl mx-auto mb-16">
         <div class="grid lg:grid-cols-2 gap-8">
           <!-- Revenue Chart -->
-          <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 lg:p-8">
+          <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 lg:p-8" style="min-height:0;">
             <h3 class="font-serif text-lg text-gray-900 mb-1">Monthly Revenue vs. Costs</h3>
             <p class="text-gray-400 text-xs mb-6">Green = revenue, Red = total costs (monitors + chemicals + software + gas)</p>
-            <div>
+            <div style="position:relative; height:300px; width:100%;">
               <canvas id="revenueChart"></canvas>
             </div>
           </div>
           <!-- Cumulative Profit Chart -->
-          <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 lg:p-8">
+          <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 lg:p-8" style="min-height:0;">
             <h3 class="font-serif text-lg text-gray-900 mb-1">Cumulative Net Profit</h3>
             <p class="text-gray-400 text-xs mb-6">Running total after all expenses including startup gear</p>
-            <div>
+            <div style="position:relative; height:300px; width:100%;">
               <canvas id="profitChart"></canvas>
             </div>
           </div>
@@ -687,10 +687,10 @@
 
       <!-- Time Investment Chart -->
       <div class="anim max-w-5xl mx-auto mb-16">
-        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 lg:p-8">
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 lg:p-8" style="min-height:0;">
           <h3 class="font-serif text-lg text-gray-900 mb-1">Weekly Hours: Remote Monitoring vs. Traditional</h3>
           <p class="text-gray-400 text-xs mb-6">Blue = OC Pools smart model (monitoring + on-demand visits), Gray = if you visited every pool weekly</p>
-          <div>
+          <div style="position:relative; height:300px; width:100%;">
             <canvas id="timeChart"></canvas>
           </div>
         </div>
@@ -920,7 +920,7 @@
         },
         options: {
           responsive: true,
-          maintainAspectRatio: true,
+          maintainAspectRatio: false,
           plugins: {
             legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } },
             tooltip: {
@@ -962,7 +962,7 @@
         },
         options: {
           responsive: true,
-          maintainAspectRatio: true,
+          maintainAspectRatio: false,
           plugins: {
             legend: { display: false },
             tooltip: {
@@ -1019,7 +1019,7 @@
         },
         options: {
           responsive: true,
-          maintainAspectRatio: true,
+          maintainAspectRatio: false,
           plugins: {
             legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } },
             tooltip: {
